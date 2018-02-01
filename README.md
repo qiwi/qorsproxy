@@ -31,11 +31,11 @@ function handler(req, res) {
 ```
 * Try out any weird thing just for fun.
 
-####In previous series
+#### In previous series
 * v1: https://www.npmjs.com/package/corsproxy-cli
 * v2: https://gerrit.osmp.ru/#/admin/projects/store/pusher
 
-####Requirements
+#### Requirements
 * Unix compliant os
 * NodeJS 8 (@std/esm)
 
