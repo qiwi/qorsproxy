@@ -1,4 +1,5 @@
-import {isFunction, mapValues} from "../../base";
+import {isFunction, mapValues} from '../../base';
+import env from '../../env';
 
 export default class Metrics {
 	constructor(components) {
@@ -13,17 +14,12 @@ export default class Metrics {
 	handler(req, res) {
 		const details = mapValues(this.components, this.constructor.getMetrics);
 		const data = {
-			// TODO move to /info
-			service: {
-				name: process.env.npm_package_name,
-				version: process.env.npm_package_version
-			},
 			process: {
-				uptime: this.constructor.formatUptime(process.uptime()),
-				memory: process.memoryUsage(),
-				cpu: process.cpuUsage()
+				uptime: this.constructor.formatUptime(env.process.uptime()),
+				memory: env.process.memoryUsage(),
+				cpu: env.process.cpuUsage()
 			},
-			...details
+			servlets: details
 		};
 
 		res.writeHead(200, {'Content-Type': 'application/json'});

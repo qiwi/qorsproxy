@@ -1,11 +1,11 @@
-import http from 'http';
 import { find } from '../base';
 import log from '../log';
+import Server from './server';
 
-export default class Server {
+export default class Container {
 	constructor() {
 		this.online = false;
-		this.server = new http.Server(this.handler.bind(this));
+		this.server = new Server(this.handler.bind(this));
 	}
 
 	configure({host, port, servlets}) {
@@ -29,42 +29,60 @@ export default class Server {
 	}
 
 	handler(req, res) {
+		const url = req.url;
+		let route;
 
 		if(!this.online) {
+			res.end();
 			return;
 		}
 
-		const servlet = find(this.servlets, (servlet, path) => {
-			return !req.url.indexOf(path);
+		const servlet = find(this.servlets, (servlet, r) => {
+			route = r; // TODO add servlet name prop
+			return !url.indexOf(r);
 		});
-
-		if (servlet) {
-			servlet.handler(req, res);
+		
+		if (!servlet) {
+			log.error(`Servlet not found. url=${url}`);
+			this.server.constructor.notFound(req, res);
+			return;
 		}
 
-		// return something
+		try {
+			servlet.handler(req, res);
+
+		} catch (e) {
+			log.error(`Servlet unhandled exception. route=${route} url=${url}`, e);
+			this.server.constructor.internalError(req, res);
+		}
 	}
 
-	start() {
+	start(cb) {
 		if (!this.online) {
-			this.server.listen(this.port, this.host, () => {
-				log.info('Container is online: ' + this.host + ':' + this.port);
-			});
+			this.server.listen(
+				this.port,
+				this.host,
+				() => {
+					log.info('Container is online: ' + this.host + ':' + this.port);
+					cb && cb();
+				}
+			);
+			this.online = true;
 		}
-		this.online = true;
 
 		return this;
 	}
 
 	stop(cb) {
-		this.online = false;
-
-		// NOTE Stops the server from accepting new connections and keeps existing connections.
-		// This function is asynchronous, the server is finally closed when all connections are ended and the server emits a 'close' event.
-		this.server.close(() => {
-			log.warn('Container stopped.');
-			cb && cb();
-		});
+		if (this.online) {
+			// NOTE Stops the server from accepting new connections and keeps existing connections.
+			// This function is asynchronous, the server is finally closed when all connections are ended and the server emits a 'close' event.
+			this.online = false;
+			this.server.close(() => {
+				log.warn('Container stopped.');
+				cb && cb();
+			});
+		}
 
 		return this;
 	}

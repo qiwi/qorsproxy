@@ -12,5 +12,5 @@
     "./script/require-all"
   ],
   "check-coverage": false,
-  "cache": false
+  "cache": true
 }

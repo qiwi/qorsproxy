@@ -4,9 +4,13 @@ import {
 	isError,
 	isObject,
 	isArray,
+	isFunction,
 	get,
 	merge,
-	each
+	each,
+	find,
+	mapValues,
+	assign
 } from 'lodash-es';
 
 export {
@@ -14,7 +18,11 @@ export {
 	isError,
 	isObject,
 	isArray,
+	isFunction,
 	get,
 	merge,
-	each
+	each,
+	find,
+	mapValues,
+	assign
 };

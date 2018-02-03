@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 import jsonschema from 'jsonschema';
 
 import { isError } from "../base";
@@ -12,11 +11,16 @@ export const LOAD_ERROR = 'error';
 
 export default class ConfigLoader {
 	constructor(path, watch) {
+		this.id = Math.random();
+		this.watch = watch|0;
 		this.path = path;
-		this.watch = !!watch;
+
+		if (this.watch > 0) {
+			fs.watchFile(this.path, { persistent: true, interval: this.watch }, this.load.bind(this));
+		}
 	}
 	on(event, cb) {
-		emitter.on(EVT_PREFIX + event, cb);
+		emitter.on(EVT_PREFIX + event + this.id, cb);
 
 		return this;
 	}
@@ -25,32 +29,37 @@ export default class ConfigLoader {
 	 */
 	load() {
 		const constructor = this.constructor;
-		let data = constructor.read(this.path);
+		let data = this.constructor.read(this.path);
+
 		if (isError(data)) {
-			return data;
+			this.emitError(data);
+			return this;
 		}
 
 		data = constructor.parse(data);
 		if (isError(data)) {
-			return data;
+			this.emitError(data);
+			return this;
 		}
 
 		data = constructor.validate(data);
 		if (isError(data)) {
-			constructor.emitError(data);
+			this.emitError(data);
+			return this;
 		}
 
-		constructor.emitLoad(data);return this;
+		this.emitLoad(data);
+		return this;
 	}
 
 	/**
 	 * @returns {string/Error}
 	 */
-	static read(_path) {
+	static read(path) {
 		try {
-			return fs.readFileSync(path.resolve(_path), { encoding: 'utf8' })
+			return fs.readFileSync(path, { encoding: 'utf8' });
 		} catch (e) {
-			return new Error(`config_loader: read error path=${_path}`)
+			return new Error(`config_loader: read error path=${path}`)
 		}
 	}
 
@@ -78,12 +87,12 @@ export default class ConfigLoader {
 		}
 	}
 
-	static emitError(error) {
-		emitter.emit(EVT_PREFIX + LOAD_ERROR, error);
+	emitError(error) {
+		emitter.emit(EVT_PREFIX + LOAD_ERROR + this.id, error);
 	}
 
-	static emitLoad(data) {
-		emitter.emit(EVT_PREFIX + LOAD, data);
+	emitLoad(data) {
+		emitter.emit(EVT_PREFIX + LOAD + this.id, data);
 	}
 }
 

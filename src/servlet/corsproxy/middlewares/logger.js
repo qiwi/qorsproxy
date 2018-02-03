@@ -47,9 +47,10 @@ export default (req, res, next) => {
 			status >= INTERNAL_ERROR ?
 				'error':
 				'warn';
-		const content = ('' + (sent && sent[0] || Buffer.concat(chunks).toString('utf8'))).slice(0, 200);
+		const contentLength = (sent ? new Buffer('' + sent[0]) : Buffer.concat(chunks)).length;
+		sent = null;
 
-		log[level](`RES ${res.id} < status=${status} duration=${Date.now() - start}ms headers=${JSON.stringify(res.header()._headers)} content=${content}...`);
+		log[level](`RES ${res.id} < status=${status} duration=${Date.now() - start}ms headers=${JSON.stringify(res.header()._headers)} bufferLength=${contentLength}`);
 	});
 
 	next();

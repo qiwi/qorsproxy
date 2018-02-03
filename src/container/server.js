@@ -1,6 +1,6 @@
-import http from 'http';
+import { Server } from 'http';
 
-export default class Server extends http.Server {
+export default class extends Server {
 	constructor(handler) {
 		super(handler);
 	}

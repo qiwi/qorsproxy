@@ -1,6 +1,7 @@
 import ip from 'ip';
 
-const DEFAULT_HOST = ip.address();
+export const IP = ip.address();
+export const DEFAULT_HOST = IP; // 'localhost'?
 
 export default {
 	"log": {
@@ -11,8 +12,13 @@ export default {
 		"level": "info"
 	},
 	"server": {
+		"port": 9292,
 		"host": DEFAULT_HOST,
-		"port": 9292
+		"ip": IP
+	},
+	"crumbs": {
+		"xff": false,
+		"xfh": true,
 	},
 	"rules": {
 		"example": {

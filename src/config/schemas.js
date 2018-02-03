@@ -11,6 +11,7 @@ export const HOST_ARRAY = {type: 'array', items: HOST};
 export const STRING_NON_EMPTY = {type: 'string', minLength: 1};
 export const INTEGER = {type: 'integer'};
 
+// TODO refactor
 export const SCHEMA = {
 	type: 'object',
 	properties: {
@@ -24,18 +25,16 @@ export const SCHEMA = {
 				level: STRING_NON_EMPTY
 			}
 		},
-		alias: HOST_ARRAY,
-		port: INTEGER,
-		host: HOST,
+		server: {
+			type: 'object',
+			port: INTEGER,
+			host: HOST
+		},
 		rules: {
 			type: 'object',
 			patternProperties: {
 				'.+': {
-					type: 'object',
-					properties: {
-						origins: HOST_ARRAY,
-						targets: HOST_ARRAY
-					}
+					type: 'object'
 				}
 			}
 		}

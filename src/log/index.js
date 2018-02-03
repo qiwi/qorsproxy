@@ -18,19 +18,19 @@ class Log {
 	}
 
 	debug(...args) {
-		return this.logger.debug(...args);
+		this.logger.debug(...args); return this;
 	}
 
 	info(...args) {
-		return this.logger.info(...args);
+		this.logger.info(...args); return this;
 	}
 
 	warn(...args) {
-		return this.logger.warn(...args);
+		this.logger.warn(...args); return this;
 	}
 
 	error(...args) {
-		return this.logger.error(...args);
+		this.logger.error(...args); return this;
 	}
 
 	static formatOptions({dir, name, size, level='info', pattern}) {

@@ -31,7 +31,7 @@ describe('config', () => {
 			});
 
 			it('getAll returns entire data', () => {
-				expect(config.getAll()).to.be.an('object').that.has.all.keys('log', 'server', 'rules');
+				expect(config.getAll()).to.be.an('object').that.has.all.keys('crumbs', 'log', 'server', 'rules');
 			});
 		});
 	});
