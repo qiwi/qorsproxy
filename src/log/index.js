@@ -5,6 +5,18 @@ import DailyRotateFile  from 'winston-daily-rotate-file';
 const { Logger, transports: {Console}, config: {colorize}} = winston;
 winston.transports.DailyRotateFile = DailyRotateFile;
 
+export const DEBUG = 'debug';
+export const INFO = 'info';
+export const WARN = 'warn';
+export const ERROR = 'error';
+
+export const level = {
+	DEBUG,
+	INFO,
+	WARN,
+	ERROR,
+};
+
 class Log {
 	constructor(...opts) {
 		this.logger = new Logger();
@@ -67,6 +79,10 @@ class Log {
 	 */
 	static formatter({level, timestamp, meta, message, colorize}) {
 		return `${timestamp()} [${colorize(level, level.toUpperCase())}] ${undefined !== message ? message : ''} ${meta && Object.keys(meta).length ? '\n\t'+ JSON.stringify(meta) : ''}`;
+	}
+
+	static now() {
+		return Date.now();
 	}
 }
 

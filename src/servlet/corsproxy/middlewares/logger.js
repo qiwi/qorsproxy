@@ -1,10 +1,10 @@
-import log from '../../../log';
-import {BAD_REQUEST, INTERNAL_ERROR} from '../codes';
+import log, { INFO, WARN, ERROR } from '../../../log';
+import { BAD_REQUEST, INTERNAL_ERROR } from '../const/status';
 import url from '../url';
 
 // TODO Support configurations
 export default (req, res, next) => {
-	const start = Date.now();
+	const start = log.constructor.now();
 
 	const _write = res.write;
 	const _end = res.end;
@@ -42,16 +42,22 @@ export default (req, res, next) => {
 	// NOTE we can not get entire headers list on send
 	res.on('finish', () => {
 		const status = res.statusCode;
-		const level = status < BAD_REQUEST ?
-			'info' :
-			status >= INTERNAL_ERROR ?
-				'error':
-				'warn';
+		const level = getLogLevelByStatus(status);
 		const contentLength = (sent ? new Buffer('' + sent[0]) : Buffer.concat(chunks)).length;
-		sent = null;
 
-		log[level](`RES ${res.id} < status=${status} duration=${Date.now() - start}ms headers=${JSON.stringify(res.header()._headers)} bufferLength=${contentLength}`);
+		sent = null;
+		chunks.lenght = 0;
+
+		log[level](`RES ${res.id} < status=${status} duration=${log.constructor.now() - start}ms headers=${JSON.stringify(res.header()._headers)} bufferLength=${contentLength}`);
 	});
 
 	next();
+}
+
+export function getLogLevelByStatus(status) {
+	return status < BAD_REQUEST ?
+		INFO :
+		status >= INTERNAL_ERROR ?
+			ERROR:
+			WARN;
 }

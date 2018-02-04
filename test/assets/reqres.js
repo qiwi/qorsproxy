@@ -1,4 +1,4 @@
-import { assign, isObject } from '../../src/base';
+import { assign, isObject, each } from '../../src/base';
 
 export class Req {
 	constructor(opts) {
@@ -13,16 +13,21 @@ export class Res {
 	constructor(opts) {
 		this.body = '';
 		this.headers = {};
+		this.__handlers = {};
 		assign(this, opts);
 	}
 
 	write(data) { this.body += data; return this;}
-	writeHead() {}
+	writeHead() {
+		return this;
+	}
 	send(value) {
 		this.body = '' + (isObject(value) ? JSON.stringify(value) : value);
+		this.__trigger('finish');
 		return this;
 	}
 	end() {
+		this.__trigger('finish');
 		return this;
 	}
 
@@ -39,6 +44,16 @@ export class Res {
 	status(status) {
 		this.statusCode = status;
 		return this;
+	}
+	on(event, handler) {
+		this.__handlers[event] = this.__handlers[event] || [];
+		this.__handlers[event]
+			.push(handler);
+
+		return this;
+	}
+	__trigger(event) {
+		each(this.__handlers[event], handler => handler());
 	}
 }
 

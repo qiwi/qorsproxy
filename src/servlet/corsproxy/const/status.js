@@ -1,4 +1,5 @@
 export const OK = 200;
+export const NO_CONTENT = 204;
 export const BAD_REQUEST = 400;
 export const AUTH = 401;
 export const FORBIDDEN = 403;
@@ -7,6 +8,7 @@ export const INTERNAL_ERROR = 500;
 
 export default {
 	OK,
+	NO_CONTENT,
 	BAD_REQUEST,
 	AUTH,
 	FORBIDDEN,
