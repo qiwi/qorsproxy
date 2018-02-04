@@ -16,13 +16,15 @@ export class Res {
 		assign(this, opts);
 	}
 
-	write(data) { this.body += data}
+	write(data) { this.body += data; return this;}
 	writeHead() {}
 	send(value) {
 		this.body = '' + (isObject(value) ? JSON.stringify(value) : value);
 		return this;
 	}
-	end() {}
+	end() {
+		return this;
+	}
 
 	header(value) {
 		if (isObject(value)) {

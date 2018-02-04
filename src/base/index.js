@@ -10,7 +10,8 @@ import {
 	each,
 	find,
 	mapValues,
-	assign
+	assign,
+	isMatch
 } from 'lodash-es';
 
 export {
@@ -24,5 +25,6 @@ export {
 	each,
 	find,
 	mapValues,
-	assign
+	assign,
+	isMatch
 };
