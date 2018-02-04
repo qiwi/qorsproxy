@@ -6,6 +6,10 @@ export const FORBIDDEN = 403;
 export const NOT_FOUND = 404;
 export const INTERNAL_ERROR = 500;
 
+// NOTE Cloudflare's reverse proxy codes
+export const REMOTE_UNKNOWN = 520;
+export const REMOTE_IS_DOWN = 521;
+
 export default {
 	OK,
 	NO_CONTENT,

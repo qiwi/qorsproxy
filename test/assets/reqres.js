@@ -10,6 +10,7 @@ export class Req {
 	}
 	header() {}
 	set() {}
+	pipe() {}
 }
 
 export class Res {
@@ -55,6 +56,7 @@ export class Res {
 
 		return this;
 	}
+	pipe() {}
 	__trigger(event) {
 		each(this.__handlers[event], handler => handler());
 	}

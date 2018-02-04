@@ -1,5 +1,6 @@
 import request from 'request';
-import codes from '../codes';
+import {ECONNREFUSED} from '../const/error';
+import {REMOTE_UNKNOWN, REMOTE_IS_DOWN} from '../const/status';
 import url from '../url';
 
 /**
@@ -16,12 +17,12 @@ export default (req, res, next) => {
 	req.pipe(request[method]({url: dest, encoding: null, headers}, (error, response, body) => {
 		if (error) {
 			switch (error.code) {
-				case codes.ECONNREFUSED:
-					res.status(codes.BAD_REQUEST).json({message: 'Connection refused: ' + dest});
+				case ECONNREFUSED:
+					res.status(REMOTE_IS_DOWN).json({message: 'Connection refused: ' + dest});
 					break;
 
 				default:
-					res.status(codes.NOT_FOUND).json({message: 'Unreachable dest: ' + dest});
+					res.status(REMOTE_UNKNOWN).json({message: 'Unreachable dest: ' + dest});
 			}
 			return;
 		}
