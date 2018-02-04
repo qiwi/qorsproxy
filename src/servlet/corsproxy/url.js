@@ -1,7 +1,5 @@
 import url from 'url';
 
-'use strict';
-
 /**
  *
  * @param {Object} req

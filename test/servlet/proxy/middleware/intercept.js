@@ -1,12 +1,12 @@
 import chai from 'chai';
-import reqres from '../../assets/reqres';
-import intercept from '../../../src/servlet/corsproxy/middlewares/intercept';
-import {GET} from '../../../src/servlet/corsproxy/const/method';
-import {FORBIDDEN, OK} from '../../../src/servlet/corsproxy/const/status';
+import reqres from '../../../assets/reqres';
+import intercept from '../../../../src/servlet/corsproxy/middlewares/intercept';
+import {GET} from '../../../../src/servlet/corsproxy/const/method';
+import {FORBIDDEN, OK} from '../../../../src/servlet/corsproxy/const/status';
 
 const {expect} = chai;
 
-describe('middleware.intercept', () => {
+describe('corsproxy.middleware.intercept', () => {
 	it('captures request by method match', () => {
 		const headers = {foo: 'bar'};
 		const body = 'Baz';

@@ -1,15 +1,15 @@
 import chai from 'chai';
 import spies from 'chai-spies';
-import reqres from '../../assets/reqres';
-import logger, {getLogLevelByStatus} from '../../../src/servlet/corsproxy/middlewares/logger';
-import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_ERROR} from '../../../src/servlet/corsproxy/const/status';
-import log, {INFO, WARN, ERROR} from '../../../src/log';
+import reqres from '../../../assets/reqres';
+import logger, {getLogLevelByStatus} from '../../../../src/servlet/corsproxy/middlewares/logger';
+import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_ERROR} from '../../../../src/servlet/corsproxy/const/status';
+import log, {INFO, WARN, ERROR} from '../../../../src/log';
 
 chai.use(spies);
 const {expect} = chai;
 const sandbox = chai.spy.sandbox();
 
-describe('middleware.logger', () => {
+describe('corsproxy.middleware.logger', () => {
 	it('gets logger level by status code', () => {
 		expect(getLogLevelByStatus(OK)).to.equal(INFO);
 		expect(getLogLevelByStatus(NO_CONTENT)).to.equal(INFO);

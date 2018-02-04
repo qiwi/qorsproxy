@@ -1,14 +1,14 @@
 import chai from 'chai';
-import reqres from '../../assets/reqres';
-import crumbs from '../../../src/servlet/corsproxy/middlewares/crumbs';
-import {XFH, HOST} from '../../../src/servlet/corsproxy/const/header';
+import reqres from '../../../assets/reqres';
+import crumbs from '../../../../src/servlet/corsproxy/middlewares/crumbs';
+import {XFH, HOST} from '../../../../src/servlet/corsproxy/const/header';
 
 const {expect} = chai;
 
 const host = '127.0.0.1';
 const port = 8080;
 
-describe('middleware.crumbs', () => {
+describe('corsproxy.middleware.crumbs', () => {
 	it('transfers XFH from response', () => {
 		const headers = {foo: 'bar', [XFH]: 'qiwi.com'};
 		const {req, res, next} = reqres({proxy: {server: {host, port}}}, {piped: {headers}});

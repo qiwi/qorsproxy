@@ -1,10 +1,10 @@
 import chai from 'chai';
-import reqres from '../../assets/reqres';
-import parse from '../../../src/servlet/corsproxy/middlewares/parse';
+import reqres from '../../../assets/reqres';
+import parse from '../../../../src/servlet/corsproxy/middlewares/parse';
 
 const { expect } = chai;
 
-describe('middleware.parse', () => {
+describe('corsproxy.middleware.parse', () => {
 	it('parses request data', () => {
 		const {req, res, next} = reqres({
 			url: '/http://example.com',

@@ -1,10 +1,10 @@
 import chai from 'chai';
-import reqres from '../../assets/reqres';
-import end from '../../../src/servlet/corsproxy/middlewares/end';
+import reqres from '../../../assets/reqres';
+import end from '../../../../src/servlet/corsproxy/middlewares/end';
 
 const { expect } = chai;
 
-describe('middleware.end', () => {
+describe('corsproxy.middleware.end', () => {
 	it('transfers piped data to response', () => {
 		const headers = {foo: 'bar'};
 		const statusCode = 200;

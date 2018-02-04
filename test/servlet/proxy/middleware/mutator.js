@@ -1,11 +1,11 @@
-import {each} from '../../../src/base';
+import {each} from '../../../../src/base';
 import chai from 'chai';
-import reqres from '../../assets/reqres';
-import {from, parsePattern, to} from '../../../src/servlet/corsproxy/middlewares/mutator';
+import reqres from '../../../assets/reqres';
+import {from, parsePattern, to} from '../../../../src/servlet/corsproxy/middlewares/mutator';
 
 const {expect} = chai;
 
-describe('middleware.mutator', () => {
+describe('corsproxy.middleware.mutator', () => {
 	describe('parsePattern', () => {
 		it('returns RegExp if possible', () => {
 			expect(parsePattern('/foo/gi')).to.be.a('regexp');

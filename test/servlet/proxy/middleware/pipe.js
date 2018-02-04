@@ -1,15 +1,15 @@
 import chai from 'chai';
 import request from 'request';
-import reqres from '../../assets/reqres';
-import pipe from '../../../src/servlet/corsproxy/middlewares/pipe';
-import {ECONNREFUSED} from '../../../src/servlet/corsproxy/const/error';
-import {GET} from '../../../src/servlet/corsproxy/const/method';
-import {OK, REMOTE_IS_DOWN, REMOTE_UNKNOWN} from '../../../src/servlet/corsproxy/const/status';
+import reqres from '../../../assets/reqres';
+import pipe from '../../../../src/servlet/corsproxy/middlewares/pipe';
+import {ECONNREFUSED} from '../../../../src/servlet/corsproxy/const/error';
+import {GET} from '../../../../src/servlet/corsproxy/const/method';
+import {OK, REMOTE_IS_DOWN, REMOTE_UNKNOWN} from '../../../../src/servlet/corsproxy/const/status';
 
 const { expect } = chai;
 const sandbox = chai.spy.sandbox();
 
-describe('middleware.pipe', () => {
+describe('corsproxy.middleware.pipe', () => {
 	afterEach(() => {
 		sandbox.restore(request);
 	});

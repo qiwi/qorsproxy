@@ -1,11 +1,11 @@
 import chai from 'chai';
-import reqres from '../../assets/reqres';
-import error from '../../../src/servlet/corsproxy/middlewares/error';
-import { INTERNAL_ERROR } from '../../../src/servlet/corsproxy/codes';
+import reqres from '../../../assets/reqres';
+import error from '../../../../src/servlet/corsproxy/middlewares/error';
+import { INTERNAL_ERROR } from '../../../../src/servlet/corsproxy/codes';
 
 const { expect } = chai;
 
-describe('middleware.error', () => {
+describe('corsproxy.middleware.error', () => {
 	it('handles error', () => {
 		const err = new Error('Some error');
 		const {req, res, next} = reqres();

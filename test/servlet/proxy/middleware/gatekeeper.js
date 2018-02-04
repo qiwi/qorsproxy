@@ -1,18 +1,18 @@
 import chai from 'chai';
 import spies from 'chai-spies';
-import reqres from '../../assets/reqres';
+import reqres from '../../../assets/reqres';
 import gatekeeper, {
 	RECURSIVE_REQUEST,
 	FORBIDDEN_REQUEST,
 	CYCLED_REQUEST
-} from '../../../src/servlet/corsproxy/middlewares/gatekeeper';
-import {OK, FORBIDDEN} from '../../../src/servlet/corsproxy/const/status';
-import {XFH} from '../../../src/servlet/corsproxy/const/header';
+} from '../../../../src/servlet/corsproxy/middlewares/gatekeeper';
+import {OK, FORBIDDEN} from '../../../../src/servlet/corsproxy/const/status';
+import {XFH} from '../../../../src/servlet/corsproxy/const/header';
 
 chai.use(spies);
 const {expect} = chai;
 
-describe('middleware.gatekeeper', () => {
+describe('corsproxy.middleware.gatekeeper', () => {
 	const host = '127.0.0.1';
 	const port = 8080;
 	const rule = {};
