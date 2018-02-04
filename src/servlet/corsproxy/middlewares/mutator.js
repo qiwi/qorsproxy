@@ -55,7 +55,7 @@ function mutate(headers, mutations) {
 	});
 }
 
-function parsePattern(value) {
+export function parsePattern(value) {
 	const ARGS_PATTERN = /\/(.+)\/(.*)/;
 	const args = ('' + value).match(ARGS_PATTERN);
 
