@@ -5,6 +5,9 @@ export class Req {
 		this.headers = {};
 		assign(this, opts);
 	}
+	get(name) {
+		return this.headers[name];
+	}
 	header() {}
 	set() {}
 }
