@@ -1,7 +1,10 @@
 ## Qorsproxy 3.0
 
+![deps](https://david-dm.org/qiwi/qorsproxy.svg)
+![devDeps](https://david-dm.org/qiwi/qorsproxy/dev-status.svg)
+
 Sometimes you need a proxy.
-There're several solutions for this:
+There're several solutions:
 * Get one of the [thousands from google](https://www.google.ru/search?q=http+proxy+js)
 * Just write your own. That's pretty easy:
 ```
