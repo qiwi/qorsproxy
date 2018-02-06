@@ -15,7 +15,7 @@ export default class Rules {
 		each(rules, rule => {
 			each([].concat(rule.from || ANY), origin => {
 				each([].concat(rule.to || ANY), target => {
-					each([].concat(rule.secrets || ANY), secret => {
+					each([].concat(rule.secret || rule.secrets || ANY), secret => {
 						key = this.constructor.getKey(origin, target, secret);
 						this.rules.set(key, rule);
 					});
@@ -31,7 +31,7 @@ export default class Rules {
 	 * @param {String} [origin]
 	 * @param {String} [host]
 	 * @param {String} [secret]
-	 * @returns {Mixed}
+	 * @returns {Object/null}
 	 */
 	get(origin, host, secret) {
 		// TODO Support ip
