@@ -38,15 +38,18 @@
   "scripts": {
     "start_pm2": "pm2 start npm --name qorsproxy -- start",
     "start": "node -r @std/esm --use_strict src/app",
-    "test": "nyc mocha --opts .mocha.opts"
+    "test": "nyc mocha --opts .mocha.opts",
+    "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-spies": "^1.0.0",
     "chai-subset": "^1.6.0",
+    "coveralls": "^3.0.0",
     "glob": "^7.1.2",
     "mocha": "^5.0.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^11.4.1"
   }
 }
