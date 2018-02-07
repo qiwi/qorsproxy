@@ -1,5 +1,7 @@
 ## Qorsproxy 3.0
 
+![buildStatus](https://travis-ci.org/qiwi/qorsproxy.svg?branch=master)
+![Coverage](https://coveralls.io/repos/qiwi/qorsproxy/badge.svg)
 ![deps](https://david-dm.org/qiwi/qorsproxy.svg)
 ![devDeps](https://david-dm.org/qiwi/qorsproxy/dev-status.svg)
 
