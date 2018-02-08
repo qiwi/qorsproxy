@@ -1,5 +1,5 @@
 import log, { INFO, WARN, ERROR } from '../../../log';
-import { BAD_REQUEST, INTERNAL_ERROR } from '../const/status';
+import { BAD_REQUEST, INTERNAL_ERROR } from '../../const/status';
 import url from '../url';
 
 // TODO Support configurations

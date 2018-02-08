@@ -2,9 +2,9 @@ import chai from 'chai';
 import request from 'request';
 import reqres from '../../../assets/reqres';
 import pipe from '../../../../src/servlet/corsproxy/middlewares/pipe';
-import {ECONNREFUSED} from '../../../../src/servlet/corsproxy/const/error';
-import {GET} from '../../../../src/servlet/corsproxy/const/method';
-import {OK, REMOTE_IS_DOWN, REMOTE_UNKNOWN} from '../../../../src/servlet/corsproxy/const/status';
+import {ECONNREFUSED} from '../../../../src/servlet/const/error';
+import {GET} from '../../../../src/servlet/const/method';
+import {OK, REMOTE_IS_DOWN, REMOTE_UNKNOWN} from '../../../../src/servlet/const/status';
 
 const { expect } = chai;
 const sandbox = chai.spy.sandbox();

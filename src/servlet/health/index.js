@@ -1,7 +1,9 @@
 import { mapValues, find, isFunction } from '../../base';
+import {DEFAULT_MAP, DEFAULT_CODE} from './mapping';
+import {UP, DOWN, UNKNOWN} from './status';
 
-export const OK = 'OK';
-export const FAIL = 'FAIL';
+/*export const UP = 'UP';
+export const DOWN = 'DOWN';*/
 
 export default class Health {
 	constructor(components) {
@@ -16,14 +18,21 @@ export default class Health {
 
 	handler(req, res) {
 		const details = mapValues(this.components, this.constructor.getHealth);
-		const status = find(details, this.constructor.isFail) ? FAIL : OK;
+		const status = find(details, this.constructor.isFail) ? DOWN : UP;
+		const code = this.constructor.resolveHttpCode(status);
 
-		res.writeHead(200, {'Content-Type': 'application/json'});
+		res.writeHead(code, {'Content-Type': 'application/json'});
 		res.write(JSON.stringify({
 			status,
 			details
 		}));
 		res.end();
+	}
+
+	static resolveHttpCode(status, map=DEFAULT_MAP, code=DEFAULT_CODE) {
+		// NOTE Inspired by Spring contract
+		// https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html
+		return map[status] || code;
 	}
 
 	static getHealth(component) {
@@ -32,14 +41,14 @@ export default class Health {
 				return component.health();
 			}
 
-			return component.health || OK; // NOTE It may be getter
+			return component.health || UP; // NOTE It may be getter
 
 		} catch (e) {
-			return FAIL;
+			return DOWN;
 		}
 	}
 
 	static isFail(health) {
-		return health !== OK && health.status !== OK;
+		return health !== UP && health.status !== UP;
 	}
 }

@@ -5,6 +5,7 @@ export const AUTH = 401;
 export const FORBIDDEN = 403;
 export const NOT_FOUND = 404;
 export const INTERNAL_ERROR = 500;
+export const SERVICE_UNAVAILABLE = 503;
 
 // NOTE Cloudflare's reverse proxy codes
 export const REMOTE_UNKNOWN = 520;
@@ -17,5 +18,9 @@ export default {
 	AUTH,
 	FORBIDDEN,
 	NOT_FOUND,
-	INTERNAL_ERROR
+	INTERNAL_ERROR,
+	SERVICE_UNAVAILABLE,
+
+	REMOTE_IS_DOWN,
+	REMOTE_UNKNOWN
 };

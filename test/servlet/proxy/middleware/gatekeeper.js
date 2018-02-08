@@ -6,8 +6,8 @@ import gatekeeper, {
 	FORBIDDEN_REQUEST,
 	CYCLED_REQUEST
 } from '../../../../src/servlet/corsproxy/middlewares/gatekeeper';
-import {OK, FORBIDDEN} from '../../../../src/servlet/corsproxy/const/status';
-import {XFH} from '../../../../src/servlet/corsproxy/const/header';
+import {OK, FORBIDDEN} from '../../../../src/servlet/const/status';
+import {XFH} from '../../../../src/servlet/const/header';
 
 chai.use(spies);
 const {expect} = chai;

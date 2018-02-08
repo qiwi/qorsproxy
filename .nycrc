@@ -2,8 +2,7 @@
   "reporter": [
     "html",
     "text",
-    "text-summary",
-    "text-lcov"
+    "text-summary"
   ],
   "include": [
     "src/**/*.js"

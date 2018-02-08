@@ -2,7 +2,7 @@ import chai from 'chai';
 import spies from 'chai-spies';
 import reqres from '../../../assets/reqres';
 import logger, {getLogLevelByStatus} from '../../../../src/servlet/corsproxy/middlewares/logger';
-import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_ERROR} from '../../../../src/servlet/corsproxy/const/status';
+import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_ERROR} from '../../../../src/servlet/const/status';
 import log, {INFO, WARN, ERROR} from '../../../../src/log';
 
 chai.use(spies);

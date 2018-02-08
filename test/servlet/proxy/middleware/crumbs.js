@@ -1,7 +1,7 @@
 import chai from 'chai';
 import reqres from '../../../assets/reqres';
 import crumbs from '../../../../src/servlet/corsproxy/middlewares/crumbs';
-import {XFH, HOST} from '../../../../src/servlet/corsproxy/const/header';
+import {XFH, HOST} from '../../../../src/servlet/const/header';
 
 const {expect} = chai;
 

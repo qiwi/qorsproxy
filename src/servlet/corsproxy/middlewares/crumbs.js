@@ -1,4 +1,4 @@
-import {XFH, XFF, HOST} from '../const/header';
+import {XFH, XFF, HOST} from '../../const/header';
 
 export const SEP = ' ';
 

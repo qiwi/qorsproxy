@@ -1,20 +1,20 @@
 {
   "name": "qorsproxy",
-  "description": "CORS proxy for Qoder",
+  "description": "Cors proxy for Qoder/Pusher",
   "keywords": [
     "cors",
     "corsproxy",
     "qors",
     "qorsproxy"
   ],
-  "version": "3.0.1",
+  "version": "3.0.2",
   "repository": {
     "type": "git",
-    "url": "https://github.qiwi.com/a-golub/qorsproxy"
+    "url": "https://github.com/qiwi/qorsproxy"
   },
   "author": "Anton Golub <a.golub@qiwi.com>",
   "engines": {
-    "node": ">=9.4.0 < 10.0",
+    "node": ">=9.4.0 <10.0",
     "npm": ">=5.6 <6.0"
   },
   "dependencies": {

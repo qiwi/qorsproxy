@@ -30,8 +30,8 @@ describe('corsproxy', () => {
 			expect(proxy.port).to.equal(port);
 		});
 
-		it('health returns OK', () => {
-			expect(proxy.health()).to.equal('OK');
+		it('health returns UP', () => {
+			expect(proxy.health()).to.equal('UP');
 		});
 
 		it('metrics returns stats report', () => {
