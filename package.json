@@ -18,7 +18,7 @@
     "npm": ">=5.6 <6.0"
   },
   "dependencies": {
-    "@std/esm": "^0.22.0",
+    "@std/esm": "^0.23.2",
     "async-middleware": "^1.2.1",
     "basic-auth": "^2.0.0",
     "express": "^4.16.2",
