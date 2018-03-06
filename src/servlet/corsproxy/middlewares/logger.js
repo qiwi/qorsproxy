@@ -37,6 +37,8 @@ export default (req, res, next) => {
 		res.end = _end;
 		res.write = _write;
 		_end.apply(res, args);
+
+		res.emit('finish')
 	};
 
 	// NOTE we can not get entire headers list on send

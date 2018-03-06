@@ -1,5 +1,5 @@
 import chai from 'chai';
-import reqres from '../../../assets/reqres';
+import reqres from 'reqresnext';
 import parse from '../../../../src/servlet/corsproxy/middlewares/parse';
 
 const { expect } = chai;

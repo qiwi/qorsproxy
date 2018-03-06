@@ -1,5 +1,5 @@
 import chai from 'chai';
-import reqres from '../../assets/reqres';
+import reqres from 'reqresnext';
 import Corsproxy from '../../../src/servlet/corsproxy';
 import url from '../../../src/servlet/corsproxy/url';
 

@@ -1,6 +1,6 @@
 import chai from 'chai';
 import spies from 'chai-spies';
-import reqres from '../../../assets/reqres';
+import reqres from 'reqresnext';
 import gatekeeper, {
 	RECURSIVE_REQUEST,
 	FORBIDDEN_REQUEST,
@@ -66,6 +66,6 @@ describe('corsproxy.middleware.gatekeeper', () => {
 
 		gatekeeper(req, res, next);
 		expect(next).to.be.called();
-		expect(res.body).to.equal('');
+		expect(res.body).to.equal(undefined);
 	});
 });

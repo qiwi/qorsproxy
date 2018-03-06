@@ -1,6 +1,6 @@
 import {each} from '../../../../src/base';
 import chai from 'chai';
-import reqres from '../../../assets/reqres';
+import reqres from 'reqresnext';
 import {from, parsePattern, to} from '../../../../src/servlet/corsproxy/middlewares/mutator';
 
 const {expect} = chai;

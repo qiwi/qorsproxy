@@ -1,5 +1,5 @@
 import chai from 'chai';
-import reqres from '../../../assets/reqres';
+import reqres from 'reqresnext';
 import end from '../../../../src/servlet/corsproxy/middlewares/end';
 
 const { expect } = chai;
@@ -13,7 +13,7 @@ describe('corsproxy.middleware.end', () => {
 
 		end(req, res, next);
 		expect(res.statusCode).to.equal(statusCode);
-		expect(res.headers).to.own.include(headers);
+		expect(res.getHeaders()).to.own.include(headers);
 		expect(res.body).to.equal(body);
 	});
 });

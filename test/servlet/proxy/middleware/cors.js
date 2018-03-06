@@ -1,5 +1,5 @@
 import chai from 'chai';
-import reqres from '../../../assets/reqres';
+import reqres from 'reqresnext';
 import cors, {ALLOW_ORIGIN} from '../../../../src/servlet/corsproxy/middlewares/cors';
 
 const { expect } = chai;
@@ -18,6 +18,6 @@ describe('corsproxy.middleware.cors', () => {
 		const {req, res, next} = reqres({proxy: {}}, {});
 
 		cors(req, res, next);
-		expect(res.headers[ALLOW_ORIGIN]).to.equal('*');
+		expect(res.get(ALLOW_ORIGIN)).to.equal('*');
 	});
 });

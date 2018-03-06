@@ -1,10 +1,9 @@
 import chai from 'chai';
 import chaiSubset from 'chai-subset';
-import reqres from '../../assets/reqres';
+import reqres from 'reqresnext';
 import Corsproxy from '../../../src/servlet/corsproxy';
 import Rules from '../../../src/servlet/corsproxy/rules';
 import Stats from '../../../src/servlet/corsproxy/stats';
-import url from '../../../src/servlet/corsproxy/url';
 
 const { expect } = chai;
 chai.use(chaiSubset);

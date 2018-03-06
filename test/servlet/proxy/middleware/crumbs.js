@@ -1,5 +1,5 @@
 import chai from 'chai';
-import reqres from '../../../assets/reqres';
+import reqres from 'reqresnext';
 import crumbs from '../../../../src/servlet/corsproxy/middlewares/crumbs';
 import {XFH, HOST} from '../../../../src/servlet/const/header';
 

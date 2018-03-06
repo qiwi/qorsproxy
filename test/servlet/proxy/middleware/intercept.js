@@ -1,5 +1,5 @@
 import chai from 'chai';
-import reqres from '../../../assets/reqres';
+import reqres from 'reqresnext';
 import intercept from '../../../../src/servlet/corsproxy/middlewares/intercept';
 import {GET} from '../../../../src/servlet/const/method';
 import {FORBIDDEN, OK} from '../../../../src/servlet/const/status';
@@ -24,7 +24,7 @@ describe('corsproxy.middleware.intercept', () => {
 
 		intercept(req, res, next);
 		expect(res.statusCode).to.equal(FORBIDDEN);
-		expect(res.headers).to.include(headers);
+		expect(res.getHeaders()).to.include(headers);
 		expect(res.body).to.equal(body);
 	});
 
@@ -55,6 +55,6 @@ describe('corsproxy.middleware.intercept', () => {
 
 		intercept(req, res, next);
 		expect(next).to.be.called();
-		expect(res.body).to.equal('');
+		expect(res.body).to.equal(undefined);
 	});
 });

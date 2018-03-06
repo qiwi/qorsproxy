@@ -1,16 +1,16 @@
 import chai from 'chai';
-import reqres from '../../assets/reqres';
+import reqres from 'reqresnext';
 import Stats from '../../../src/servlet/corsproxy/stats';
 
 const { expect } = chai;
 
 describe('corsproxy.stats', () => {
-	let stats;
+	let stats, req, res, next
 	const length = 100;
-	const {req, res, next} = reqres({}, {piped: {body: {length}}});
 
 	beforeEach(() => {
-		stats = new Stats();
+		({req, res, next} = reqres({}, {piped: {body: {length}}}));
+    stats = new Stats();
 	});
 
 	it('constructor returns proper instance', () => {

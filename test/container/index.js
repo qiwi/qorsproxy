@@ -1,6 +1,6 @@
 import chai from 'chai';
 import spies from 'chai-spies';
-import { gen } from '../assets/reqres';
+import gen from 'reqresnext';
 import Container from '../../src/container';
 import Server from '../../src/container/server';
 
@@ -62,7 +62,7 @@ describe('container', () => {
 
 			container.online = false;
 			container.handler(req, res);
-			expect(res.body).to.equal('');
+			expect(res.body).to.equal(undefined);
 		});
 	});
 

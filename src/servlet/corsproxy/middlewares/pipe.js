@@ -14,7 +14,7 @@ export default (req, res, next) => {
 		method = req.method.toLowerCase(),
 		headers = req.headers;
 
-	req.pipe(request[method]({url: dest, encoding: null, headers}, (error, response, body) => {
+	request[method]({url: dest, encoding: null, headers}, (error, response, body) => {
 		if (error) {
 			switch (error.code) {
 				case ECONNREFUSED:
@@ -33,5 +33,5 @@ export default (req, res, next) => {
 			body: body // Buffer
 		};
 		next();
-	}));
+	});
 }

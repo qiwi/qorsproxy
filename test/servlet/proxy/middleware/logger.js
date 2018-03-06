@@ -1,6 +1,6 @@
 import chai from 'chai';
 import spies from 'chai-spies';
-import reqres from '../../../assets/reqres';
+import reqres from 'reqresnext';
 import logger, {getLogLevelByStatus} from '../../../../src/servlet/corsproxy/middlewares/logger';
 import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_ERROR} from '../../../../src/servlet/const/status';
 import log, {INFO, WARN, ERROR} from '../../../../src/log';
@@ -30,7 +30,6 @@ describe('corsproxy.middleware.logger', () => {
 
 		it('logs current request', () => {
 			const {req, res, next} = reqres({
-				ip: '192.168.1.10',
 				method: 'GET',
 				proxy: {
 					id: '123',
@@ -38,16 +37,18 @@ describe('corsproxy.middleware.logger', () => {
 						protocol: 'http',
 						host: 'example.com'
 					}
+				},
+				headers: {
+	        'x-forwarded-for': '192.168.1.10'
 				}
 			});
 			logger(req, res, next);
 
-			expect(log.info).to.have.been.called.with('REQ 123 > method=GET origin=undefined ip=192.168.1.10 dest=http://example.com user=undefined headers={}');
+			expect(log.info).to.have.been.called.with('REQ 123 > method=GET origin=undefined ip=192.168.1.10 dest=http://example.com user=undefined headers={"x-forwarded-for":"192.168.1.10","host":null}');
 		});
 
 		it('logs response on finish', () => {
 			const {req, res, next} = reqres({
-				ip: '192.168.1.10',
 				method: 'GET',
 				proxy: {
 					id: '123',
@@ -64,16 +65,15 @@ describe('corsproxy.middleware.logger', () => {
 			logger(req, res, next);
 			res.send('foo');
 
-			expect(log.error).to.have.been.called.with('RES 123 < status=500 duration=0ms headers=undefined bufferLength=3');
+      expect(log.error).to.have.been.called.with('RES 123 < status=500 duration=0ms headers={"content-type":"text/html; charset=utf-8","content-length":"3"} bufferLength=3');
 		});
 	});
 
-	describe('injects res method', () => {
+	describe('overrides res method', () => {
 		let req, res, next, send, end, write;
 
 		before(() => {
 			({req, res, next} = reqres({
-				ip: '192.168.1.10',
 				method: 'GET',
 				proxy: {
 					id: '123',
@@ -98,18 +98,14 @@ describe('corsproxy.middleware.logger', () => {
 
 		it('send', () => {
 			expect(res.send).not.to.equal(send);
+      expect(res.end).not.to.equal(end);
 			res.send();
 
 			expect(send).to.be.called();
-			expect(res.send).to.equal(send);
-		});
+      expect(end).to.be.called();
 
-		it('end', () => {
-			expect(res.end).not.to.equal(end);
-			res.end('foo');
-
-			expect(res.end).to.be.called();
-			expect(res.end).to.equal(end);
+      expect(res.send).to.equal(send);
+      expect(res.end).to.equal(end);
 		});
 	});
 });
