@@ -2704,9 +2704,9 @@
       }
     },
     "reqresnext": {
-      "version": "1.1.3",
-      "resolved": "https://registry.npmjs.org/reqresnext/-/reqresnext-1.1.3.tgz",
-      "integrity": "sha512-Z2j8MzNigrJx1FoEO+ua+vW5AYb9Bh9bc8sfhhu9uIZfbW3VX0iTvoqsMQKis6TYBSreNUbVecpV3/8rtcN8GA==",
+      "version": "1.1.4",
+      "resolved": "https://registry.npmjs.org/reqresnext/-/reqresnext-1.1.4.tgz",
+      "integrity": "sha512-H1vGwFeapebAkC9qCqGzA3xhDuz7sgKeUOhneD3Jlmt7xnCJmRu0gEIvE1nJdMn31q5S7RTsB9/L/tcFh5xkYw==",
       "dev": true,
       "requires": {
         "express": "4.16.2",
