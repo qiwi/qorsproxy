@@ -6,7 +6,6 @@ import Server from '../../src/container/server';
 
 chai.use(spies);
 const { expect } = chai;
-const sandbox = chai.spy.sandbox();
 
 describe('container', () => {
 	const host = '127.0.0.1';
@@ -14,7 +13,6 @@ describe('container', () => {
 	const foo = {handler() {}};
 	const bar = {handler() { throw new Error('Bar unhandled') }};
 	const servlets = { foo, bar };
-	const container = new Container().configure({host, port, servlets});
 
 	describe('constructor', () => {
 		it('returns proper instance', () => {
@@ -26,12 +24,20 @@ describe('container', () => {
 	});
 
 	describe('handler', () => {
-    const container = new Container().configure({host, port, servlets});
-    container.online = true;
-    sandbox.on(foo, 'handler');
-    sandbox.on(bar, 'handler');
+    let container
+		let servlets
+
+		const setup = () => {
+      servlets = {foo: {handler: foo.handler}, bar: {handler: bar.handler}}
+      chai.spy.on(servlets.foo, 'handler');
+      chai.spy.on(servlets.bar, 'handler');
+
+      container = new Container().configure({host, port, servlets});
+      container.online = true;
+		}
 
 		it('invokes found servlet', () => {
+      setup()
 			const {req, res} = gen({url: 'foo/inner'});
 
 			container.handler(req, res);
@@ -39,6 +45,7 @@ describe('container', () => {
 		});
 
 		it('returns InternalError on servlet unhandled', () => {
+      setup()
 			const {req, res} = gen({url: 'bar/some'});
 
 			container.handler(req, res);
@@ -47,6 +54,7 @@ describe('container', () => {
 		});
 
 		it('returns NotFound otherwise', () => {
+      setup()
 			const {req, res} = gen({url: 'bazzz'});
 
 			container.handler(req, res);
@@ -54,6 +62,7 @@ describe('container', () => {
 		});
 
 		it('drops connection if offline', () => {
+      setup()
 			const {req, res} = gen({url: 'bazzz'});
 
 			container.online = false;
@@ -68,7 +77,7 @@ describe('container', () => {
 		// WORKAROUND beforeEach sometimes breaks build, so we use manual setup
 		const setup = () => {
       container = new Container().configure({host, port, servlets});
-      sandbox.on(container.server, ['listen', 'close'], (arg0, arg1, arg2) => {
+      chai.spy.on(container.server, ['listen', 'close'], (arg0, arg1, arg2) => {
         if (typeof arg0  === 'function') { arg0() }
         if (typeof arg2  === 'function') { arg2() }
       });

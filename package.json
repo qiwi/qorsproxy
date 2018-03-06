@@ -18,7 +18,7 @@
     "npm": ">=5.6 <6.0"
   },
   "dependencies": {
-    "@std/esm": "^0.23.2",
+    "@std/esm": "^0.25.0",
     "async-middleware": "^1.2.1",
     "basic-auth": "^2.0.0",
     "express": "^4.16.2",
@@ -31,7 +31,7 @@
     "winston-daily-rotate-file": "^1.7.2"
   },
   "@std/esm": {
-    "esm": "all",
+    "mode": "all",
     "cjs": true
   },
   "main": "src/app",
@@ -48,7 +48,7 @@
     "chai-subset": "^1.6.0",
     "coveralls": "^3.0.0",
     "glob": "^7.1.2",
-    "mocha": "^5.0.1",
+    "mocha": "^5.0.2",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^11.4.1",
     "reqresnext": "^1.1.3"

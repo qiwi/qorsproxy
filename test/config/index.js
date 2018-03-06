@@ -37,15 +37,8 @@ describe('config', () => {
 	});
 
 	describe('events', () => {
-		before(() => {
-			fs.writeFileSync(configPath, configDataStr);
-		});
-
-		after(() => {
-			fs.writeFileSync(configPath, configDataStr);
-		});
-
 		it('READY', done => {
+      fs.writeFileSync(configPath, configDataStr)
 			const config = new Config({host, port, watch, config: configPath});
 			config
 				.on(READY, data => {
