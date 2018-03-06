@@ -18,22 +18,18 @@ describe('container', () => {
 
 	describe('constructor', () => {
 		it('returns proper instance', () => {
+      const container = new Container().configure({host, port, servlets});
+
 			expect(container.server).to.be.an.instanceof(Server);
 			expect(container.online).to.be.a('boolean');
 		});
 	});
 
 	describe('handler', () => {
-		before(() => {
-			container.online = true;
-			sandbox.on(foo, 'handler');
-			sandbox.on(bar, 'handler');
-		});
-
-		after(() => {
-			sandbox.restore(foo);
-			sandbox.restore(bar);
-		});
+    const container = new Container().configure({host, port, servlets});
+    container.online = true;
+    sandbox.on(foo, 'handler');
+    sandbox.on(bar, 'handler');
 
 		it('invokes found servlet', () => {
 			const {req, res} = gen({url: 'foo/inner'});
