@@ -69,22 +69,25 @@ describe('container', () => {
 	describe('server', () => {
 		let container;
 
-		beforeEach(() => {
-			container = new Container().configure({host, port, servlets});
-			sandbox.on(container.server, ['listen', 'close'], (arg0, arg1, arg2) => {
-				if (typeof arg0  === 'function') { arg0() }
-				if (typeof arg2  === 'function') { arg2() }
-			});
-		});
+		// WORKAROUND beforeEach sometimes breaks build, so we use manual setup
+		const setup = () => {
+      container = new Container().configure({host, port, servlets});
+      sandbox.on(container.server, ['listen', 'close'], (arg0, arg1, arg2) => {
+        if (typeof arg0  === 'function') { arg0() }
+        if (typeof arg2  === 'function') { arg2() }
+      });
+		}
 
 		describe('start', () => {
 			it('starts inner server if it looks stopped', () => {
+        setup()
 				container.online = false;
 				container.start();
 				expect(container.server.listen).to.have.been.called();
 			});
 
 			it('does nothing otherwise', () => {
+        setup()
 				container.online = true;
 				container.start();
 				expect(container.server.listen).to.not.have.been.called();
@@ -93,12 +96,14 @@ describe('container', () => {
 
 		describe('stop', () => {
 			it('turns off inner server if it\'s online', () => {
+        setup()
 				container.online = true;
 				container.stop(() => {});
 				expect(container.server.close).to.have.been.called();
 			});
 
 			it('does nothing otherwise', () => {
+        setup()
 				container.online = false;
 				container.stop();
 				expect(container.server.close).to.not.have.been.called();
@@ -107,6 +112,7 @@ describe('container', () => {
 
 		describe('restart', () => {
 			it('restarts server', () => {
+        setup()
 				container.online = true;
 				container.restart();
 				expect(container.server.listen).to.have.been.called();
