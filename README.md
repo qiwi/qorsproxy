@@ -1,15 +1,16 @@
 ## Qorsproxy 3.0
 
-![buildStatus](https://travis-ci.org/qiwi/qorsproxy.svg?branch=master)
-![Coverage](https://coveralls.io/repos/qiwi/qorsproxy/badge.svg)
-![deps](https://david-dm.org/qiwi/qorsproxy.svg)
-![devDeps](https://david-dm.org/qiwi/qorsproxy/dev-status.svg)
+[![buildStatus](https://img.shields.io/travis/qiwi/qorsproxy.svg?maxAge=3600&branch=master)](https://travis-ci.org/qiwi/qorsproxy)
+[![Coveralls](https://img.shields.io/coveralls/qiwi/qorsproxy.svg?maxAge=3600)](https://coveralls.io/github/qiwi/qorsproxy)
+[![dependencyStatus](https://img.shields.io/david/qiwi/qorsproxy.svg?maxAge=3600)](https://david-dm.org/qiwi/qorsproxy)
+[![devDependencyStatus](https://img.shields.io/david/dev/qiwi/qorsproxy.svg?maxAge=3600)](https://david-dm.org/qiwi/qorsproxy)
+
 
 Sometimes you need a proxy.
 There're several solutions:
 * Get one of the [thousands from google](https://www.google.ru/search?q=http+proxy+js)
 * Just write your own. That's pretty easy:
-```
+```javascript
 const http = require('http');
 http.createServer(handler).listen(3000);
 
@@ -46,20 +47,20 @@ function handler(req, res) {
 
 #### Install
 
-```
+```bash
 npm i
 ```
 
 #### Start 
 Any of you'd prefer:
-```$
+```bash
 npm start -- --config=path
 pm2 start npm --name qorsproxy -- start -- --port=8080 --config=/Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
 npm run start_pm2 -- -- --port=8080
 ```
 
 #### Config example
-```$
+```json
 {
   "server": {
     "host": "127.0.0.1",
@@ -104,7 +105,7 @@ npm run start_pm2 -- -- --port=8080
 
 #### Usage
 
-```$
+```bash
 curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' → <!doctype html> ...
 ```
 

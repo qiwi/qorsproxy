@@ -2,8 +2,7 @@ import { mapValues, find, isFunction } from '../../base';
 import {DEFAULT_MAP, DEFAULT_CODE} from './mapping';
 import {UP, DOWN, UNKNOWN} from './status';
 
-/*export const UP = 'UP';
-export const DOWN = 'DOWN';*/
+// TODO migrate to
 
 export default class Health {
 	constructor(components) {
