@@ -708,9 +708,9 @@
       "dev": true
     },
     "lodash-es": {
-      "version": "4.17.7",
-      "resolved": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.7.tgz",
-      "integrity": "sha512-jzqTi3vk4J5Dxq43cNjB0ekfCjPLHixoY2Sc0WHTo+0r928taLqe/VCt02vY5uQBvg0rdXgL3xWkK4X0MCmZcw=="
+      "version": "4.17.8",
+      "resolved": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.8.tgz",
+      "integrity": "sha512-I9mjAxengFAleSThFhhAhvba6fsO0hunb9/0sQ6qQihSZsJRBofv2rYH58WXaOb/O++eUmYpCLywSQ22GfU+sA=="
     },
     "log-driver": {
       "version": "1.2.5",
@@ -3706,9 +3706,9 @@
       }
     },
     "reqresnext": {
-      "version": "1.2.0",
-      "resolved": "https://registry.npmjs.org/reqresnext/-/reqresnext-1.2.0.tgz",
-      "integrity": "sha512-CfzGpwpEZQpADjmWeX7laV5/SeG3zYH2l3lN5YNfvr2qhxD4Rl6PCvLGchvYEhfteOSTqo4wemMZI8PcxtjjGA==",
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/reqresnext/-/reqresnext-1.3.0.tgz",
+      "integrity": "sha512-cTDinocpCjhPnGicoLw1a+FI9yf/Z+n3mAACjZdofVloM9W2jmGHiLPny9jIGCfKg+pChQ19EeoQET82Siyd0g==",
       "dev": true,
       "requires": {
         "express": "4.16.3",

@@ -11,9 +11,9 @@ export default class Container {
       request.on('data', (chunk) => {
         chunk && body.push(chunk);
       }).on('end', () => {
-
-        body = Buffer.concat(body);
-        request.body = body;
+      	if (body.length) {
+          request.body = Buffer.concat(body);
+        }
 
         this.handler.call(this, request, response)
       });

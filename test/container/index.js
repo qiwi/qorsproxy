@@ -44,6 +44,8 @@ describe('container', () => {
 			req.on = (e, f) => {f(); return req}
 
       container.server.emit('request', req, res);
+			req.emit('end')
+
       expect(servlets.foo.handler).to.have.been.called();
 		})
 

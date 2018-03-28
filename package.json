@@ -24,7 +24,7 @@
     "express": "^4.16.3",
     "ip": "^1.1.5",
     "jsonschema": "^1.2.2",
-    "lodash-es": "^4.17.7",
+    "lodash-es": "^4.17.8",
     "optimist": "^0.6.1",
     "request": "^2.85.0",
     "winston": "^2.4.1",
@@ -51,6 +51,6 @@
     "mocha": "^5.0.5",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^11.6.0",
-    "reqresnext": "^1.2.0"
+    "reqresnext": "^1.3.0"
   }
 }
