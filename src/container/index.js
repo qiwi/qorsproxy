@@ -5,7 +5,19 @@ import Server from './server';
 export default class Container {
 	constructor() {
 		this.online = false;
-		this.server = new Server(this.handler.bind(this));
+		this.server = new Server();
+    this.server.on('request', (request, response) => {
+      let body = [];
+      request.on('data', (chunk) => {
+        chunk && body.push(chunk);
+      }).on('end', () => {
+
+        body = Buffer.concat(body);
+        request.body = body;
+
+        this.handler.call(this, request, response)
+      });
+    });
 	}
 
 	configure({host, port, servlets}) {
@@ -47,10 +59,8 @@ export default class Container {
 			this.server.constructor.notFound(req, res);
 			return;
 		}
-
 		try {
 			servlet.handler(req, res);
-
 		} catch (e) {
 			log.error(`Servlet unhandled exception. route=${route} url=${url}`, e);
 			this.server.constructor.internalError(req, res);

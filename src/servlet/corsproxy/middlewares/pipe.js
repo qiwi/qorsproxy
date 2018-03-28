@@ -12,9 +12,15 @@ import url from '../url';
 export default (req, res, next) => {
 	let dest = url.format(url.parseRequest(req)),
 		method = req.method.toLowerCase(),
-		headers = req.headers;
+		headers = req.headers,
+		body = req.body && req.body.length ? Buffer.from(req.body.toString()) : null;
 
-	request[method]({url: dest, encoding: null, headers}, (error, response, body) => {
+	request[method]({
+    url: dest,
+    headers,
+    encoding: null,
+    body
+  }, (error, response, body) => {
 		if (error) {
 			switch (error.code) {
 				case ECONNREFUSED:

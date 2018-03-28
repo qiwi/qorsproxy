@@ -36,6 +36,17 @@ describe('container', () => {
       container.online = true;
 		}
 
+		it('passes request control to handler', () => {
+      setup()
+      const {req, res} = gen({url: 'foo/inner'});
+
+      // TODO fix reqresnext
+			req.on = (e, f) => {f(); return req}
+
+      container.server.emit('request', req, res);
+      expect(servlets.foo.handler).to.have.been.called();
+		})
+
 		it('invokes found servlet', () => {
       setup()
 			const {req, res} = gen({url: 'foo/inner'});
@@ -80,6 +91,17 @@ describe('container', () => {
       chai.spy.on(container.server, ['listen', 'close'], (arg0, arg1, arg2) => {
         if (typeof arg0  === 'function') { arg0() }
         if (typeof arg2  === 'function') { arg2() }
+      });
+
+      const listeners = {}
+      chai.spy.on(container.server, ['on'], (event, handler) => {
+        listeners[event] = handler
+      });
+      chai.spy.on(container.server, ['emit'], (event, ...args) => {
+        const handler = listeners[event]
+	      if (handler) {
+        	handler(...args)
+	      }
       });
 		}
 
