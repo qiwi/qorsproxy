@@ -6,7 +6,7 @@ export const DEFAULT_HOST = IP; // 'localhost'?
 export default {
 	"log": {
 		"dir": "./logs/",
-		"name": "qors-%DATE%.log",
+		"filename": "qors-%DATE%.log",
 		"datePattern": 'YYYY-MM-DD',
 		"size": 50 * 1024 * 1024,
 		"level": "info"

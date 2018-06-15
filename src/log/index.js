@@ -45,7 +45,7 @@ class Log {
 		this.logger.error(...args); return this;
 	}
 
-	static formatOptions({dir, name, size, level='info', pattern}) {
+	static formatOptions({dir, filename, name, size, level=INFO, pattern}) {
 		return {
 			level: level,
 			exitOnError: false,
@@ -60,7 +60,7 @@ class Log {
 					maxsize: size,
 					datePattern: pattern,
 					dirname: path.resolve(dir + '/'),
-					filename: name,
+					filename: filename || name, // `name` is legacy option
 					timestamp: this.timestamp,
 					formatter: this.formatter,
 					colorize: (level, text) => text,
