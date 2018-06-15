@@ -4,7 +4,7 @@
 [![Coveralls](https://img.shields.io/coveralls/qiwi/qorsproxy.svg?maxAge=3600)](https://coveralls.io/github/qiwi/qorsproxy)
 [![dependencyStatus](https://img.shields.io/david/qiwi/qorsproxy.svg?maxAge=3600)](https://david-dm.org/qiwi/qorsproxy)
 [![devDependencyStatus](https://img.shields.io/david/dev/qiwi/qorsproxy.svg?maxAge=3600)](https://david-dm.org/qiwi/qorsproxy)
-
+[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/qiwi/qorsproxy)
 
 Sometimes you need a proxy.
 There're several solutions:
