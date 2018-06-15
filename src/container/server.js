@@ -6,14 +6,16 @@ export default class extends Server {
 	}
 
 	static notFound(req, res) {
-		res.writeHead(404, {'Content-Type': 'text/plain'});
-		res.write('Not Found');
-		res.end();
+		this.sendError(res, 404, 'Not Found');
 	}
 
 	static internalError(req, res) {
-		res.writeHead(500, {'Content-Type': 'text/plain'});
-		res.write('Internal Server Error');
+		this.sendError(res, 500, 'Internal Server Error');
+	}
+
+	static sendError(res, status, message) {
+		res.writeHead(status, {'Content-Type': 'text/plain'});
+		res.write(message);
 		res.end();
 	}
 }

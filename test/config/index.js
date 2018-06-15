@@ -23,7 +23,7 @@ describe('config', () => {
 
 		describe('prototype', () => {
 			it('get returns value by key', () => {
-				expect(config.get('log.name')).to.equal('qors');
+				expect(config.get('log.filename')).to.equal('qors-%DATE%.log');
 			});
 
 			it('get returns undefined if key is out of map', () => {
