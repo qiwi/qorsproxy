@@ -2,7 +2,7 @@ import path from 'path';
 import winston from 'winston';
 import DailyRotateFile  from 'winston-daily-rotate-file';
 
-const { Logger, transports: {Console}, config: {colorize}} = winston;
+const { createLogger, transports: {Console}, config: {colorize}} = winston;
 winston.transports.DailyRotateFile = DailyRotateFile;
 
 export const DEBUG = 'debug';
@@ -19,7 +19,7 @@ export const level = {
 
 class Log {
 	constructor(...opts) {
-		this.logger = new Logger();
+		this.logger = createLogger();
 		this.configure(...opts);
 	}
 	configure(opts) {
