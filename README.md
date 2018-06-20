@@ -1,4 +1,4 @@
-## Qorsproxy 3.0
+## Qorsproxy
 
 [![buildStatus](https://img.shields.io/travis/qiwi/qorsproxy.svg?maxAge=3600&branch=master)](https://travis-ci.org/qiwi/qorsproxy)
 [![Coveralls](https://img.shields.io/coveralls/qiwi/qorsproxy.svg?maxAge=3600)](https://coveralls.io/github/qiwi/qorsproxy)
@@ -37,29 +37,29 @@ function handler(req, res) {
 ```
 * Try out any weird thing just for fun.
 
-#### In previous series
-* v1: https://www.npmjs.com/package/corsproxy-cli
-* v2: https://gerrit.osmp.ru/#/admin/projects/store/pusher
-
 #### Requirements
-* Unix compliant os
-* NodeJS 8 (@std/esm)
+* Unix compliant OS
+* NodeJS 8+ (@std/esm)
 
-#### Install
+## Install
 
 ```bash
-npm i
+npm i @qiwi/qorsproxy --save-dev
 ```
 
-#### Start 
+## Start 
 Any of you'd prefer:
 ```bash
 npm start -- --config=path
 pm2 start npm --name qorsproxy -- start -- --port=8080 --config=/Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
 npm run start_pm2 -- -- --port=8080
 ```
+#### CLI options
+- `--config` sets path to custom config
+- `--port` defines server listen port. Defaults to `9292`
+- `--host` DNS name or IP address
 
-#### Config example
+## Configuration
 ```json
 {
   "server": {
@@ -103,13 +103,8 @@ npm run start_pm2 -- -- --port=8080
 ```
 
 
-#### Usage
+## Usage
 
 ```bash
 curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' → <!doctype html> ...
 ```
-
-#### CLI options
-- `--config` sets path to custom config
-- `--port` defines server listen port. Defaults to `9292`
-- `--host` DNS name or IP address
