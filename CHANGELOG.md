@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/qiwi/qorsproxy/compare/v1.0.0...v1.1.0) (2018-06-20)
+
+
+### Features
+
+* **servlet/health:** migrate to [@qiwi](https://github.com/qiwi)/health-indicator, add `critical` flag support, `deps` & etc ([b64aac6](https://github.com/qiwi/qorsproxy/commit/b64aac6))
+
 # 1.0.0 (2018-06-15)
 
 
