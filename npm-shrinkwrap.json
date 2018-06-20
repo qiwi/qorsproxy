@@ -167,6 +167,15 @@
         }
       }
     },
+    "@qiwi/health-indicator": {
+      "version": "1.2.0",
+      "resolved": "https://registry.npmjs.org/@qiwi/health-indicator/-/health-indicator-1.2.0.tgz",
+      "integrity": "sha512-sp5Wx8LX/dcH69evv0ZYDlBBfDHAbsWuyyxqseeJQ1XZNht/i87lNrejBL5QKvcpQf8KflO6FPoMtYVk7R48Lw==",
+      "requires": {
+        "http-status-codes": "^1.3.0",
+        "lodash": "^4.17.10"
+      }
+    },
     "@semantic-release/changelog": {
       "version": "2.0.2",
       "resolved": "https://registry.npmjs.org/@semantic-release/changelog/-/changelog-2.0.2.tgz",
@@ -2420,6 +2429,11 @@
         "jsprim": "^1.2.2",
         "sshpk": "^1.7.0"
       }
+    },
+    "http-status-codes": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/http-status-codes/-/http-status-codes-1.3.0.tgz",
+      "integrity": "sha1-nNDnE5F3PQZxtInUHLxQlKpBY7Y="
     },
     "https-proxy-agent": {
       "version": "2.2.1",

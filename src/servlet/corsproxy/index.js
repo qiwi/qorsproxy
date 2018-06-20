@@ -75,7 +75,10 @@ export default class Server {
 	}
 
 	health() {
-		return 'UP';
+		return {
+			status: 'UP',
+			critical: true
+		};
 	}
 
 	metrics() {

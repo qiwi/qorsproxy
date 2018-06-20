@@ -4,7 +4,7 @@ import Orchestrator from './orchestrator';
 
 class App {
 	static main(...argv) {
-		log.info('Qorsproxy loading...');
+		log.info('Qorsproxy is loading...');
 
 		new Orchestrator(...argv);
 	}

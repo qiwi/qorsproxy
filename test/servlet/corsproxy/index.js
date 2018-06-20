@@ -30,7 +30,7 @@ describe('corsproxy', () => {
 		});
 
 		it('health returns UP', () => {
-			expect(proxy.health()).to.equal('UP');
+			expect(proxy.health()).to.deep.equal({status: 'UP', critical: true});
 		});
 
 		it('metrics returns stats report', () => {

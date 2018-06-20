@@ -14,10 +14,11 @@
   },
   "author": "Anton Golub <a.golub@qiwi.com>",
   "engines": {
-    "node": ">=9.4.0 <10.0",
-    "npm": ">=5.6 <6.0"
+    "node": ">=9.4.0 <11.0",
+    "npm": ">=5.6 <7.0"
   },
   "dependencies": {
+    "@qiwi/health-indicator": "^1.2.0",
     "@std/esm": "^0.26.0",
     "async-middleware": "^1.2.1",
     "basic-auth": "^2.0.0",
@@ -45,6 +46,11 @@
     "coveralls_push": "cat ./coverage/lcov.info | coveralls"
   },
   "license": "MIT",
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "src/"
+  ],
   "devDependencies": {
     "@semantic-release/changelog": "^2.0.2",
     "@semantic-release/git": "^5.0.0",
