@@ -44,7 +44,7 @@ function handler(req, res) {
 ## Install
 
 ```bash
-npm i @qiwi/qorsproxy --save-dev
+npm i qorsproxy --save-dev
 ```
 
 ## Start 
