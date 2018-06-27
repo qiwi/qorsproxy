@@ -10,6 +10,7 @@ Sometimes you need a proxy.
 There're several solutions:
 * Get one of the [thousands from google](https://www.google.ru/search?q=http+proxy+js)
 * Just write your own. That's pretty easy:
+
 ```javascript
 const http = require('http');
 http.createServer(handler).listen(3000);
@@ -35,6 +36,7 @@ function handler(req, res) {
 	});
 }
 ```
+
 * Try out any weird thing just for fun.
 
 #### Requirements
@@ -49,17 +51,20 @@ npm i qorsproxy --save-dev
 
 ## Start 
 Any of you'd prefer:
+
 ```bash
 npm start -- --config=path
 pm2 start npm --name qorsproxy -- start -- --port=8080 --config=/Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
 npm run start_pm2 -- -- --port=8080
 ```
+
 #### CLI options
 - `--config` sets path to custom config
 - `--port` defines server listen port. Defaults to `9292`
 - `--host` DNS name or IP address
 
 ## Configuration
+
 ```json
 {
   "server": {
@@ -101,7 +106,6 @@ npm run start_pm2 -- -- --port=8080
   }
 }
 ```
-
 
 ## Usage
 
