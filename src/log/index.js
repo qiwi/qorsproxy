@@ -17,7 +17,7 @@ export const level = {
 	ERROR,
 };
 
-class Log {
+export class Log {
 	constructor(...opts) {
 		this.logger = createLogger();
 		this.configure(...opts);

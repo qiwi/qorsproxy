@@ -1,1 +1,1 @@
---require @std/esm test/**/*.js --exit
+--require @std/esm test/**/*.js  --exit

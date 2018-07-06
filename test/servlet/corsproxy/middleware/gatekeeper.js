@@ -1,5 +1,6 @@
 import chai from 'chai';
-import spies from 'chai-spies';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 import reqres from 'reqresnext';
 import gatekeeper, {
 	RECURSIVE_REQUEST,
@@ -9,7 +10,7 @@ import gatekeeper, {
 import {OK, FORBIDDEN} from '../../../../src/servlet/const/status';
 import {XFH} from '../../../../src/servlet/const/header';
 
-chai.use(spies);
+chai.use(sinonChai);
 const {expect} = chai;
 
 describe('corsproxy.middleware.gatekeeper', () => {
@@ -61,11 +62,11 @@ describe('corsproxy.middleware.gatekeeper', () => {
 	it('proceeds to next otherwise', () => {
 		const rule = true;
 		const path = {hostname: 'example.com', host: 'example.com', port: 80};
-		const next = chai.spy(() => {});
+		const next = sinon.spy(() => {});
 		const {req, res} = reqres({proxy: {rule, server: {host, port}, path}}, {});
 
 		gatekeeper(req, res, next);
-		expect(next).to.be.called();
+		expect(next).to.be.called;
 		expect(res.body).to.equal(undefined);
 	});
 });

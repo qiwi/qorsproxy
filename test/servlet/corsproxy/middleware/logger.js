@@ -1,13 +1,14 @@
 import chai from 'chai';
-import spies from 'chai-spies';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai'
 import reqres from 'reqresnext';
 import logger, {getLogLevelByStatus} from '../../../../src/servlet/corsproxy/middlewares/logger';
 import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_ERROR} from '../../../../src/servlet/const/status';
 import log, {INFO, WARN, ERROR} from '../../../../src/log';
 
-chai.use(spies);
+chai.use(sinonChai);
 const {expect} = chai;
-const sandbox = chai.spy.sandbox();
+const sandbox = sinon.createSandbox();
 
 describe('corsproxy.middleware.logger', () => {
 	it('gets logger level by status code', () => {
@@ -20,12 +21,13 @@ describe('corsproxy.middleware.logger', () => {
 
 	describe('', () => {
 		before(() => {
-			sandbox.on(log, [INFO, WARN, ERROR]);
-			sandbox.on(log.constructor, 'now', () => 0)
+			sandbox.spy(log, INFO)
+			sandbox.spy(log, WARN)
+			sandbox.spy(log, ERROR)
+			sandbox.stub(log.constructor, 'now').callsFake(() => 0)
 		});
 		after(() => {
-			sandbox.restore(log);
-			sandbox.restore(log.constructor);
+			sandbox.restore();
 		});
 
 		it('logs current request', () => {
@@ -44,7 +46,7 @@ describe('corsproxy.middleware.logger', () => {
 			});
 			logger(req, res, next);
 
-			expect(log.info).to.have.been.called.with('REQ 123 > method=GET origin=undefined ip=192.168.1.10 dest=http://example.com user=undefined headers={"x-forwarded-for":"192.168.1.10","host":null}');
+			expect(log.info).to.have.been.calledWith('REQ 123 > method=GET origin=undefined ip=192.168.1.10 dest=http://example.com user=undefined headers={"x-forwarded-for":"192.168.1.10","host":null}');
 		});
 
 		it('logs response on finish', () => {
@@ -65,7 +67,7 @@ describe('corsproxy.middleware.logger', () => {
 			logger(req, res, next);
 			res.send('foo');
 
-      expect(log.error).to.have.been.called.with('RES 123 < status=500 duration=0ms headers={"content-type":"text/html; charset=utf-8","content-length":"3"} bufferLength=3');
+      expect(log.error).to.have.been.calledWith('RES 123 < status=500 duration=0ms headers={"content-type":"text/html; charset=utf-8","content-length":"3"} bufferLength=3');
 		});
 	});
 
@@ -83,7 +85,9 @@ describe('corsproxy.middleware.logger', () => {
 					}
 				}
 			}));
-			sandbox.on(res, ['send', 'end', 'write']);
+      sandbox.spy(res, 'send')
+      sandbox.spy(res, 'end')
+      sandbox.spy(res, 'write')
 			({send, end, write} = res);
 
 			logger(req, res, next);
@@ -93,7 +97,7 @@ describe('corsproxy.middleware.logger', () => {
 			expect(res.write).not.to.equal(write);
 			res.write('foo');
 
-			expect(write).to.be.called.with('foo');
+			expect(write).to.be.calledWith('foo');
 		});
 
 		it('send', () => {
@@ -101,8 +105,8 @@ describe('corsproxy.middleware.logger', () => {
       expect(res.end).not.to.equal(end);
 			res.send();
 
-			expect(send).to.be.called();
-      expect(end).to.be.called();
+			expect(send).to.be.called;
+      expect(end).to.be.called;
 
       expect(res.send).to.equal(send);
       expect(res.end).to.equal(end);

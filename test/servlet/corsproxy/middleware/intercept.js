@@ -1,10 +1,13 @@
 import chai from 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 import reqres from 'reqresnext';
 import intercept from '../../../../src/servlet/corsproxy/middlewares/intercept';
 import {GET} from '../../../../src/servlet/const/method';
 import {FORBIDDEN, OK} from '../../../../src/servlet/const/status';
 
 const {expect} = chai;
+chai.use(sinonChai);
 
 describe('corsproxy.middleware.intercept', () => {
 	it('captures request by method match', () => {
@@ -50,11 +53,11 @@ describe('corsproxy.middleware.intercept', () => {
 	});
 
 	it('proceeds to next if no match found', () => {
-		const next = chai.spy(() => {});
+		const next = sinon.spy(() => {});
 		const {req, res} = reqres();
 
 		intercept(req, res, next);
-		expect(next).to.be.called();
+		expect(next).to.be.called;
 		expect(res.body).to.equal(undefined);
 	});
 });
