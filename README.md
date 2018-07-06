@@ -8,7 +8,7 @@
 
 Sometimes you need a proxy.
 There're several solutions:
-* Get one of the [thousands from google](https://www.google.ru/search?q=http+proxy+js)
+* Get any from [from google](https://www.google.ru/search?q=http+proxy+js)
 * Just write your own. That's pretty easy:
 
 ```javascript
