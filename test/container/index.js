@@ -1,12 +1,6 @@
-import chai from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai'
 import gen from 'reqresnext';
 import Container from '../../src/container';
 import Server from '../../src/container/server';
-
-chai.use(sinonChai);
-const { expect } = chai;
 
 describe('container', () => {
 	const host = '127.0.0.1';

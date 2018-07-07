@@ -1,6 +1,3 @@
-import chai from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai'
 import request from 'request';
 import reqres from 'reqresnext';
 import pipe from '../../../../src/servlet/corsproxy/middlewares/pipe';
@@ -8,8 +5,6 @@ import {ECONNREFUSED} from '../../../../src/servlet/const/error';
 import {GET} from '../../../../src/servlet/const/method';
 import {OK, REMOTE_IS_DOWN, REMOTE_UNKNOWN} from '../../../../src/servlet/const/status';
 
-chai.use(sinonChai);
-const { expect } = chai;
 const sandbox = sinon.createSandbox();
 
 describe('corsproxy.middleware.pipe', () => {

@@ -1,6 +1,3 @@
-import chai from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import reqres from 'reqresnext';
 import gatekeeper, {
 	RECURSIVE_REQUEST,
@@ -9,9 +6,6 @@ import gatekeeper, {
 } from '../../../../src/servlet/corsproxy/middlewares/gatekeeper';
 import {OK, FORBIDDEN} from '../../../../src/servlet/const/status';
 import {XFH} from '../../../../src/servlet/const/header';
-
-chai.use(sinonChai);
-const {expect} = chai;
 
 describe('corsproxy.middleware.gatekeeper', () => {
 	const host = '127.0.0.1';

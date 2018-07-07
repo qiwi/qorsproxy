@@ -1,11 +1,6 @@
-import chai from 'chai';
-import chaiSubset from 'chai-subset';
 import reqresnext from 'reqresnext';
 import {StandardIndicator, Endpoint} from '@qiwi/health-indicator';
 import Health from '../../../src/servlet/health';
-
-const { expect } = chai;
-chai.use(chaiSubset);
 
 describe('health', () => {
   it('constructor returns proper instance', () => {

@@ -1,9 +1,6 @@
-import chai from 'chai';
 import reqres from 'reqresnext';
 import Corsproxy from '../../../src/servlet/corsproxy';
 import url from '../../../src/servlet/corsproxy/url';
-
-const { expect } = chai;
 
 describe('corsproxy.parse', () => {
 	it('parses request data', () => {

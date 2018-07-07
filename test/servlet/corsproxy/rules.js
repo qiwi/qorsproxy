@@ -1,7 +1,4 @@
-import chai from 'chai';
 import Rules, {ANY, SEPARATOR} from '../../../src/servlet/corsproxy/rules';
-
-const { expect } = chai;
 
 describe('corsproxy.Rules', () => {
 	const rules = new Rules();

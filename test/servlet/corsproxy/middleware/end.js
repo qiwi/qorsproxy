@@ -1,8 +1,5 @@
-import chai from 'chai';
 import reqres from 'reqresnext';
 import end from '../../../../src/servlet/corsproxy/middlewares/end';
-
-const { expect } = chai;
 
 describe('corsproxy.middleware.end', () => {
 	it('transfers piped data to response', () => {

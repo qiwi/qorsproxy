@@ -1,13 +1,8 @@
-import chai from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai'
 import reqres from 'reqresnext';
 import logger, {getLogLevelByStatus} from '../../../../src/servlet/corsproxy/middlewares/logger';
 import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_ERROR} from '../../../../src/servlet/const/status';
 import log, {INFO, WARN, ERROR} from '../../../../src/log';
 
-chai.use(sinonChai);
-const {expect} = chai;
 const sandbox = sinon.createSandbox();
 
 describe('corsproxy.middleware.logger', () => {

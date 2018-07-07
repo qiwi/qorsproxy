@@ -1,8 +1,5 @@
-import chai from 'chai';
 import reqres from 'reqresnext';
 import cors, {ALLOW_ORIGIN} from '../../../../src/servlet/corsproxy/middlewares/cors';
-
-const { expect } = chai;
 
 describe('corsproxy.middleware.cors', () => {
 	it(`sets ${ALLOW_ORIGIN} to origin if exists`, () => {

@@ -1,12 +1,7 @@
-import chai from 'chai';
-import chaiSubset from 'chai-subset';
 import reqres from 'reqresnext';
 import Corsproxy from '../../../src/servlet/corsproxy';
 import Rules from '../../../src/servlet/corsproxy/rules';
 import Stats from '../../../src/servlet/corsproxy/stats';
-
-const { expect } = chai;
-chai.use(chaiSubset);
 
 describe('corsproxy', () => {
 	const proxy = new Corsproxy();

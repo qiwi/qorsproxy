@@ -1,9 +1,6 @@
-import chai from 'chai';
 import reqres from 'reqresnext';
 import error from '../../../../src/servlet/corsproxy/middlewares/error';
 import { INTERNAL_ERROR } from '../../../../src/servlet/corsproxy/codes';
-
-const { expect } = chai;
 
 describe('corsproxy.middleware.error', () => {
 	it('handles error', () => {

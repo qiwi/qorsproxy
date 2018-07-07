@@ -1,8 +1,5 @@
-import chai from 'chai';
 import reqres from 'reqresnext';
 import Stats from '../../../src/servlet/corsproxy/stats';
-
-const { expect } = chai;
 
 describe('corsproxy.stats', () => {
 	let stats, req, res, next

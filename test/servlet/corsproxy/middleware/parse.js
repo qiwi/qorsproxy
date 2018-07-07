@@ -1,8 +1,5 @@
-import chai from 'chai';
 import reqres from 'reqresnext';
 import parse from '../../../../src/servlet/corsproxy/middlewares/parse';
-
-const { expect } = chai;
 
 describe('corsproxy.middleware.parse', () => {
 	it('parses request data', () => {

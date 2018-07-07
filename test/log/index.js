@@ -1,11 +1,4 @@
-import chai from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import {Log} from '../../src/log';
-
-chai.should();
-chai.use(sinonChai);
-const {expect} = chai;
 
 describe('Log', () => {
   describe('constructor', () => {
