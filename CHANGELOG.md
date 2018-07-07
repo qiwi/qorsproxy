@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/qiwi/qorsproxy/compare/v1.1.0...v1.1.1) (2018-07-07)
+
+
+### Performance Improvements
+
+* **container:** tune up constructor ([c16a3e3](https://github.com/qiwi/qorsproxy/commit/c16a3e3))
+
 # [1.1.0](https://github.com/qiwi/qorsproxy/compare/v1.0.0...v1.1.0) (2018-06-20)
 
 
