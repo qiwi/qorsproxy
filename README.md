@@ -7,9 +7,8 @@
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/qiwi/qorsproxy) [![Greenkeeper badge](https://badges.greenkeeper.io/qiwi/qorsproxy.svg)](https://greenkeeper.io/)
 
 Sometimes you need a proxy.
-There're several solutions:
-* Get any from [from google](https://www.google.ru/search?q=http+proxy+js)
-* Just write your own. That's pretty easy:
+* Get any [from google](https://www.google.ru/search?q=http+proxy+js)
+* Write your own. That's pretty easy:
 
 ```javascript
 const http = require('http');
@@ -37,7 +36,7 @@ function handler(req, res) {
 }
 ```
 
-* Try out any weird thing just for fun.
+* Try out this weird thing just for fun.
 
 #### Requirements
 * Unix compliant OS
@@ -105,6 +104,22 @@ npm run start_pm2 -- -- --port=8080
     }
   }
 }
+```
+
+## Pre-flight
+If you need support for OPTIONS request, extend target rule:
+
+```json
+"interceptions": [
+  {
+    "req": {
+      "method": "OPTIONS"
+    },
+    "res": {
+      "status": 200
+    }
+  }
+],
 ```
 
 ## Usage
