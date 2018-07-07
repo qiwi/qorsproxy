@@ -10,6 +10,11 @@ export const INFO = 'info';
 export const WARN = 'warn';
 export const ERROR = 'error';
 
+export {
+	Console,
+	DailyRotateFile
+}
+
 export const level = {
 	DEBUG,
 	INFO,
@@ -63,7 +68,7 @@ export class Log {
 					filename: filename || name, // `name` is legacy option
 					timestamp: this.timestamp,
 					formatter: this.formatter,
-					colorize: (level, text) => text,
+					colorize: this.nocolorize,
 				})
 			].filter(v => !!v)
 		};
@@ -83,6 +88,10 @@ export class Log {
 
 	static now() {
 		return Date.now();
+	}
+
+	static nocolorize(level, text) {
+		return text;
 	}
 }
 
