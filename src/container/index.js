@@ -6,18 +6,7 @@ export default class Container {
 	constructor() {
 		this.online = false;
 		this.server = new Server();
-    this.server.on('request', (request, response) => {
-      let body = [];
-      request.on('data', (chunk) => {
-        chunk && body.push(chunk);
-      }).on('end', () => {
-      	if (body.length) {
-          request.body = Buffer.concat(body);
-        }
-
-        this.handler.call(this, request, response)
-      });
-    });
+    this.server.on('request', this.collector.bind(this));
 	}
 
 	configure({host, port, servlets}) {
@@ -40,11 +29,26 @@ export default class Container {
 		return this;
 	}
 
+	collector(req, res) {
+    const body = [];
+
+    req
+      .on('data', chunk => {
+        chunk && body.push(chunk);
+      })
+      .on('end', () => {
+        if (body.length) {
+          req.body = Buffer.concat(body);
+        }
+        this.handler.call(this, req, res)
+      });
+	}
+
 	handler(req, res) {
 		const url = req.url;
 		let route;
 
-		if(!this.online) {
+		if (!this.online) {
 			res.end();
 			return;
 		}
