@@ -40,7 +40,7 @@ function handler(req, res) {
 
 #### Requirements
 * Unix compliant OS
-* NodeJS 8+ (@std/esm)
+* NodeJS 8+
 
 ## Install
 

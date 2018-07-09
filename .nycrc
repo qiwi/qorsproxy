@@ -8,7 +8,7 @@
     "src/**/*.js"
   ],
   "require": [
-    "@std/esm",
+    "esm",
     "./script/require-all"
   ],
   "check-coverage": false,

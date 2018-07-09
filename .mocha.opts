@@ -1,1 +1,1 @@
---require @std/esm --require ./test/setup.js  -r chai/register-expect -r chai/register-should test/**/*.js  --exit
+--require esm --require ./test/setup.js  -r chai/register-expect -r chai/register-should test/**/*.js  --exit
