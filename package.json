@@ -55,7 +55,7 @@
     "@semantic-release/changelog": "^2.1.1",
     "@semantic-release/git": "^6.0.1",
     "@semantic-release/github": "^4.3.0",
-    "@semantic-release/npm": "^3.3.4",
+    "@semantic-release/npm": "^4.0.0",
     "chai": "^4.1.2",
     "chai-subset": "^1.6.0",
     "codeclimate-test-reporter": "^0.5.0",
