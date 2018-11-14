@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/qiwi/qorsproxy/compare/v1.1.1...v1.2.0) (2018-11-14)
+
+
+### Features
+
+* **middleware:** Add customAuthorization middleware ([0a41072](https://github.com/qiwi/qorsproxy/commit/0a41072))
+
 ## [1.1.1](https://github.com/qiwi/qorsproxy/compare/v1.1.0...v1.1.1) (2018-07-07)
 
 
