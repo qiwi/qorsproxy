@@ -8,6 +8,7 @@ import end from './end';
 import intercept from './intercept';
 import crumbs from './crumbs';
 import logger from './logger';
+import customAuthorization from './customAuthorization';
 
 export {
 	cors,
@@ -20,5 +21,6 @@ export {
 	end,
 	intercept,
 	crumbs,
-	logger
+	logger,
+	customAuthorization
 };
