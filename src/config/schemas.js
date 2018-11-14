@@ -11,6 +11,20 @@ export const HOST_ARRAY = {type: 'array', items: HOST};
 export const STRING_NON_EMPTY = {type: 'string', minLength: 1};
 export const INTEGER = {type: 'integer'};
 
+
+const URL = { type: "string", pattern: "^https?://.+" };
+const STRING_ARRAY = { type: "array", items: STRING_NON_EMPTY };
+const CUSTOM_AUTHORIZATION = {
+  type: "object",
+  properties: {
+    targetUrl: URL,
+    authorizationUrl: URL,
+    headers: STRING_ARRAY,
+    authPath: STRING_NON_EMPTY
+  },
+  required: ["targetUrl", "authorizationUrl", "headers", "authPath"]
+};
+
 // TODO refactor
 export const SCHEMA = {
 	type: 'object',
@@ -34,7 +48,10 @@ export const SCHEMA = {
 			type: 'object',
 			patternProperties: {
 				'.+': {
-					type: 'object'
+					type: 'object',
+					properties: {
+						customAuthorization: CUSTOM_AUTHORIZATION
+					},
 				}
 			}
 		}

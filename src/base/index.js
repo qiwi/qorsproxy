@@ -11,7 +11,8 @@ import {
 	find,
 	mapValues,
 	assign,
-	isMatch
+	isMatch,
+	pick
 } from 'lodash-es';
 
 export {
@@ -26,5 +27,6 @@ export {
 	find,
 	mapValues,
 	assign,
-	isMatch
+	isMatch,
+	pick
 };

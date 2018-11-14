@@ -5,7 +5,7 @@ import basicAuth from 'basic-auth';
 import url from './url';
 import Stats from './stats';
 import Rules from './rules';
-import { pipe, cors, error, gatekeeper, from, to, end, intercept, logger, crumbs } from './middlewares';
+import { pipe, cors, error, gatekeeper, from, to, end, intercept, logger, crumbs, customAuthorization } from './middlewares';
 
 export default class Server {
 	constructor() {
@@ -32,6 +32,7 @@ export default class Server {
 			.use(cors)  // NOTE Handles res.piped.headers
 			.use(statsRes)
 			.use(crumbs)
+			.use(customAuthorization)
 			.use(end)
 			.use(error)
 			.disable('x-powered-by');
