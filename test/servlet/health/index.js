@@ -22,14 +22,14 @@ describe('health', () => {
 
         health.handler(req, res)
 
-        expect(res.body).to.equal(JSON.stringify({
+        expect(JSON.parse(res.body)).to.deep.equal({
           deps: {
             dep1: {status: 'UP'},
             dep2: {status: 'DOWN', critical: false}
           },
           status:'UP',
           critical: false
-        }))
+        })
       })
     })
   })
