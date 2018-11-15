@@ -24,7 +24,7 @@ export default (req, res, next) => {
 	};
 
 	res.write = (...args) => {
-		chunks.push(new Buffer(args[0]));
+		chunks.push(Buffer.from(args[0]));
 		_write.apply(res, args);
 	};
 
@@ -43,7 +43,7 @@ export default (req, res, next) => {
 	res.on('finish', () => {
 		const status = res.statusCode;
 		const level = getLogLevelByStatus(status);
-		const contentLength = (sent ? new Buffer('' + sent[0]) : Buffer.concat(chunks)).length;
+		const contentLength = (sent ? Buffer.from('' + sent[0]) : Buffer.concat(chunks)).length;
 
 		sent = null;
 		chunks.lenght = 0;
