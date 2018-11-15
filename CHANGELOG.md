@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/qiwi/qorsproxy/compare/v1.2.0...v1.2.1) (2018-11-15)
+
+
+### Performance Improvements
+
+* replace deprecated Buffer methods ([9104163](https://github.com/qiwi/qorsproxy/commit/9104163))
+
 # [1.2.0](https://github.com/qiwi/qorsproxy/compare/v1.1.1...v1.2.0) (2018-11-14)
 
 
