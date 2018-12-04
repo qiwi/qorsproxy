@@ -4,9 +4,9 @@ import Container from './container';
 import { Corsproxy, Health, Metrics, Info } from './servlet';
 
 export default class Orchestrator {
-	constructor(...argv) {
+	constructor(argv) {
 		// TODO IoC/DI
-		const config = new Config(...argv);
+		const config = new Config(argv);
 		const container = new Container();
 		const corsproxy = new Corsproxy();
 		const health = new Health();
