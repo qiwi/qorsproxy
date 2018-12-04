@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/qiwi/qorsproxy/compare/v1.2.1...v1.2.2) (2018-12-04)
+
+
+### Performance Improvements
+
+* migrate to yargs ([1e42ded](https://github.com/qiwi/qorsproxy/commit/1e42ded))
+
 ## [1.2.1](https://github.com/qiwi/qorsproxy/compare/v1.2.0...v1.2.1) (2018-11-15)
 
 
