@@ -53,8 +53,8 @@
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.1",
     "@semantic-release/git": "^7.0.5",
-    "@semantic-release/github": "^5.2.5",
-    "@semantic-release/npm": "^5.1.1",
+    "@semantic-release/github": "^5.2.6",
+    "@semantic-release/npm": "^5.1.2",
     "chai": "^4.2.0",
     "chai-subset": "^1.6.0",
     "coveralls": "^3.0.2",
@@ -65,8 +65,8 @@
     "nyc": "^13.1.0",
     "proxyquire": "^2.1.0",
     "reqresnext": "^1.5.1",
-    "semantic-release": "^15.12.4",
-    "sinon": "^7.1.1",
+    "semantic-release": "^15.13.1",
+    "sinon": "^7.2.2",
     "sinon-chai": "^3.3.0"
   },
   "release": {
