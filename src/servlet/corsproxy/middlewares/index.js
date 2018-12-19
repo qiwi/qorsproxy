@@ -9,6 +9,7 @@ import intercept from './intercept';
 import crumbs from './crumbs';
 import logger from './logger';
 import customAuthorization from './customAuthorization';
+import memo from './memo'
 
 export {
 	cors,
@@ -16,6 +17,7 @@ export {
 	error,
 	gatekeeper,
 	parse,
+	memo,
 	from,
 	to,
 	end,

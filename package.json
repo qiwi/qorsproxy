@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@qiwi/health-indicator": "^1.2.2",
+    "@qiwi/primitive-storage": "^1.2.1",
     "async-middleware": "^1.2.1",
     "basic-auth": "^2.0.1",
     "esm": "3.0.82",

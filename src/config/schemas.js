@@ -25,6 +25,18 @@ const CUSTOM_AUTHORIZATION = {
   required: ["targetUrl", "authorizationUrl", "headers", "authPath"]
 };
 
+const MEMO = {
+	type: 'object',
+	properties: {
+		dir: STRING_NON_EMPTY,
+		host: HOST_ARRAY,
+		strategy: {
+			type: 'string',
+			pattern: '^(override|uphold)$'
+		}
+	}
+}
+
 // TODO refactor
 export const SCHEMA = {
 	type: 'object',
@@ -50,8 +62,9 @@ export const SCHEMA = {
 				'.+': {
 					type: 'object',
 					properties: {
-						customAuthorization: CUSTOM_AUTHORIZATION
-					},
+						customAuthorization: CUSTOM_AUTHORIZATION,
+						memo: MEMO
+					}
 				}
 			}
 		}

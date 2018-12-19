@@ -32,7 +32,12 @@ export default {
 						"value": null
 					}
 				]
-			}]
+			}],
+			"memo": {
+				"dir": "./memo/stub.json",
+				"strategy": "override",
+				"host": ["example.com"]
+			}
 		}
 	}
 };

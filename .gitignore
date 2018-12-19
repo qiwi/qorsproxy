@@ -9,3 +9,5 @@ logs
 dist
 statistics.html
 package-lock.json
+memo
+stub
