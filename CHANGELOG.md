@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/qiwi/qorsproxy/compare/v1.2.2...v1.3.0) (2018-12-19)
+
+
+### Features
+
+* add memoize middleware ([a90b20c](https://github.com/qiwi/qorsproxy/commit/a90b20c)), closes [#10](https://github.com/qiwi/qorsproxy/issues/10)
+
 ## [1.2.2](https://github.com/qiwi/qorsproxy/compare/v1.2.1...v1.2.2) (2018-12-04)
 
 
