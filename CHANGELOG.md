@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/qiwi/qorsproxy/compare/v1.3.1...v1.4.0) (2018-12-20)
+
+
+### Features
+
+* **memo:** replace errored responses with success stubs ([5f74816](https://github.com/qiwi/qorsproxy/commit/5f74816))
+
 ## [1.3.1](https://github.com/qiwi/qorsproxy/compare/v1.3.0...v1.3.1) (2018-12-20)
 
 
