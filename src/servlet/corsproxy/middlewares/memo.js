@@ -32,13 +32,22 @@ export default (req, res, next) => {
 		return;
 	}
 
-	const entry = {
-		statusCode: statusCode,
-		body: content.toString('utf8'),
-		headers
-	}
+	const _entry = storage.get(key)
 
-	storage.set(key, entry)
+	if (statusCode >= 500 && _entry.statusCode <= 500) {
+		res.piped = {
+			statusCode: _entry.statusCode,
+			headers: _entry.headers,
+			body: Buffer.from(_entry.body)
+		};
+	} else {
+		const entry = {
+			statusCode: statusCode,
+			body: content.toString('utf8'),
+			headers
+		};
+		storage.set(key, entry);
+	}
 
 	next();
 }
