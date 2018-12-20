@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/qiwi/qorsproxy/compare/v1.3.0...v1.3.1) (2018-12-20)
+
+
+### Performance Improvements
+
+* **memo:** collect res data from res.piped ([b2fd51a](https://github.com/qiwi/qorsproxy/commit/b2fd51a))
+
 # [1.3.0](https://github.com/qiwi/qorsproxy/compare/v1.2.2...v1.3.0) (2018-12-19)
 
 
