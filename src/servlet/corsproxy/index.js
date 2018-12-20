@@ -39,7 +39,6 @@ export default class Server {
 			.use(cors)
 			.use(gatekeeper)
 			.use(intercept)
-			.use(memo)
 			.use(to)
 			.use(pipe)
 			.use(from)
@@ -47,6 +46,7 @@ export default class Server {
 			.use(statsRes)
 			.use(crumbs)
 			.use(customAuthorization)
+			.use(memo)
 			.use(end)
 			.use(error)
 			.disable('x-powered-by');

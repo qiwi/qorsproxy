@@ -39,62 +39,20 @@ describe('corsproxy.middleware.memo', () => {
 				headers: {
 	        'x-forwarded-for': '192.168.1.10'
 				}
+			}, {
+				piped: {
+					statusCode: 200,
+					body: Buffer.from(JSON.stringify({foo: 'bar'})),
+					headers: {'content-type':'application/json; charset=utf-8','content-length':'13'}
+				}
 			});
 			memo(req, res, next);
 
-			res.send({foo: 'bar'})
+			const key = "GET::http://example.com/::"
+			const value = {"statusCode":200,"body":"{\"foo\":\"bar\"}","headers":{"content-type":"application/json; charset=utf-8","content-length":"13"}}
+			const json = JSON.parse(fs.readFileSync(stub, 'utf8'))
 
-			expect(fs.readFileSync(stub, 'utf8').slice(0, -15)).to.equal('{"GET:http://example.com/:body:":{"value":{"status":200,"content":"{\\"foo\\":\\"bar\\"}","headers":{"content-type":"application/json; charset=utf-8","content-length":"13"}},"exp":1545303079829}}'.slice(0, -15))
-		});
-	});
-
-	describe('overrides res method', () => {
-		let req, res, next, send, end, write;
-
-		before(() => {
-			({req, res, next} = reqres({
-				method: 'GET',
-				proxy: {
-					id: '123',
-					path: {
-						protocol: 'http',
-						host: 'example.com'
-					},
-					to: 'example.com',
-					rule: {
-						memo: {
-							strategy: 'override',
-							dir: stub,
-							host: ['example.com']
-						}
-					}
-				}
-			}));
-      sandbox.spy(res, 'send')
-      sandbox.spy(res, 'end')
-      sandbox.spy(res, 'write')
-			({send, end, write} = res);
-
-			memo(req, res, next);
-		});
-
-		it('write', () => {
-			expect(res.write).not.to.equal(write);
-			res.write('foo');
-
-			expect(write).to.be.calledWith('foo');
-		});
-
-		it('send', () => {
-			expect(res.send).not.to.equal(send);
-      expect(res.end).not.to.equal(end);
-			res.send();
-
-			expect(send).to.be.called;
-      expect(end).to.be.called;
-
-      expect(res.send).to.equal(send);
-      expect(res.end).to.equal(end);
+			expect(json[key].value).to.deep.equal(value)
 		});
 	});
 });
