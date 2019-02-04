@@ -36,8 +36,6 @@ const processRequest = (req, res, next, config) => {
 	});
 };
 
-export const foo = 'bar'
-
 export default (req, res, next) => {
 	const config = get(req, 'proxy.rule.customAuthorization');
 	if (config && checkUrl(req.url, config.targetUrl)) {

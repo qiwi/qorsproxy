@@ -5,7 +5,7 @@ const stubRequest = request =>
 	proxyquire(
 		'../../../../src/servlet/corsproxy/middlewares/customAuthorization',
 		{ request: request }
-	).default;
+	);
 
 describe('corsproxy.middleware.customAuthorization', () => {
 	const authBody = '{"key1":{"key2":"SuchSecretMuchSecurity"}}';
