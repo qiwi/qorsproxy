@@ -1599,9 +1599,9 @@
       "dev": true
     },
     "esm": {
-      "version": "3.2.1",
-      "resolved": "https://registry.npmjs.org/esm/-/esm-3.2.1.tgz",
-      "integrity": "sha512-+gxDed1gELD6mCn0P4TRPpknVJe7JvLtg3lJ9sRlLSpfw6J47QMGa5pi+10DN20VQ5z6OtbxjFoD9Z6PM+zb6Q=="
+      "version": "3.2.25",
+      "resolved": "https://registry.npmjs.org/esm/-/esm-3.2.25.tgz",
+      "integrity": "sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA=="
     },
     "esprima": {
       "version": "4.0.1",
