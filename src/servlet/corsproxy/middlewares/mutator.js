@@ -45,9 +45,9 @@ function mutate(headers, mutations) {
 
 			if (prev) {
 				if (isArray(prev)) {
-                    headers[name] = prev.map(prev => prev.replace(parsePattern(value.from), value.to));
+					headers[name] = prev.map(prev => prev.replace(parsePattern(value.from), value.to));
 				} else {
-                    headers[name] = prev.replace(parsePattern(value.from), value.to);
+					headers[name] = prev.replace(parsePattern(value.from), value.to);
 				}
 			}
 		});
