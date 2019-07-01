@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/qiwi/qorsproxy/compare/v1.4.1...v1.5.0) (2019-07-01)
+
+
+### Features
+
+* **readme:** mention customAuthorization ([619afd8](https://github.com/qiwi/qorsproxy/commit/619afd8))
+
 ## [1.4.1](https://github.com/qiwi/qorsproxy/compare/v1.4.0...v1.4.1) (2019-07-01)
 
 
