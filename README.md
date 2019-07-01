@@ -123,7 +123,7 @@ If you need support for OPTIONS request, extend target rule:
 ```
 
 ## Including JWT
-If you want JWT from an other domain to be included in each request, add following rule:
+If intermediate authorization is required (change auth for [JWT](https://jwt.io/)) add customAuthorization to the target rule. See details at  [schema](src/config/schemas.js) and [impl](src/servlet/corsproxy/middlewares/customAuthorization.js)
 
 ```json
 "customAuthorization": {
