@@ -123,7 +123,7 @@ If you need support for OPTIONS request, extend target rule:
 ```
 
 ## Authorization
-If intermediate authorization is required (change auth for [JWT](https://jwt.io/)) add `customAuthorization` to the target rule. See details at  [schema](src/config/schemas.js) and [impl](src/servlet/corsproxy/middlewares/customAuthorization.js)
+If intermediate authorization is required (change auth for [JWT](https://jwt.io/)) add `customAuthorization` to the target rule. See details at [schema](src/config/schemas.js) and [impl](src/servlet/corsproxy/middlewares/customAuthorization.js)
 
 ```json
 "customAuthorization": {
