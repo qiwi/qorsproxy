@@ -45,11 +45,10 @@ function mutate(headers, mutations) {
 
 			if (prev) {
 				if (isArray(prev)) {
-					value = prev.map(prev => prev.replace(parsePattern(value.from), value.to));
+					headers[name] = prev.map(prev => prev.replace(parsePattern(value.from), value.to));
 				} else {
-					value = prev.replace(parsePattern(value.from), value.to);
+					headers[name] = prev.replace(parsePattern(value.from), value.to);
 				}
-				headers[name] = '' + value;
 			}
 		});
 	});
