@@ -72,7 +72,7 @@ describe('corsproxy.middleware.mutator', () => {
 		expect(resHeaders.foo).to.be.undefined;
 		expect(resHeaders.bar).to.equal('baz');
 		expect(resHeaders.baz).to.equal(';kassa.qiwi.tools;example.com;');
-		expect(resHeaders.qux).to.include(['ba', 'dc', 'efg']);
+		expect(resHeaders.qux).to.eql(['ba', 'dc', 'efg']);
 	});
 
 	it('`to` assigns new request headers', () => {
@@ -125,6 +125,6 @@ describe('corsproxy.middleware.mutator', () => {
 		expect(reqHeaders.foo).to.be.undefined;
 		expect(reqHeaders.bar).to.equal('baz');
 		expect(reqHeaders.baz).to.equal(';kassa.qiwi.tools;example.com;');
-		expect(reqHeaders.qux).to.include(['ba', 'dc', 'efg']);
+		expect(reqHeaders.qux).to.eql(['ba', 'dc', 'efg']);
 	});
 });
