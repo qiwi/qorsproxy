@@ -122,6 +122,18 @@ If you need support for OPTIONS request, extend target rule:
 ],
 ```
 
+## Including JWT
+If you want JWT from an other domain to be included in each request, add following rule:
+
+```json
+"customAuthorization": {
+    "targetUrl": "example.com",
+    "authorizationUrl": "example-authorization.com",
+    "headers": ["authorization", "cookie"],
+    "authPath": "Edge.Headers.Authorization[0]"
+}
+```
+
 ## Usage
 
 ```bash
