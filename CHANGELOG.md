@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/qiwi/qorsproxy/compare/v1.5.2...v1.5.3) (2019-07-05)
+
+
+### Bug Fixes
+
+* **customAuth:** transmit all headers after auth to target endpoint ([6781b97](https://github.com/qiwi/qorsproxy/commit/6781b97)), closes [#23](https://github.com/qiwi/qorsproxy/issues/23)
+
 ## [1.5.2](https://github.com/qiwi/qorsproxy/compare/v1.5.1...v1.5.2) (2019-07-05)
 
 
