@@ -25,9 +25,9 @@ const processRequest = (req, res, next, config) => {
 			const options = {
 				uri: normalizeUrl(req.url),
 				method: req.method,
-				headers: {
+				headers: Object.assign(req.headers, {
 					Authorization: authorization
-				},
+				}),
 				body: req.body
 			};
 			request(options).pipe(res);

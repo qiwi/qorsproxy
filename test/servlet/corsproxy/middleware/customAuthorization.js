@@ -13,27 +13,34 @@ describe('corsproxy.middleware.customAuthorization', () => {
 		customAuthorization: {
 			targetUrl: 'http://target',
 			authorizationUrl: 'http://authorization',
-			headers: ['authorization', 'additionalHeader'],
+			headers: ['Authorization', 'additionalHeader'],
 			authPath: 'key1.key2'
 		}
 	};
 	const proxy = { rule };
 	const headers = {
-		authorization: '1',
+		Authorization: '1',
 		additionalHeader: '2',
-		badHeader: '3'
+		badHeader: '3',
+		host: null
 	};
 	const body = {
 		bodyKey: 'bodyKey Value'
 	};
-	const expectedHeaders = {
-		authorization: '1',
+	const expectedAuthEndpointHeaders = {
+        Authorization: '1',
 		additionalHeader: '2'
+	};
+	const expectedTargetEndpointHeaders = {
+        Authorization: 'SuchSecretMuchSecurity',
+		additionalHeader: '2',
+        badHeader: '3',
+        host: null
 	};
 	const targetUrl = '/http://target';
 	const otherUrl = '/http://other';
 
-	it('exchanges headers to Authorization', () => {
+	it('adds Authorization to headers ', () => {
 		let authReqOpts = {};
 		let proxyedReqOpts = {};
 		const request = sinon.stub().callsFake((opts, cb) => {
@@ -52,10 +59,8 @@ describe('corsproxy.middleware.customAuthorization', () => {
 		);
 		customAuthorization(req, res, next);
 
-		expect(authReqOpts.headers).to.deep.equal(expectedHeaders);
-		expect(proxyedReqOpts.headers.Authorization).to.be.equal(
-			'SuchSecretMuchSecurity'
-		);
+		expect(authReqOpts.headers).to.deep.equal(expectedAuthEndpointHeaders);
+		expect(proxyedReqOpts.headers).to.deep.equal(expectedTargetEndpointHeaders);
 	});
 
 	it('transmits body to target endpoint', () => {
