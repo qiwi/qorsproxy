@@ -23,6 +23,9 @@ describe('corsproxy.middleware.customAuthorization', () => {
 		additionalHeader: '2',
 		badHeader: '3'
 	};
+	const body = {
+		bodyKey: 'bodyKey Value'
+	};
 	const expectedHeaders = {
 		authorization: '1',
 		additionalHeader: '2'
@@ -53,6 +56,28 @@ describe('corsproxy.middleware.customAuthorization', () => {
 		expect(proxyedReqOpts.headers.Authorization).to.be.equal(
 			'SuchSecretMuchSecurity'
 		);
+	});
+
+	it('transmits body to target endpoint', () => {
+		let authReqOpts = {};
+		let proxyedReqOpts = {};
+		const request = sinon.stub().callsFake((opts, cb) => {
+			proxyedReqOpts = opts;
+			return { pipe: sinon.stub() };
+		});
+		sinon.stub(request, 'get').callsFake((opts, cb) => {
+			authReqOpts = opts;
+			cb(null, {}, authBody);
+		});
+		const customAuthorization = stubRequest(request);
+
+		const { req, res, next } = reqres(
+			{ proxy, url: targetUrl, headers, body },
+			{}
+		);
+		customAuthorization(req, res, next);
+
+		expect(proxyedReqOpts.body).to.be.equal(body);
 	});
 
 	it('does nothing to urls not from config', () => {

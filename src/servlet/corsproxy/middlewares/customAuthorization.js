@@ -27,7 +27,8 @@ const processRequest = (req, res, next, config) => {
 				method: req.method,
 				headers: {
 					Authorization: authorization
-				}
+				},
+				body: req.body
 			};
 			request(options).pipe(res);
 		} else {
