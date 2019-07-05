@@ -58,7 +58,7 @@ describe('corsproxy.middleware.customAuthorization', () => {
 		);
 	});
 
-	it('does not loose request body', () => {
+	it('transmits body to target endpoint', () => {
 		let authReqOpts = {};
 		let proxyedReqOpts = {};
 		const request = sinon.stub().callsFake((opts, cb) => {
