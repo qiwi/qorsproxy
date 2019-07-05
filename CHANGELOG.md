@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/qiwi/qorsproxy/compare/v1.5.1...v1.5.2) (2019-07-05)
+
+
+### Bug Fixes
+
+* **customAuth:** transmit body to target endpoint ([fde7155](https://github.com/qiwi/qorsproxy/commit/fde7155)), closes [#21](https://github.com/qiwi/qorsproxy/issues/21)
+
 ## [1.5.1](https://github.com/qiwi/qorsproxy/compare/v1.5.0...v1.5.1) (2019-07-01)
 
 
