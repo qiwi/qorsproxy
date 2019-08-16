@@ -1,18 +1,19 @@
-import {isFunction, mapValues} from '../../base';
-import env from '../../env';
+import { isFunction, mapValues } from '../../base'
+import env from '../../env'
 
 export default class Metrics {
-  constructor(components) {
-    this.configure(components);
-  }
-  configure(components) {
-    this.components = components;
-
-    return this;
+  constructor (components) {
+    this.configure(components)
   }
 
-  handler(req, res) {
-    const details = mapValues(this.components, this.constructor.getMetrics);
+  configure (components) {
+    this.components = components
+
+    return this
+  }
+
+  handler (req, res) {
+    const details = mapValues(this.components, this.constructor.getMetrics)
     const data = {
       process: {
         uptime: this.constructor.formatUptime(env.process.uptime()),
@@ -20,34 +21,33 @@ export default class Metrics {
         cpu: env.process.cpuUsage()
       },
       servlets: details
-    };
+    }
 
-    res.writeHead(200, {'Content-Type': 'application/json'});
-    res.write(JSON.stringify(data));
-    res.end();
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    res.write(JSON.stringify(data))
+    res.end()
   }
 
-  static getMetrics(component) {
+  static getMetrics (component) {
     try {
       if (isFunction(component.metrics)) {
-        return component.metrics();
+        return component.metrics()
       }
 
-      return component.metrics || null; // NOTE It may be getter
-
+      return component.metrics || null // NOTE It may be getter
     } catch (e) {
-      return null;
+      return null
     }
   }
 
-  static formatUptime(uptime){
-    function pad(s){
-      return (s < 10 ? '0' : '') + s;
+  static formatUptime (uptime) {
+    function pad (s) {
+      return (s < 10 ? '0' : '') + s
     }
-    const hours = Math.floor(uptime / (60 * 60));
-    const minutes = Math.floor(uptime % (60 * 60) / 60);
-    const seconds = Math.floor(uptime % 60);
+    const hours = Math.floor(uptime / (60 * 60))
+    const minutes = Math.floor(uptime % (60 * 60) / 60)
+    const seconds = Math.floor(uptime % 60)
 
-    return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
+    return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds)
   }
 }

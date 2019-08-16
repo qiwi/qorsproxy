@@ -1,4 +1,4 @@
-import url from 'url';
+import url from 'url'
 
 /**
  *
@@ -6,10 +6,10 @@ import url from 'url';
  * @returns {Object}
  */
 url.parseRequest = (req) => {
-  let path = req.url.slice(1);
-  path = /^https?:/.test(path) ? path : req.protocol + '://' + path;
+  let path = req.url.slice(1)
+  path = /^https?:/.test(path) ? path : req.protocol + '://' + path
 
-  return url.parse(path);
-};
+  return url.parse(path) // eslint-disable-line
+}
 
-export default url;
+export default url

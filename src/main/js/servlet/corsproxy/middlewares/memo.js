@@ -1,4 +1,4 @@
-import { get } from '../../../base';
+import { get } from '../../../base'
 import factory from '@qiwi/primitive-storage'
 
 const storages = {}
@@ -14,22 +14,22 @@ const storageFactory = (dir) => {
 }
 
 export default (req, res, next) => {
-  const memo = get(req, 'proxy.rule.memo');
+  const memo = get(req, 'proxy.rule.memo')
 
   if (!memo) {
-    next();
-    return;
+    next()
+    return
   }
 
-  const { dir, host } = memo;
-  const { proxy: {to, path: {href}}, body = '' } = req
+  const { dir, host } = memo
+  const { proxy: { to, path: { href } }, body = '' } = req
   const key = `${req.method}::${href}::${body.toString('utf-8')}`
   const storage = storageFactory(dir)
-  const {statusCode, headers, body: content} = res.piped
+  const { statusCode, headers, body: content } = res.piped
 
   if (!host.includes(to)) {
-    next();
-    return;
+    next()
+    return
   }
 
   const _entry = storage.get(key)
@@ -39,15 +39,15 @@ export default (req, res, next) => {
       statusCode: _entry.statusCode,
       headers: _entry.headers,
       body: Buffer.from(_entry.body)
-    };
+    }
   } else {
     const entry = {
       statusCode: statusCode,
       body: content.toString('utf8'),
       headers
-    };
-    storage.set(key, entry);
+    }
+    storage.set(key, entry)
   }
 
-  next();
+  next()
 }

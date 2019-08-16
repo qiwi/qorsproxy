@@ -1,10 +1,10 @@
-import express from 'express';
-import crypto from 'crypto';
-import basicAuth from 'basic-auth';
+import express from 'express'
+import crypto from 'crypto'
+import basicAuth from 'basic-auth'
 
-import url from './url';
-import Stats from './stats';
-import Rules from './rules';
+import url from './url'
+import Stats from './stats'
+import Rules from './rules'
 import {
   pipe,
   cors,
@@ -18,19 +18,19 @@ import {
   crumbs,
   customAuthorization,
   memo
-} from './middlewares';
+} from './middlewares'
 
 export default class Server {
-  constructor() {
-    this.online = false;
-    this.rules = new Rules();
-    this.stats = new Stats();
-    this.handler = express();
+  constructor () {
+    this.online = false
+    this.rules = new Rules()
+    this.stats = new Stats()
+    this.handler = express()
 
     // TODO autobind
-    const statsReq = this.stats.req.bind(this.stats);
-    const statsRes = this.stats.res.bind(this.stats);
-    const contextify = this.contextify.bind(this);
+    const statsReq = this.stats.req.bind(this.stats)
+    const statsRes = this.stats.res.bind(this.stats)
+    const contextify = this.contextify.bind(this)
 
     this.handler
       .use(statsReq)
@@ -42,23 +42,23 @@ export default class Server {
       .use(to)
       .use(pipe)
       .use(from)
-      .use(cors)  // NOTE Handles res.piped.headers
+      .use(cors) // NOTE Handles res.piped.headers
       .use(statsRes)
       .use(crumbs)
       .use(customAuthorization)
       .use(memo)
       .use(end)
       .use(error)
-      .disable('x-powered-by');
+      .disable('x-powered-by')
   }
 
-  contextify(req, res, next) {
-    const {from, to, secret, user, path, origin} = this.constructor.parse(req);
-    const {host, port} = this;
-    const id = crypto.randomBytes(8).toString('hex');
-    const rule = this.rules.get(from, to, secret);
+  contextify (req, res, next) {
+    const { from, to, secret, user, path, origin } = this.constructor.parse(req)
+    const { host, port } = this
+    const id = crypto.randomBytes(8).toString('hex')
+    const rule = this.rules.get(from, to, secret)
 
-    req.id = res.id = id;
+    req.id = res.id = id
 
     req.proxy = {
       id,
@@ -68,11 +68,11 @@ export default class Server {
       user,
       secret,
       path,
-      server: {host, port},
+      server: { host, port },
       origin
-    };
+    }
 
-    next();
+    next()
   }
 
   /**
@@ -81,34 +81,34 @@ export default class Server {
    * @param {Number} port
    * @param {Object} rules
    */
-  configure({host, port, rules}={}) {
-    this.port = port;
-    this.host = host;
-    this.rules.configure(rules);
+  configure ({ host, port, rules } = {}) {
+    this.port = port
+    this.host = host
+    this.rules.configure(rules)
 
-    return this;
+    return this
   }
 
-  health() {
+  health () {
     return {
       status: 'UP',
       critical: true
-    };
+    }
   }
 
-  metrics() {
-    return this.stats.report();
+  metrics () {
+    return this.stats.report()
   }
 
-  static parse(req) {
-    let path = url.parseRequest(req),
-      auth = basicAuth(req) || {},
-      user = auth.name,
-      password = auth.pass,
-      secret = user && crypto.createHash('md5').update(user + ':' + password).digest('hex'),
-      host = path.host,
-      origin = req.get('origin'),
-      from = origin && url.parse(origin).hostname || origin;
+  static parse (req) {
+    const path = url.parseRequest(req)
+    const auth = basicAuth(req) || {}
+    const user = auth.name
+    const password = auth.pass
+    const secret = user && crypto.createHash('md5').update(user + ':' + password).digest('hex')
+    const host = path.host
+    const origin = req.get('origin')
+    const from = (origin && url.parse(origin).hostname) || origin
 
     return {
       path,
@@ -117,6 +117,6 @@ export default class Server {
       user,
       secret,
       origin
-    };
+    }
   }
 }

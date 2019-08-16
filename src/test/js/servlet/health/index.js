@@ -1,6 +1,6 @@
-import reqresnext from 'reqresnext';
-import {StandardIndicator, Endpoint} from '@qiwi/health-indicator';
-import Health from '../../../../main/js/servlet/health';
+import reqresnext from 'reqresnext'
+import { StandardIndicator, Endpoint } from '@qiwi/health-indicator'
+import Health from '../../../../main/js/servlet/health'
 
 describe('health', () => {
   it('constructor returns proper instance', () => {
@@ -15,19 +15,19 @@ describe('health', () => {
   describe('proto', () => {
     describe('handler', () => {
       it('sends proper value to client', () => {
-        const {req, res} = reqresnext()
-        const dep1 = {health(){ return {status: 'UP'}}}
-        const dep2 = {health(){ return {status: 'DOWN', critical: false}}}
-        const health = new Health({dep1, dep2})
+        const { req, res } = reqresnext()
+        const dep1 = { health () { return { status: 'UP' } } }
+        const dep2 = { health () { return { status: 'DOWN', critical: false } } }
+        const health = new Health({ dep1, dep2 })
 
         health.handler(req, res)
 
         expect(JSON.parse(res.body)).to.deep.equal({
           deps: {
-            dep1: {status: 'UP'},
-            dep2: {status: 'DOWN', critical: false}
+            dep1: { status: 'UP' },
+            dep2: { status: 'DOWN', critical: false }
           },
-          status:'UP',
+          status: 'UP',
           critical: false
         })
       })

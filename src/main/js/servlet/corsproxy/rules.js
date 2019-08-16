@@ -1,29 +1,30 @@
-import {each} from '../../base';
+import { each } from '../../base'
 
-export const ANY = '*';
-export const SEPARATOR = '__';
+export const ANY = '*'
+export const SEPARATOR = '__'
 
 export default class Rules {
-  constructor(rules) {
-    this.configure(rules);
+  constructor (rules) {
+    this.configure(rules)
   }
-  configure(rules) {
-    this.rules = new Map();
 
-    let key;
+  configure (rules) {
+    this.rules = new Map()
+
+    let key
 
     each(rules, rule => {
       each([].concat(rule.from || ANY), origin => {
         each([].concat(rule.to || ANY), target => {
           each([].concat(rule.secret || rule.secrets || ANY), secret => {
-            key = this.constructor.getKey(origin, target, secret);
-            this.rules.set(key, rule);
-          });
-        });
-      });
-    });
+            key = this.constructor.getKey(origin, target, secret)
+            this.rules.set(key, rule)
+          })
+        })
+      })
+    })
 
-    return this;
+    return this
   }
 
   /**
@@ -33,7 +34,7 @@ export default class Rules {
    * @param {String} [secret]
    * @returns {Object/null}
    */
-  get(origin, host, secret) {
+  get (origin, host, secret) {
     // TODO Support ip
     // TODO Support masks
     // TODO Use TreeMap
@@ -46,19 +47,19 @@ export default class Rules {
       ANY, host, secret,
       origin, ANY, secret,
       ANY, host, ANY
-    ];
-    let rule;
-    let key;
+    ]
+    let rule
+    let key
 
-    for (let i = 0; i < 8 * 3; i+=3) {
-      key = this.constructor.getKey(map[i], map[i+1], map[i+2]);
-      rule = this.rules.get(key);
+    for (let i = 0; i < 8 * 3; i += 3) {
+      key = this.constructor.getKey(map[i], map[i + 1], map[i + 2])
+      rule = this.rules.get(key)
 
       if (rule) {
-        return rule;
+        return rule
       }
     }
-    return null;
+    return null
   }
 
   /**
@@ -67,7 +68,7 @@ export default class Rules {
    * @param [secret='*']
    * @returns {string}
    */
-  static getKey(from=ANY, to=ANY, secret=ANY) {
-    return from + SEPARATOR + to + SEPARATOR + secret;
+  static getKey (from = ANY, to = ANY, secret = ANY) {
+    return from + SEPARATOR + to + SEPARATOR + secret
   }
 };
