@@ -6,10 +6,10 @@ export const HEAD = 'HEAD';
 export const OPTIONS = 'OPTIONS';
 
 export default {
-	GET,
-	POST,
-	PUT,
-	DELETE,
-	HEAD,
-	OPTIONS
+  GET,
+  POST,
+  PUT,
+  DELETE,
+  HEAD,
+  OPTIONS
 };

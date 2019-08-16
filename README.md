@@ -1,10 +1,11 @@
 ## Qorsproxy
 
 [![buildStatus](https://img.shields.io/travis/qiwi/qorsproxy.svg?maxAge=3600&branch=master)](https://travis-ci.org/qiwi/qorsproxy)
-[![Coveralls](https://img.shields.io/coveralls/qiwi/qorsproxy.svg?maxAge=3600)](https://coveralls.io/github/qiwi/qorsproxy)
 [![dependencyStatus](https://img.shields.io/david/qiwi/qorsproxy.svg?maxAge=3600)](https://david-dm.org/qiwi/qorsproxy)
 [![devDependencyStatus](https://img.shields.io/david/dev/qiwi/qorsproxy.svg?maxAge=3600)](https://david-dm.org/qiwi/qorsproxy)
-[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/qiwi/qorsproxy) [![Greenkeeper badge](https://badges.greenkeeper.io/qiwi/qorsproxy.svg)](https://greenkeeper.io/)
+[![Maintainability](https://api.codeclimate.com/v1/badges/50acfd98bab6f903d950/maintainability)](https://codeclimate.com/github/qiwi/qorsproxy/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/50acfd98bab6f903d950/test_coverage)](https://codeclimate.com/github/qiwi/qorsproxy/test_coverage)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 
 Sometimes you need a proxy.
 * Get any [from google](https://www.google.ru/search?q=http+proxy+js)

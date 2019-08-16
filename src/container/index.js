@@ -1,110 +1,110 @@
-import { find } from '../base';
-import log from '../log';
-import Server from './server';
+import { find } from '../base'
+import log from '../log'
+import Server from './server'
 
 export default class Container {
-	constructor() {
-		this.online = false;
-		this.server = new Server();
-    this.server.on('request', this.collector.bind(this));
-	}
+  constructor () {
+    this.online = false
+    this.server = new Server()
+    this.server.on('request', this.collector.bind(this))
+  }
 
-	configure({host, port, servlets}) {
-		if (servlets) {
-			this.servlets = servlets;
-		}
+  configure ({ host, port, servlets }) {
+    if (servlets) {
+      this.servlets = servlets
+    }
 
-		port = port|0;
+    port = port | 0
 
-		const restart = this.online && (this.port !== port || this.host !== host);
+    const restart = this.online && (this.port !== port || this.host !== host)
 
-		this.port = port;
-		this.host = host;
+    this.port = port
+    this.host = host
 
-		restart &&
-			this.restart();
+    restart &&
+      this.restart()
 
-		log.info('Container configured.');
+    log.info('Container configured.')
 
-		return this;
-	}
+    return this
+  }
 
-	collector(req, res) {
-    const body = [];
+  collector (req, res) {
+    const body = []
 
     req
       .on('data', chunk => {
-        chunk && body.push(chunk);
+        chunk && body.push(chunk)
       })
       .on('end', () => {
         if (body.length) {
-          req.body = Buffer.concat(body);
+          req.body = Buffer.concat(body)
         }
-        this.handler.call(this, req, res)
-      });
-	}
+        this.handler(req, res)
+      })
+  }
 
-	handler(req, res) {
-		const url = req.url;
-		let route;
+  handler (req, res) {
+    const url = req.url
+    let route
 
-		if (!this.online) {
-			res.end();
-			return;
-		}
+    if (!this.online) {
+      res.end()
+      return
+    }
 
-		const servlet = find(this.servlets, (servlet, r) => {
-			route = r; // TODO add servlet name prop
-			return !url.indexOf(r);
-		});
-		
-		if (!servlet) {
-			log.error(`Servlet not found. url=${url}`);
-			this.server.constructor.notFound(req, res);
-			return;
-		}
-		try {
-			servlet.handler(req, res);
-		} catch (e) {
-			log.error(`Servlet unhandled exception. route=${route} url=${url}`, e);
-			this.server.constructor.internalError(req, res);
-		}
-	}
+    const servlet = find(this.servlets, (servlet, r) => {
+      route = r // TODO add servlet name prop
+      return !url.indexOf(r)
+    })
 
-	start(cb) {
-		if (!this.online) {
-			this.server.listen(
-				this.port,
-				this.host,
-				() => {
-					log.info('Container is online: ' + this.host + ':' + this.port);
-					cb && cb();
-				}
-			);
-			this.online = true;
-		}
+    if (!servlet) {
+      log.error(`Servlet not found. url=${url}`)
+      this.server.constructor.notFound(req, res)
+      return
+    }
+    try {
+      servlet.handler(req, res)
+    } catch (e) {
+      log.error(`Servlet unhandled exception. route=${route} url=${url}`, e)
+      this.server.constructor.internalError(req, res)
+    }
+  }
 
-		return this;
-	}
+  start (cb) {
+    if (!this.online) {
+      this.server.listen(
+        this.port,
+        this.host,
+        () => {
+          log.info('Container is online: ' + this.host + ':' + this.port)
+          cb && cb()
+        }
+      )
+      this.online = true
+    }
 
-	stop(cb) {
-		if (this.online) {
-			// NOTE Stops the server from accepting new connections and keeps existing connections.
-			// This function is asynchronous, the server is finally closed when all connections are ended and the server emits a 'close' event.
-			this.online = false;
-			this.server.close(() => {
-				log.warn('Container stopped.');
-				cb && cb();
-			});
-		}
+    return this
+  }
 
-		return this;
-	}
+  stop (cb) {
+    if (this.online) {
+      // NOTE Stops the server from accepting new connections and keeps existing connections.
+      // This function is asynchronous, the server is finally closed when all connections are ended and the server emits a 'close' event.
+      this.online = false
+      this.server.close(() => {
+        log.warn('Container stopped.')
+        cb && cb()
+      })
+    }
 
-	restart() {
-		log.warn('Container restart required.');
-		this.stop(this.start.bind(this));
+    return this
+  }
 
-		return this;
-	}
+  restart () {
+    log.warn('Container restart required.')
+    this.stop(this.start.bind(this))
+
+    return this
+  }
 }

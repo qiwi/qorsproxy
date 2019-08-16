@@ -4,60 +4,60 @@ import url from '../url';
 
 // TODO Support configurations
 export default (req, res, next) => {
-	const start = log.constructor.now();
+  const start = log.constructor.now();
 
-	const _write = res.write;
-	const _end = res.end;
-	const _send = res.send;
-	const chunks = [];
-	let sent;
+  const _write = res.write;
+  const _end = res.end;
+  const _send = res.send;
+  const chunks = [];
+  let sent;
 
-	const { id, from, to, user, path } = req.proxy;
-	const target = url.format(path);
+  const { id, from, to, user, path } = req.proxy;
+  const target = url.format(path);
 
-	log.info(`REQ ${id} > method=${req.method} origin=${from} ip=${req.ip} dest=${target} user=${user} headers=${JSON.stringify(req.headers)}`);
+  log.info(`REQ ${id} > method=${req.method} origin=${from} ip=${req.ip} dest=${target} user=${user} headers=${JSON.stringify(req.headers)}`);
 
-	res.send = (...args) => {
-		res.send = _send;
-		sent = args;
-		_send.apply(res, args);
-	};
+  res.send = (...args) => {
+    res.send = _send;
+    sent = args;
+    _send.apply(res, args);
+  };
 
-	res.write = (...args) => {
-		chunks.push(Buffer.from(args[0]));
-		_write.apply(res, args);
-	};
+  res.write = (...args) => {
+    chunks.push(Buffer.from(args[0]));
+    _write.apply(res, args);
+  };
 
-	res.end = (...args) => {
-		const chunk = args[0];
+  res.end = (...args) => {
+    const chunk = args[0];
 
-		if (chunk) {
-			chunks.push(new Buffer(chunk));
-		}
-		res.end = _end;
-		res.write = _write;
-		_end.apply(res, args);
-	};
+    if (chunk) {
+      chunks.push(new Buffer(chunk));
+    }
+    res.end = _end;
+    res.write = _write;
+    _end.apply(res, args);
+  };
 
-	// NOTE we can not get entire headers list on send
-	res.on('finish', () => {
-		const status = res.statusCode;
-		const level = getLogLevelByStatus(status);
-		const contentLength = (sent ? Buffer.from('' + sent[0]) : Buffer.concat(chunks)).length;
+  // NOTE we can not get entire headers list on send
+  res.on('finish', () => {
+    const status = res.statusCode;
+    const level = getLogLevelByStatus(status);
+    const contentLength = (sent ? Buffer.from('' + sent[0]) : Buffer.concat(chunks)).length;
 
-		sent = null;
-		chunks.lenght = 0;
+    sent = null;
+    chunks.lenght = 0;
 
-		log[level](`RES ${res.id} < status=${status} duration=${log.constructor.now() - start}ms headers=${JSON.stringify(res.header()._headers)} bufferLength=${contentLength}`);
-	});
+    log[level](`RES ${res.id} < status=${status} duration=${log.constructor.now() - start}ms headers=${JSON.stringify(res.header()._headers)} bufferLength=${contentLength}`);
+  });
 
-	next();
+  next();
 }
 
 export function getLogLevelByStatus(status) {
-	return status < BAD_REQUEST ?
-		INFO :
-		status >= INTERNAL_ERROR ?
-			ERROR:
-			WARN;
+  return status < BAD_REQUEST ?
+    INFO :
+    status >= INTERNAL_ERROR ?
+      ERROR:
+      WARN;
 }

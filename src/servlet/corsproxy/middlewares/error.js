@@ -9,9 +9,9 @@ import log from '../../../log';
  * @param {Function} next
  */
 export default (err, req, res, next) => {
-	log.error('Proxy unexpected error', err);
+  log.error('Proxy unexpected error', err);
 
-	res
-		.status(codes.INTERNAL_ERROR)
-		.json({message: 'Proxy unexpected error'});
+  res
+    .status(codes.INTERNAL_ERROR)
+    .json({message: 'Proxy unexpected error'});
 }

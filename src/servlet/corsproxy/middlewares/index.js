@@ -12,17 +12,17 @@ import customAuthorization from './customAuthorization';
 import memo from './memo'
 
 export {
-	cors,
-	pipe,
-	error,
-	gatekeeper,
-	parse,
-	memo,
-	from,
-	to,
-	end,
-	intercept,
-	crumbs,
-	logger,
-	customAuthorization
+  cors,
+  pipe,
+  error,
+  gatekeeper,
+  parse,
+  memo,
+  from,
+  to,
+  end,
+  intercept,
+  crumbs,
+  logger,
+  customAuthorization
 };
