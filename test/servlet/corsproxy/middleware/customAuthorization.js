@@ -28,14 +28,14 @@ describe('corsproxy.middleware.customAuthorization', () => {
 		bodyKey: 'bodyKey Value'
 	};
 	const expectedAuthEndpointHeaders = {
-        Authorization: '1',
+		Authorization: '1',
 		additionalHeader: '2'
 	};
 	const expectedTargetEndpointHeaders = {
-        Authorization: 'SuchSecretMuchSecurity',
+    Authorization: 'SuchSecretMuchSecurity',
 		additionalHeader: '2',
-        badHeader: '3',
-        host: null
+    badHeader: '3',
+    host: 'localhost'
 	};
 	const targetUrl = '/http://target';
 	const otherUrl = '/http://other';
