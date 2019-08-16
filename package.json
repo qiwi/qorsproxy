@@ -38,14 +38,14 @@
   },
   "main": "src/app",
   "scripts": {
-    "start_pm2": "pm2 start npm --name qorsproxy -- start",
+    "start:pm2": "pm2 start npm --name qorsproxy -- start",
     "start": "node -r esm --use_strict src/main/js/app",
-    "test": "npm run mocha",
+    "test": "npm run lint && npm run mocha",
     "lint": "standard src/**/*.js",
     "lint:fix": "npm run lint -- --fix",
     "mocha": "nyc mocha --opts .mocha.opts && nyc report --reporter=text-lcov > ./coverage/lcov.info",
-    "test_with_report": "npm test && npm run coveralls_push",
-    "coveralls_push": "cat ./coverage/lcov.info | coveralls"
+    "test:report": "npm test && npm run coveralls:push",
+    "coveralls:push": "cat ./coverage/lcov.info | coveralls"
   },
   "license": "MIT",
   "files": [

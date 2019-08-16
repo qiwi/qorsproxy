@@ -55,7 +55,7 @@ Any of you'd prefer:
 ```bash
 npm start -- --config=path
 pm2 start npm --name qorsproxy -- start -- --port=8080 --config=/Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
-npm run start_pm2 -- -- --port=8080
+npm run start:pm2 -- -- --port=8080
 ```
 
 #### CLI options
