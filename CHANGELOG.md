@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/qiwi/qorsproxy/compare/v1.5.3...v1.5.4) (2019-08-16)
+
+
+### Bug Fixes
+
+* **package:** fix vulnerabilities, up deps ([e1c7b46](https://github.com/qiwi/qorsproxy/commit/e1c7b46))
+
 ## [1.5.3](https://github.com/qiwi/qorsproxy/compare/v1.5.2...v1.5.3) (2019-07-05)
 
 
