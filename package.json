@@ -49,6 +49,7 @@
   },
   "license": "MIT",
   "files": [
+    "LICENSE",
     "README.md",
     "CHANGELOG.md",
     "src/main"
