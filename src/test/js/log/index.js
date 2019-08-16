@@ -1,4 +1,4 @@
-import {Log, Console, DailyRotateFile} from '../../src/log'
+import {Log, Console, DailyRotateFile} from '../../../main/js/log'
 
 describe('Log', () => {
   describe('constructor', () => {

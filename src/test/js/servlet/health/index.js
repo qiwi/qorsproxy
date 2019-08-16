@@ -1,6 +1,6 @@
 import reqresnext from 'reqresnext';
 import {StandardIndicator, Endpoint} from '@qiwi/health-indicator';
-import Health from '../../../src/servlet/health';
+import Health from '../../../../main/js/servlet/health';
 
 describe('health', () => {
   it('constructor returns proper instance', () => {

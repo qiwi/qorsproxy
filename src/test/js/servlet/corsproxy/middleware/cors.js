@@ -1,5 +1,5 @@
 import reqres from 'reqresnext';
-import cors, {ALLOW_ORIGIN} from '../../../../src/servlet/corsproxy/middlewares/cors';
+import cors, {ALLOW_ORIGIN} from '../../../../../main/js/servlet/corsproxy/middlewares/cors';
 
 describe('corsproxy.middleware.cors', () => {
 	it(`sets ${ALLOW_ORIGIN} to origin if exists`, () => {

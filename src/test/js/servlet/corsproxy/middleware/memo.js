@@ -1,5 +1,5 @@
 import reqres from 'reqresnext';
-import memo from '../../../../src/servlet/corsproxy/middlewares/memo';
+import memo from '../../../../../main/js/servlet/corsproxy/middlewares/memo';
 import path from 'path'
 import fs from 'fs'
 

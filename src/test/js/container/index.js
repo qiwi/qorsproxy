@@ -1,7 +1,7 @@
 import EventEmitter from 'events';
 import gen from 'reqresnext';
-import Container from '../../src/container';
-import Server from '../../src/container/server';
+import Container from '../../../main/js/container';
+import Server from '../../../main/js/container/server';
 
 describe('container', () => {
 	const host = '127.0.0.1';

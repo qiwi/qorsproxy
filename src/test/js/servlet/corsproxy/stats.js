@@ -1,5 +1,5 @@
 import reqres from 'reqresnext';
-import Stats from '../../../src/servlet/corsproxy/stats';
+import Stats from '../../../../main/js/servlet/corsproxy/stats';
 
 describe('corsproxy.stats', () => {
 	let stats, req, res, next

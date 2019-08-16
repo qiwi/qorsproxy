@@ -1,6 +1,6 @@
-import {each} from '../../../../src/base';
+import {each} from '../../../../../main/js/base';
 import reqres from 'reqresnext';
-import {from, parsePattern, to} from '../../../../src/servlet/corsproxy/middlewares/mutator';
+import {from, parsePattern, to} from '../../../../../main/js/servlet/corsproxy/middlewares/mutator';
 
 describe('corsproxy.middleware.mutator', () => {
 	describe('parsePattern', () => {

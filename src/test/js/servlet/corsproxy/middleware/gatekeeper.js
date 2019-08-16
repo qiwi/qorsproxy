@@ -3,9 +3,9 @@ import gatekeeper, {
 	RECURSIVE_REQUEST,
 	FORBIDDEN_REQUEST,
 	CYCLED_REQUEST
-} from '../../../../src/servlet/corsproxy/middlewares/gatekeeper';
-import {OK, FORBIDDEN} from '../../../../src/servlet/const/status';
-import {XFH} from '../../../../src/servlet/const/header';
+} from '../../../../../main/js/servlet/corsproxy/middlewares/gatekeeper';
+import {OK, FORBIDDEN} from '../../../../../main/js/servlet/const/status';
+import {XFH} from '../../../../../main/js/servlet/const/header';
 
 describe('corsproxy.middleware.gatekeeper', () => {
 	const host = '127.0.0.1';

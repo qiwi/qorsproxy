@@ -1,6 +1,6 @@
 import reqres from 'reqresnext';
-import error from '../../../../src/servlet/corsproxy/middlewares/error';
-import { INTERNAL_ERROR } from '../../../../src/servlet/corsproxy/codes';
+import error from '../../../../../main/js/servlet/corsproxy/middlewares/error';
+import { INTERNAL_ERROR } from '../../../../../main/js/servlet/corsproxy/codes';
 
 describe('corsproxy.middleware.error', () => {
 	it('handles error', () => {

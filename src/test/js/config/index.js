@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import chai from 'chai';
-import Config, { READY, UPDATE, ERROR } from '../../src/config';
+import Config, { READY, UPDATE, ERROR } from '../../../main/js/config';
 
 const { expect } = chai;
 

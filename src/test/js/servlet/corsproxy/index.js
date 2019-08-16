@@ -1,7 +1,7 @@
 import reqres from 'reqresnext';
-import Corsproxy from '../../../src/servlet/corsproxy';
-import Rules from '../../../src/servlet/corsproxy/rules';
-import Stats from '../../../src/servlet/corsproxy/stats';
+import Corsproxy from '../../../../main/js/servlet/corsproxy';
+import Rules from '../../../../main/js/servlet/corsproxy/rules';
+import Stats from '../../../../main/js/servlet/corsproxy/stats';
 
 describe('corsproxy', () => {
 	const proxy = new Corsproxy();

@@ -1,7 +1,7 @@
 import reqres from 'reqresnext';
-import logger, {getLogLevelByStatus} from '../../../../src/servlet/corsproxy/middlewares/logger';
-import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_ERROR} from '../../../../src/servlet/const/status';
-import log, {INFO, WARN, ERROR} from '../../../../src/log';
+import logger, {getLogLevelByStatus} from '../../../../../main/js/servlet/corsproxy/middlewares/logger';
+import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_ERROR} from '../../../../../main/js/servlet/const/status';
+import log, {INFO, WARN, ERROR} from '../../../../../main/js/log';
 
 const sandbox = sinon.createSandbox();
 

@@ -1,6 +1,6 @@
 import reqres from 'reqresnext';
-import crumbs from '../../../../src/servlet/corsproxy/middlewares/crumbs';
-import {XFH, HOST} from '../../../../src/servlet/const/header';
+import crumbs from '../../../../../main/js/servlet/corsproxy/middlewares/crumbs';
+import {XFH, HOST} from '../../../../../main/js/servlet/const/header';
 
 const host = '127.0.0.1';
 const port = 8080;

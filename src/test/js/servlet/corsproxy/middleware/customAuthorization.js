@@ -3,7 +3,7 @@ import reqres from 'reqresnext';
 
 const stubRequest = request =>
 	proxyquire(
-		'../../../../src/servlet/corsproxy/middlewares/customAuthorization',
+		'../../../../../main/js/servlet/corsproxy/middlewares/customAuthorization',
 		{ request: request }
 	).default;
 

@@ -1,5 +1,5 @@
 import reqres from 'reqresnext';
-import end from '../../../../src/servlet/corsproxy/middlewares/end';
+import end from '../../../../../main/js/servlet/corsproxy/middlewares/end';
 
 describe('corsproxy.middleware.end', () => {
 	it('transfers piped data to response', () => {

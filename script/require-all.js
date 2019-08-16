@@ -16,7 +16,7 @@ import fs from 'fs'
 import path from 'path'
 import glob from 'glob'
 
-const libDir = 'src';
+const libDir = 'src/main/js';
 const files = glob.sync('**/*.js', {
 	cwd: path.resolve(libDir),
 	ignore: [

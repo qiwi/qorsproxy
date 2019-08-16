@@ -39,7 +39,7 @@
   "main": "src/app",
   "scripts": {
     "start_pm2": "pm2 start npm --name qorsproxy -- start",
-    "start": "node -r esm --use_strict src/app",
+    "start": "node -r esm --use_strict src/main/js/app",
     "test": "npm run mocha",
     "lint": "standard src/**/*.js",
     "lint:fix": "npm run lint -- --fix",
@@ -51,7 +51,7 @@
   "files": [
     "README.md",
     "CHANGELOG.md",
-    "src"
+    "src/main"
   ],
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.4",

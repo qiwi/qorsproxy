@@ -1,6 +1,6 @@
 import reqres from 'reqresnext';
-import Corsproxy from '../../../src/servlet/corsproxy';
-import url from '../../../src/servlet/corsproxy/url';
+import Corsproxy from '../../../../main/js/servlet/corsproxy';
+import url from '../../../../main/js/servlet/corsproxy/url';
 
 describe('corsproxy.parse', () => {
 	it('parses request data', () => {

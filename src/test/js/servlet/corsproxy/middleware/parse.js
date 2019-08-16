@@ -1,5 +1,5 @@
 import reqres from 'reqresnext';
-import parse from '../../../../src/servlet/corsproxy/middlewares/parse';
+import parse from '../../../../../main/js/servlet/corsproxy/middlewares/parse';
 
 describe('corsproxy.middleware.parse', () => {
 	it('parses request data', () => {
