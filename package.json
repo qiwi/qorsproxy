@@ -1,6 +1,6 @@
 {
   "name": "qorsproxy",
-  "description": "Cors proxy for Qoder/Pusher",
+  "description": "Cors proxy for dev purposes",
   "keywords": [
     "cors",
     "corsproxy",
