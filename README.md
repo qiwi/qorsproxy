@@ -1,4 +1,5 @@
 ## Qorsproxy
+> cors proxy for ~~dev~~ any purposes
 
 [![buildStatus](https://img.shields.io/travis/qiwi/qorsproxy.svg?maxAge=3600&branch=master)](https://travis-ci.org/qiwi/qorsproxy)
 [![dependencyStatus](https://img.shields.io/david/qiwi/qorsproxy.svg?maxAge=3600)](https://david-dm.org/qiwi/qorsproxy)
@@ -6,42 +7,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/50acfd98bab6f903d950/maintainability)](https://codeclimate.com/github/qiwi/qorsproxy/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/50acfd98bab6f903d950/test_coverage)](https://codeclimate.com/github/qiwi/qorsproxy/test_coverage)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
-
-Sometimes you need a proxy.
-* Get any [from google](https://www.google.ru/search?q=http+proxy+js)
-* Write your own. That's pretty easy:
-
-```javascript
-const http = require('http');
-http.createServer(handler).listen(3000);
-
-function handler(req, res) {
-	console.log('serve: ' + req.url);
-
-	const options = {
-		hostname: 'example.com',
-		port: 80,
-		path: req.url,
-		method: req.method
-	};
-
-	const proxy = http.request(options, _res => {
-		_res.pipe(res, {
-			end: true
-		});
-	});
-
-	req.pipe(proxy, {
-		end: true
-	});
-}
-```
-
-* Try out this weird thing just for fun.
-
-#### Requirements
-* Unix compliant OS
-* NodeJS 8+
 
 ## Install
 
@@ -56,6 +21,12 @@ Any of you'd prefer:
 npm start -- --config=path
 pm2 start npm --name qorsproxy -- start -- --port=8080 --config=/Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
 npm run start:pm2 -- -- --port=8080
+```
+
+## Use
+
+```bash
+curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' → <!doctype html> ...
 ```
 
 #### CLI options
@@ -148,8 +119,33 @@ Cypress [has a trouble](https://github.com/cypress-io/cypress/issues/1185) with 
 }
 ```
 
-## Usage
 
-```bash
-curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' → <!doctype html> ...
+## Alternatives
+* Get any [from google](https://www.google.ru/search?q=http+proxy+js)
+* Write your own. That's pretty easy:
+
+```javascript
+const http = require('http');
+http.createServer(handler).listen(3000);
+
+function handler(req, res) {
+	console.log('serve: ' + req.url);
+
+	const options = {
+		hostname: 'example.com',
+		port: 80,
+		path: req.url,
+		method: req.method
+	};
+
+	const proxy = http.request(options, _res => {
+		_res.pipe(res, {
+			end: true
+		});
+	});
+
+	req.pipe(proxy, {
+		end: true
+	});
+}
 ```
