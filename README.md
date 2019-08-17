@@ -39,7 +39,8 @@ curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' →
 At the top level config describes `server`, `log` and proxy `rules` sections.
 
 #### `rules` is the main one
-It declares allowed connections and its side-effects like `mutations`, `interceptions`, `customAuthorization` and etc.
+It declares allowed connections and their side-effects like `mutations`, `interceptions`, `customAuthorization` and etc.
+Each rule has a name as key of map and value. Qorsproxy applies [the first matched](./src/main/js/servlet/corsproxy/rules.js) rule to the request, therefore declaration order matters.
 ```json
 {
   "rules": {
@@ -119,7 +120,7 @@ If you need support for OPTIONS request, extend target rule:
 ```
 
 #### Authorization
-If intermediate authorization is required (change auth for [JWT](https://jwt.io/)) add `customAuthorization` to the target rule. See details at [schema](src/config/schemas.js) and [impl](src/servlet/corsproxy/middlewares/customAuthorization.js)
+If intermediate authorization is required (change auth for [JWT](https://jwt.io/)) add `customAuthorization` to the target rule. See details at [schema](./src/main/js/config/schemas.js) and [impl](./src/main/js/servlet/corsproxy/middlewares/customAuthorization.js).
 
 ```json
 "customAuthorization": {
