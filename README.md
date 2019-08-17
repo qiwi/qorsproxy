@@ -134,10 +134,15 @@ If intermediate authorization is required (change auth for [JWT](https://jwt.io/
 Cypress [has a trouble](https://github.com/cypress-io/cypress/issues/1185) with `Transfer-Encoding: chunked` header, so in this case you may use workaround:
 ```json
 {
-  "headers": [
+  "mutations": [
     {
-      "name": "transfer-encoding",
-      "value": null
+      "direction": "from",
+      "headers": [
+        {
+          "name": "transfer-encoding",
+          "value": null
+        }
+      ]
     }
   ]
 }
