@@ -29,19 +29,19 @@ npm run start:pm2 -- -- --port=8080
 curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' → <!doctype html> ...
 ```
 
-#### CLI options
-- `--config` sets path to custom config
-- `--port` defines server listen port. Defaults to `9292`
-- `--host` DNS name or IP address
-
 ## Configuration
+### CLI options
+- `--host` DNS name or IP address
+- `--port` defines exposed port. Defaults to `9292`
+- `--config` sets path to the custom config
 
+### JSON config
+At the top level config describes `server`, `log` and proxy `rules` sections.
+
+#### `rules` is the main one
+It declares allowed connections and its side-effects like `mutations`, `interceptions`, `customAuthorization` and etc.
 ```json
 {
-  "server": {
-    "host": "127.0.0.1",
-    "port": 8080
-  },
   "rules": {
     "localhost": {
       "from": [
@@ -77,8 +77,32 @@ curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' →
   }
 }
 ```
+#### `log`
+[Winston](https://github.com/winstonjs/winston) is under the hood and you're able to set some parameters:
+```json
+{
+  "log": {
+    "dir": "./logs/",
+    "filename": "qors-%DATE%.log",
+    "datePattern": "YYYY-MM-DD",
+    "size": 52428800,
+    "level": "info"
+  }
+}
+```
 
-## Pre-flight
+#### `server`
+Everything is simple here: `host` and `port`.
+```json
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8080
+  }
+}
+```
+
+#### Pre-flight
 If you need support for OPTIONS request, extend target rule:
 
 ```json
@@ -94,7 +118,7 @@ If you need support for OPTIONS request, extend target rule:
 ],
 ```
 
-## Authorization
+#### Authorization
 If intermediate authorization is required (change auth for [JWT](https://jwt.io/)) add `customAuthorization` to the target rule. See details at [schema](src/config/schemas.js) and [impl](src/servlet/corsproxy/middlewares/customAuthorization.js)
 
 ```json
