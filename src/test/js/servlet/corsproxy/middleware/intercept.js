@@ -1,7 +1,7 @@
 import reqresnext from 'reqresnext'
 import intercept from '../../../../../main/js/servlet/corsproxy/middlewares/intercept'
-import { GET } from '../../../../../main/js/servlet/const/method'
-import { FORBIDDEN, OK } from '../../../../../main/js/servlet/const/status'
+import { GET } from '../../../../../main/js/servlet/common/method'
+import { FORBIDDEN, OK } from '../../../../../main/js/servlet/common/status'
 
 describe('corsproxy.middleware.intercept', () => {
   it('captures request by method match', () => {

@@ -1,5 +1,5 @@
 import log, { INFO, WARN, ERROR } from '../../../log'
-import { BAD_REQUEST, INTERNAL_ERROR } from '../../const/status'
+import { BAD_REQUEST, INTERNAL_SERVER_ERROR } from '../../common/status'
 import url from '../url'
 
 // TODO Support configurations
@@ -57,7 +57,7 @@ export default (req, res, next) => {
 export function getLogLevelByStatus (status) {
   return status < BAD_REQUEST
     ? INFO
-    : status >= INTERNAL_ERROR
+    : status >= INTERNAL_SERVER_ERROR
       ? ERROR
       : WARN
 }

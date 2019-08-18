@@ -1,9 +1,9 @@
 import request from 'request'
 import reqresnext from 'reqresnext'
 import pipe from '../../../../../main/js/servlet/corsproxy/middlewares/pipe'
-import { ECONNREFUSED } from '../../../../../main/js/servlet/const/error'
-import { GET } from '../../../../../main/js/servlet/const/method'
-import { OK, REMOTE_IS_DOWN, REMOTE_UNKNOWN } from '../../../../../main/js/servlet/const/status'
+import { ECONNREFUSED } from '../../../../../main/js/servlet/common/error'
+import { GET } from '../../../../../main/js/servlet/common/method'
+import { OK, REMOTE_IS_DOWN, REMOTE_UNKNOWN } from '../../../../../main/js/servlet/common/status'
 
 const sandbox = sinon.createSandbox()
 

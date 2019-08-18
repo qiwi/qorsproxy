@@ -1,5 +1,5 @@
-import { OK, FORBIDDEN } from '../../const/status'
-import { XFH } from '../../const/header'
+import { OK, FORBIDDEN } from '../../common/status'
+import { XFH } from '../../common/header'
 
 export const EMPTY = '<empty>'
 export const RECURSIVE_REQUEST = 'Proxy error: recursive request'

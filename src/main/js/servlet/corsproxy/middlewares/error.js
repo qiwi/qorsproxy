@@ -1,4 +1,4 @@
-import codes from '../codes'
+import { INTERNAL_SERVER_ERROR } from '../../common/status'
 import log from '../../../log'
 
 /**
@@ -12,6 +12,6 @@ export default (err, req, res, next) => {
   log.error('Proxy unexpected error', err)
 
   res
-    .status(codes.INTERNAL_ERROR)
+    .status(INTERNAL_SERVER_ERROR)
     .json({ message: 'Proxy unexpected error' })
 }

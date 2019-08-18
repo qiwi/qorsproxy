@@ -1,6 +1,6 @@
 import reqresnext from 'reqresnext'
 import logger, { getLogLevelByStatus } from '../../../../../main/js/servlet/corsproxy/middlewares/logger'
-import { OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_ERROR } from '../../../../../main/js/servlet/const/status'
+import { OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_SERVER_ERROR } from '../../../../../main/js/servlet/common/status'
 import log, { INFO, WARN, ERROR } from '../../../../../main/js/log'
 
 const sandbox = sinon.createSandbox()
@@ -11,7 +11,7 @@ describe('corsproxy.middleware.logger', () => {
     expect(getLogLevelByStatus(NO_CONTENT)).to.equal(INFO)
     expect(getLogLevelByStatus(BAD_REQUEST)).to.equal(WARN)
     expect(getLogLevelByStatus(FORBIDDEN)).to.equal(WARN)
-    expect(getLogLevelByStatus(INTERNAL_ERROR)).to.equal(ERROR)
+    expect(getLogLevelByStatus(INTERNAL_SERVER_ERROR)).to.equal(ERROR)
   })
 
   describe('', () => {
@@ -56,7 +56,7 @@ describe('corsproxy.middleware.logger', () => {
         }
       }, {
         id: '123',
-        statusCode: INTERNAL_ERROR
+        statusCode: INTERNAL_SERVER_ERROR
       })
 
       logger(req, res, next)

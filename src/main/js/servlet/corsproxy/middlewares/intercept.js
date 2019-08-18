@@ -1,5 +1,5 @@
 import { get, find, isMatch } from '../../../base'
-import { OK } from '../../const/status'
+import { OK } from '../../common/status'
 
 export default (req, res, next) => {
   const interceptions = get(req, 'proxy.rule.interceptions')

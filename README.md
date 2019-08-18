@@ -160,7 +160,7 @@ Cypress [has a trouble](https://github.com/cypress-io/cypress/issues/1185) with 
 There're several features to clarify what's going on with proxy.
 
 #### `GET /health`
-Exposes liveness prope.
+Exposes liveness probe.
 ```json
 {
   "status":"UP",

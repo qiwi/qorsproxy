@@ -1,6 +1,6 @@
 import request from 'request'
-import { ECONNREFUSED } from '../../const/error'
-import { REMOTE_UNKNOWN, REMOTE_IS_DOWN } from '../../const/status'
+import { ECONNREFUSED } from '../../common/error'
+import { REMOTE_UNKNOWN, REMOTE_IS_DOWN } from '../../common/status'
 import url from '../url'
 
 /**
