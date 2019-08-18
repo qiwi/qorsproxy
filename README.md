@@ -36,15 +36,15 @@ curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' →
 - `--port` defines exposed port. Defaults to `9292`
 - `--config` sets path to the custom config
 - `--watch` if defined sets `fs.watchFile` interval for config update. 
-If `port` or `host` has been changed, the server [would be restarted](src/main/js/container/index.js). 
-If config becomes invalid, the prev working version [remains applied](src/main/js/orchestrator.js).
+If `port` or `host` has been changed, the server [would be restarted](src/main/js/container/index.js#L19). 
+If config becomes invalid, the prev working version [remains applied](src/main/js/orchestrator.js#L59).
 
 ### JSON config
 At the top level config describes `server`, `log` and proxy `rules` sections.
 
 #### `rules` is the main one
 It declares allowed connections and their side-effects like `mutations`, `interceptions`, `customAuthorization` and etc.
-Each rule has a name as key of map and value. Qorsproxy applies [the first matched](./src/main/js/servlet/corsproxy/rules.js) rule to the request, therefore declaration order matters.
+Each rule has a name as key of map and value. Qorsproxy applies [the first matched](./src/main/js/servlet/corsproxy/rules.js#L58) rule to the request, therefore declaration order matters.
 ```json
 {
   "rules": {
