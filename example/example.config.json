@@ -1,0 +1,53 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 8080
+  },
+  "rules": {
+    "localhost": {
+      "from": [
+        "*"
+      ],
+      "to": [
+        "example.com"
+      ],
+      "interceptions": [
+        {
+          "req": {
+            "method": "OPTIONS"
+          },
+          "res": {
+            "status": 200
+          }
+        }
+      ],
+      "mutations": [
+        {
+          "direction": "to",
+          "headers": [
+            {
+              "name": "host",
+              "value": null
+            },
+            {
+              "name": "origin",
+              "value": "http://localhost"
+            }
+          ]
+        },
+        {
+          "direction": "from",
+          "headers": [
+            {
+              "name": "set-cookie",
+              "value": {
+                "from": "/;Domain.+;/i",
+                "to": ";Domain: localhost;"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
