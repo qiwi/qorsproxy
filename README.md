@@ -150,6 +150,52 @@ Cypress [has a trouble](https://github.com/cypress-io/cypress/issues/1185) with 
 }
 ```
 
+## Monitoring
+There're several features to clarify what's going on with proxy.
+
+#### `GET /health`
+Exposes liveness prope.
+```json
+{
+  "status":"UP",
+  "critical":true,
+  "deps":{
+    "corsproxy":{
+      "status":"UP",
+      "critical":true
+    }
+  }
+}
+```
+
+#### `GET /metrics`
+Uptime, CPU and memory usage, request counter:
+```json
+{
+  "process": {
+    "uptime": "00:10:29",
+    "memory": {"rss": 96956416, "heapTotal": 56356864, "heapUsed": 47617368, "external": 10413906},
+    "cpu": {"user": 2229086, "system": 585411}
+  },
+  "servlets": {
+    "corsproxy": {
+      "count": 3,
+      "traffic": 1270
+    }
+  }
+}
+```
+
+#### `GET /info`
+Common app info: version, name, etc.
+```json
+{
+  "name": "qorsproxy",
+  "version": "1.5.4",
+  "description": "Cors proxy for dev purposes",
+  "repository": "git@github.com:qiwi/qorsproxy.git"
+}
+```
 
 ## Alternatives
 * Get any [from google](https://www.google.ru/search?q=http+proxy+js)
