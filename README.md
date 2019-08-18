@@ -35,6 +35,9 @@ curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' →
 - `--host` DNS name or IP address
 - `--port` defines exposed port. Defaults to `9292`
 - `--config` sets path to the custom config
+- `--watch` if defined sets `fs.watchFile` interval for config update. 
+If `port` or `host` has been changed, the server [would be restarted](src/main/js/container/index.js). 
+If config becomes invalid, the prev working version [remains applied](src/main/js/orchestrator.js).
 
 ### JSON config
 At the top level config describes `server`, `log` and proxy `rules` sections.
@@ -79,6 +82,9 @@ Each rule has a name as key of map and value. Qorsproxy applies [the first match
   }
 }
 ```
+
+
+
 #### `log`
 [Winston](https://github.com/winstonjs/winston) is under the hood and you're able to set some parameters:
 ```json
