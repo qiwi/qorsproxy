@@ -31,7 +31,7 @@
     "request": "^2.88.0",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^3.10.0",
-    "yargs": "^13.3.0"
+    "yargs": "^14.0.0"
   },
   "esm": {
     "mode": "all",
