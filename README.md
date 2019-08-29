@@ -16,8 +16,10 @@ npm i qorsproxy --save-dev
 ```
 
 ## Start 
-Any of you'd prefer:
-
+```bash
+qorsproxy -p 8080 -c /Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
+```
+or any other way:
 ```bash
 npm start -- --config=path
 pm2 start npm --name qorsproxy -- start -- --port=8080 --config=/Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
@@ -32,10 +34,10 @@ curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' →
 
 ## Configuration
 ### CLI options
-- `--host` DNS name or IP address
-- `--port` defines exposed port. Defaults to `9292`
-- `--config` sets path to the custom config
-- `--watch` if defined sets `fs.watchFile` interval for config update. 
+- `--host`, `-h` DNS name or IP address
+- `--port`, `-p` defines exposed port. Defaults to `9292`
+- `--config`, `-c` sets path to the custom config
+- `--watch`, `-w` if defined sets `fs.watchFile` interval for config update. 
 If `port` or `host` has been changed, the server [would be restarted](src/main/js/container/index.js#L19). 
 If config becomes invalid, the prev working version [remains applied](src/main/js/orchestrator.js#L59).
 

@@ -1,21 +1,20 @@
 {
   "name": "qorsproxy",
-  "description": "Cors proxy for dev purposes",
-  "keywords": [
-    "cors",
-    "corsproxy",
-    "qors",
-    "qorsproxy"
-  ],
   "version": "1.5.4",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:qiwi/qorsproxy.git"
+  "description": "Cors proxy for dev purposes",
+  "main": "src/main/js/index.js",
+  "bin": {
+    "qorsproxy": "src/main/js/index.js"
   },
-  "author": "Anton Golub <a.golub@qiwi.com>",
-  "engines": {
-    "node": ">=9.4.0",
-    "npm": ">=5.6"
+  "scripts": {
+    "start:pm2": "pm2 start npm --name qorsproxy -- start",
+    "start": "node --use_strict src/main/js/index.js",
+    "test": "npm run lint && npm run mocha",
+    "lint": "standard src/**/*.js",
+    "lint:fix": "npm run lint -- --fix",
+    "mocha": "nyc mocha --opts .mocha.opts && nyc report --reporter=text-lcov > ./coverage/lcov.info",
+    "test:report": "npm test && npm run coveralls:push",
+    "coveralls:push": "cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "@qiwi/health-indicator": "^1.2.3",
@@ -28,25 +27,14 @@
     "ip": "^1.1.5",
     "jsonschema": "^1.2.4",
     "lodash-es": "^4.17.15",
+    "meow": "^5.0.0",
     "request": "^2.88.0",
     "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^3.10.0",
-    "yargs": "^14.0.0"
+    "winston-daily-rotate-file": "^3.10.0"
   },
   "esm": {
     "mode": "all",
     "cjs": true
-  },
-  "main": "src/app",
-  "scripts": {
-    "start:pm2": "pm2 start npm --name qorsproxy -- start",
-    "start": "node --use_strict src/main/js/index",
-    "test": "npm run lint && npm run mocha",
-    "lint": "standard src/**/*.js",
-    "lint:fix": "npm run lint -- --fix",
-    "mocha": "nyc mocha --opts .mocha.opts && nyc report --reporter=text-lcov > ./coverage/lcov.info",
-    "test:report": "npm test && npm run coveralls:push",
-    "coveralls:push": "cat ./coverage/lcov.info | coveralls"
   },
   "license": "MIT",
   "files": [
@@ -76,6 +64,21 @@
     "sinon": "^7.4.1",
     "sinon-chai": "^3.3.0",
     "standard": "^14.1.0"
+  },
+  "keywords": [
+    "cors",
+    "corsproxy",
+    "qors",
+    "qorsproxy"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:qiwi/qorsproxy.git"
+  },
+  "author": "Anton Golub <a.golub@qiwi.com>",
+  "engines": {
+    "node": ">=9.4.0",
+    "npm": ">=5.6"
   },
   "release": {
     "branch": "master",
