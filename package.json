@@ -40,7 +40,7 @@
   "main": "src/app",
   "scripts": {
     "start:pm2": "pm2 start npm --name qorsproxy -- start",
-    "start": "node -r esm --use_strict src/main/js/app",
+    "start": "node --use_strict src/main/js/index",
     "test": "npm run lint && npm run mocha",
     "lint": "standard src/**/*.js",
     "lint:fix": "npm run lint -- --fix",
