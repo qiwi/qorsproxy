@@ -1,6 +1,6 @@
 {
   "name": "qorsproxy",
-  "version": "1.5.4",
+  "version": "2.0.0",
   "description": "Cors proxy for dev purposes",
   "main": "src/main/js/index.js",
   "bin": {

@@ -1,3 +1,20 @@
+# [2.0.0](https://github.com/qiwi/qorsproxy/compare/v1.5.4...v2.0.0) (2019-08-29)
+
+
+### Features
+
+* add qorsproxy bin alias ([97c1334](https://github.com/qiwi/qorsproxy/commit/97c1334)), closes [#28](https://github.com/qiwi/qorsproxy/issues/28) [#30](https://github.com/qiwi/qorsproxy/issues/30)
+
+
+### Performance Improvements
+
+* invoke esm at the entry point ([0c6d8dd](https://github.com/qiwi/qorsproxy/commit/0c6d8dd))
+
+
+### BREAKING CHANGES
+
+* app.js is not entry point anymore, refer to qorsproxy bin or index.js instead
+
 ## [1.5.4](https://github.com/qiwi/qorsproxy/compare/v1.5.3...v1.5.4) (2019-08-16)
 
 
