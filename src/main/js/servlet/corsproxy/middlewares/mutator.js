@@ -1,4 +1,5 @@
 import { each, isObject, isNull, isArray } from './../../../base'
+import { normalizeHeader } from '../../common/header'
 
 export const FROM = 'from'
 export const TO = 'to'
@@ -31,24 +32,27 @@ export {
 function mutate (headers, mutations) {
   each(mutations, m => {
     each(m.headers, ({ name, value }) => {
-      const prev = headers[name]
+      const lowerName = name.toLowerCase()
+      const normalName = normalizeHeader(name)
+      const prev = headers[normalName] || headers[lowerName] || headers[name]
+      const modify = str => str.replace(parsePattern(value.from), value.to)
 
       if (value === null) {
         delete headers[name]
+        delete headers[normalName]
+        delete headers[lowerName]
         return
       }
 
       if (!isObject(value)) {
-        headers[name] = '' + value
+        headers[name] = headers[normalName] = headers[lowerName] = '' + value
         return
       }
 
       if (prev) {
-        if (isArray(prev)) {
-          headers[name] = prev.map(prev => prev.replace(parsePattern(value.from), value.to))
-        } else {
-          headers[name] = prev.replace(parsePattern(value.from), value.to)
-        }
+        headers[name] = headers[normalName] = headers[lowerName] = isArray(prev)
+          ? prev.map(modify)
+          : modify(prev)
       }
     })
   })

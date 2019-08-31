@@ -52,6 +52,10 @@ describe('corsproxy.middleware.mutator', () => {
                       from: '/^(\\w)(\\w)$/i',
                       to: '$2$1'
                     }
+                  },
+                  {
+                    name: 'authorization',
+                    value: 'OtherToken'
                   }
                 ]
               }
@@ -65,7 +69,8 @@ describe('corsproxy.middleware.mutator', () => {
             foo: 'bar',
             fooo: 'fooo',
             baz: ';kassa.qiwi.com;example.com;',
-            qux: ['ab', 'cd', 'efg']
+            qux: ['ab', 'cd', 'efg'],
+            Authorization: 'OtherToken'
           }
         }
       }
@@ -79,6 +84,8 @@ describe('corsproxy.middleware.mutator', () => {
     expect(resHeaders.bar).to.equal('baz')
     expect(resHeaders.baz).to.equal(';kassa.qiwi.tools;example.com;')
     expect(resHeaders.qux).to.eql(['ba', 'dc', 'efg'])
+    expect(resHeaders.Authorization).to.equal('OtherToken')
+    expect(resHeaders.authorization).to.equal('OtherToken')
   })
 
   it('`to` assigns new request headers', () => {
@@ -87,7 +94,8 @@ describe('corsproxy.middleware.mutator', () => {
         headers: {
           foo: 'bar',
           baz: ';kassa.qiwi.com;example.com;',
-          qux: ['ab', 'cd', 'efg']
+          qux: ['ab', 'cd', 'efg'],
+          'foo-bar-baz': 'a'
         },
         proxy: {
           rule: {
@@ -116,6 +124,13 @@ describe('corsproxy.middleware.mutator', () => {
                       from: '/^(\\w)(\\w)$/i',
                       to: '$2$1'
                     }
+                  },
+                  {
+                    name: 'foo-bar-baz',
+                    value: {
+                      from: '/^(\\w+)$/i',
+                      to: '$1$1$1'
+                    }
                   }
                 ]
               }
@@ -130,6 +145,8 @@ describe('corsproxy.middleware.mutator', () => {
 
     expect(reqHeaders.foo).to.be.undefined()
     expect(reqHeaders.bar).to.equal('baz')
+    expect(reqHeaders['Foo-Bar-Baz']).to.equal('aaa')
+    expect(reqHeaders['foo-bar-baz']).to.equal('aaa')
     expect(reqHeaders.baz).to.equal(';kassa.qiwi.tools;example.com;')
     expect(reqHeaders.qux).to.eql(['ba', 'dc', 'efg'])
   })
