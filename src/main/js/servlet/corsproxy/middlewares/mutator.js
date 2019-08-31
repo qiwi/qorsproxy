@@ -33,7 +33,7 @@ function mutate (headers, mutations) {
     each(m.headers, ({ name, value }) => {
       const prev = headers[name]
 
-      if (!value) {
+      if (value === null) {
         delete headers[name]
         return
       }

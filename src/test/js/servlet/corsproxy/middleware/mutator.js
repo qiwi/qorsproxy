@@ -32,6 +32,10 @@ describe('corsproxy.middleware.mutator', () => {
                     value: null
                   },
                   {
+                    name: 'fooo',
+                    value: ''
+                  },
+                  {
                     name: 'bar',
                     value: 'baz'
                   },
@@ -59,6 +63,7 @@ describe('corsproxy.middleware.mutator', () => {
         piped: {
           headers: {
             foo: 'bar',
+            fooo: 'fooo',
             baz: ';kassa.qiwi.com;example.com;',
             qux: ['ab', 'cd', 'efg']
           }
@@ -70,6 +75,7 @@ describe('corsproxy.middleware.mutator', () => {
     from(req, res, next)
 
     expect(resHeaders.foo).to.be.undefined()
+    expect(resHeaders.fooo).to.equal('')
     expect(resHeaders.bar).to.equal('baz')
     expect(resHeaders.baz).to.equal(';kassa.qiwi.tools;example.com;')
     expect(resHeaders.qux).to.eql(['ba', 'dc', 'efg'])
