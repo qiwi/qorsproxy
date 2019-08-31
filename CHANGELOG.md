@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/qiwi/qorsproxy/compare/v2.0.0...v2.0.1) (2019-08-31)
+
+
+### Bug Fixes
+
+* support empty header values ([3c799d3](https://github.com/qiwi/qorsproxy/commit/3c799d3))
+* **mutator:** normalize headers ([392511b](https://github.com/qiwi/qorsproxy/commit/392511b)), closes [#27](https://github.com/qiwi/qorsproxy/issues/27)
+
 # [2.0.0](https://github.com/qiwi/qorsproxy/compare/v1.5.4...v2.0.0) (2019-08-29)
 
 
