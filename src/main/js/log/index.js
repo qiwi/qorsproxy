@@ -2,7 +2,7 @@ import path from 'path'
 import winston from 'winston'
 import DailyRotateFile from 'winston-daily-rotate-file'
 
-const { createLogger, transports: { Console }, config: { colorize } } = winston
+const { createLogger, transports: { Console }, format: {json}, config: { colorize } } = winston
 winston.transports.DailyRotateFile = DailyRotateFile
 
 export const DEBUG = 'debug'
@@ -20,6 +20,13 @@ export const level = {
   INFO,
   WARN,
   ERROR
+}
+
+const createFormat = () => {
+  const replaceError = ({ label, level, message, stack }) => ({ label, level, message, stack })
+  const replacer = (key, value) => value instanceof Error ? replaceError(value) : value
+
+  return json({ replacer })
 }
 
 export class Log {
@@ -55,6 +62,7 @@ export class Log {
     return {
       level: level,
       exitOnError: false,
+      format: createFormat(),
       transports: [
         new Console({
           timestamp: this.timestamp,
