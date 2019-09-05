@@ -46,7 +46,8 @@ At the top level config describes `server`, `log` and proxy `rules` sections.
 
 #### `rules` is the main one
 It declares allowed connections and their side-effects like `mutations`, `interceptions`, `customAuthorization` and etc.
-Each rule has a name as key of map and value. Qorsproxy applies [the first matched](./src/main/js/servlet/corsproxy/rules.js#L58) rule to the request, therefore declaration order matters.
+Qorsproxy applies [the first matched](./src/main/js/servlet/corsproxy/rules.js#L58) rule to the request, therefore declaration order matters.
+`rules` may be declared as a map: 
 ```json
 {
   "rules": {
@@ -82,6 +83,21 @@ Each rule has a name as key of map and value. Qorsproxy applies [the first match
       ]
     }
   }
+}
+```
+Or as array:
+```json
+{
+  "rules": [
+    {
+      "from": [
+        "*"
+      ],
+      "to": [
+        "example.com"
+      ]
+    }
+  ]
 }
 ```
 

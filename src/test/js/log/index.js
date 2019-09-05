@@ -31,6 +31,7 @@ describe('Log', () => {
       const opts = {}
       const expected = Log.formatOptions(opts)
       delete expected.transports
+      delete expected.format
 
       log.configure(opts)
       log.logger.configure.should.have.been.calledWith(sinon.match(expected))

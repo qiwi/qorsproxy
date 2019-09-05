@@ -45,9 +45,9 @@ const INTERCEPTION = {
     res: {
       type: 'object',
       properties: {
-        body: {type: 'string'},
-        status: {type: 'number'},
-        headers: {type: 'object'}
+        body: { type: 'string' },
+        status: { type: 'number' },
+        headers: { type: 'object' }
       }
     }
   },
@@ -85,10 +85,18 @@ export const SCHEMA = {
       host: HOST
     },
     rules: {
-      type: 'object',
-      patternProperties: {
-        '.+': RULE
-      }
+      oneOf: [
+        {
+          type: 'object',
+          patternProperties: {
+            '.+': RULE
+          }
+        },
+        {
+          type: 'array',
+          items: RULE
+        }
+      ]
     }
   }
 }

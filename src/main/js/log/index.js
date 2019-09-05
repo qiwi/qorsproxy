@@ -2,7 +2,7 @@ import path from 'path'
 import winston from 'winston'
 import DailyRotateFile from 'winston-daily-rotate-file'
 
-const { createLogger, transports: { Console }, format: {json}, config: { colorize } } = winston
+const { createLogger, transports: { Console }, format: { json }, config: { colorize } } = winston
 winston.transports.DailyRotateFile = DailyRotateFile
 
 export const DEBUG = 'debug'
