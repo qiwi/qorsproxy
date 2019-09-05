@@ -1,3 +1,16 @@
+# [2.1.0](https://github.com/qiwi/qorsproxy/compare/v2.0.1...v2.1.0) (2019-09-05)
+
+
+### Bug Fixes
+
+* **logger:** handle error stack traces ([31344bf](https://github.com/qiwi/qorsproxy/commit/31344bf)), closes [#31](https://github.com/qiwi/qorsproxy/issues/31)
+
+
+### Features
+
+* **config:** add rules.interceptions validation ([e54eeab](https://github.com/qiwi/qorsproxy/commit/e54eeab))
+* **config:** let rules be a map ([645350a](https://github.com/qiwi/qorsproxy/commit/645350a)), closes [#26](https://github.com/qiwi/qorsproxy/issues/26)
+
 ## [2.0.1](https://github.com/qiwi/qorsproxy/compare/v2.0.0...v2.0.1) (2019-08-31)
 
 
