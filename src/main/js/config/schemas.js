@@ -36,6 +36,35 @@ const MEMO = {
   }
 }
 
+const INTERCEPTION = {
+  type: 'object',
+  properties: {
+    req: {
+      type: 'object'
+    },
+    res: {
+      type: 'object',
+      properties: {
+        body: {type: 'string'},
+        status: {type: 'number'},
+        headers: {type: 'object'}
+      }
+    }
+  },
+  required: ['req', 'res']
+}
+
+const RULE = {
+  type: 'object',
+  properties: {
+    customAuthorization: CUSTOM_AUTHORIZATION,
+    memo: MEMO,
+    from: STRING_ARRAY,
+    to: STRING_ARRAY,
+    interceptions: { type: 'array', items: INTERCEPTION }
+  }
+}
+
 // TODO refactor
 export const SCHEMA = {
   type: 'object',
@@ -58,13 +87,7 @@ export const SCHEMA = {
     rules: {
       type: 'object',
       patternProperties: {
-        '.+': {
-          type: 'object',
-          properties: {
-            customAuthorization: CUSTOM_AUTHORIZATION,
-            memo: MEMO
-          }
-        }
+        '.+': RULE
       }
     }
   }

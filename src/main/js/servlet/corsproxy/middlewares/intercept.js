@@ -3,8 +3,6 @@ import { OK } from '../../common/status'
 
 export default (req, res, next) => {
   const interceptions = get(req, 'proxy.rule.interceptions')
-
-  // TODO Support json-schema
   const captured = find(interceptions, ({ req: _req }) => isMatch(req, _req))
 
   if (!captured) {
