@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/qiwi/qorsproxy/compare/v2.1.0...v2.2.0) (2019-09-15)
+
+
+### Features
+
+* print error details to log ([ee2a5f2](https://github.com/qiwi/qorsproxy/commit/ee2a5f2)), closes [#34](https://github.com/qiwi/qorsproxy/issues/34)
+
 # [2.1.0](https://github.com/qiwi/qorsproxy/compare/v2.0.1...v2.1.0) (2019-09-05)
 
 
