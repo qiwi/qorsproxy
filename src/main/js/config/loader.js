@@ -4,6 +4,7 @@ import jsonschema from 'jsonschema'
 import { isError } from '../base'
 import emitter from '../emitter'
 import { SCHEMA } from './schemas'
+import Error from '../common/error'
 
 export const EVT_PREFIX = 'config_loader_'
 export const LOAD = 'load'
@@ -61,7 +62,7 @@ export default class ConfigLoader {
     try {
       return fs.readFileSync(path, { encoding: 'utf8' })
     } catch (e) {
-      return new Error(`config_loader: read error path=${path}`)
+      return new Error(`config_loader: read error path=${path}`, e)
     }
   }
 
@@ -74,7 +75,7 @@ export default class ConfigLoader {
     try {
       return JSON.parse(data)
     } catch (e) {
-      return new Error('config_loader: parse error')
+      return new Error('config_loader: parse error', e)
     }
   }
 
@@ -82,10 +83,12 @@ export default class ConfigLoader {
    * Validates profile data.
    */
   static validate (data) {
-    if (jsonschema.validate(data, SCHEMA).valid) {
+    const validationResult = jsonschema.validate(data, SCHEMA)
+
+    if (validationResult.valid) {
       return data
     } else {
-      return new Error('config_loader: invalid by schema')
+      return new Error('config_loader: invalid by schema', validationResult.errors)
     }
   }
 

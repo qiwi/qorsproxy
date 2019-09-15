@@ -23,7 +23,7 @@ export const level = {
 }
 
 const createFormat = () => {
-  const replaceError = ({ label, level, message, stack }) => ({ label, level, message, stack })
+  const replaceError = ({ label, level, message, stack, details }) => ({ label, level, message, details, stack })
   const replacer = (key, value) => value instanceof Error ? replaceError(value) : value
 
   return json({ replacer })
