@@ -64,7 +64,7 @@
     "semantic-release": "^15.13.24",
     "sinon": "^7.4.2",
     "sinon-chai": "^3.3.0",
-    "standard": "^14.3.0"
+    "standard": "^14.3.1"
   },
   "keywords": [
     "cors",
