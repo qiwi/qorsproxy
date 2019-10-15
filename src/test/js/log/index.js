@@ -11,7 +11,7 @@ describe('Log', () => {
   })
 
   describe('proto', () => {
-    const sandbox = sinon.sandbox.create()
+    const sandbox = sinon.createSandbox()
     const opts = {}
     const log = new Log(opts)
 

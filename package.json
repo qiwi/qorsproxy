@@ -31,7 +31,7 @@
     "meow": "^5.0.0",
     "request": "^2.88.0",
     "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^4.1.0"
+    "winston-daily-rotate-file": "^4.2.1"
   },
   "esm": {
     "mode": "all",
@@ -48,21 +48,21 @@
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.4",
     "@semantic-release/git": "^7.0.16",
-    "@semantic-release/github": "^5.4.3",
-    "@semantic-release/npm": "^5.1.15",
+    "@semantic-release/github": "^5.5.3",
+    "@semantic-release/npm": "^5.2.0",
     "chai": "^4.2.0",
     "chai-subset": "^1.6.0",
-    "coveralls": "^3.0.6",
+    "coveralls": "^3.0.7",
     "dirty-chai": "^2.0.1",
     "glob": "^7.1.4",
-    "mocha": "^6.2.0",
+    "mocha": "^6.2.1",
     "mocha-lcov-reporter": "^1.3.0",
     "mocha-sinon": "^2.1.0",
     "nyc": "^14.1.1",
     "proxyquire": "^2.1.3",
-    "reqresnext": "^1.5.5",
+    "reqresnext": "^1.6.1",
     "semantic-release": "^15.13.24",
-    "sinon": "^7.4.2",
+    "sinon": "^7.5.0",
     "sinon-chai": "^3.3.0",
     "standard": "^14.3.1"
   },

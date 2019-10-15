@@ -23,6 +23,7 @@ const files = glob.sync('**/*.js', {
 		// Ignore tests
 		'**/*.test.js',
 		// Ignore entry points
+		'index.js',
 		'app.js',
 		'orchestrator.js'
 	]
