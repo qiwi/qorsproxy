@@ -28,7 +28,7 @@
     "ip": "^1.1.5",
     "jsonschema": "^1.2.5",
     "lodash-es": "^4.17.15",
-    "meow": "^5.0.0",
+    "meow": "^6.0.0",
     "request": "^2.88.0",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.3.0"
