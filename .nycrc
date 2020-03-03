@@ -8,8 +8,7 @@
     "src/**/*.js"
   ],
   "require": [
-    "esm",
-    "./script/require-all"
+    "esm"
   ],
   "check-coverage": false,
   "cache": true
