@@ -43,7 +43,8 @@
     "README.md",
     "CHANGELOG.md",
     "src/main",
-    "example"
+    "example",
+    "ssl"
   ],
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
