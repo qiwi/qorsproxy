@@ -10,29 +10,28 @@ export default class Container {
     this.initSecureServer()
   }
 
-  shouldRestart ({ host, port, securePort, secureOpts }) {
+  shouldRestart ({ host, port, secure }) {
     return this.online && (
       this.port !== port ||
       this.host !== host ||
-      this.securePort !== securePort ||
-      this.secureOpts.cert !== secureOpts.cert ||
-      this.secureOpts.key !== secureOpts.key
+      this.secure.port !== secure.port ||
+      this.secure.cert !== secure.cert ||
+      this.secure.key !== secure.key
     )
   }
 
-  async configure ({ host, port, securePort, servlets, secureOpts }) {
+  async configure ({ host, port, secure, servlets }) {
     if (servlets) {
       this.servlets = servlets
     }
 
     port = port | 0
 
-    const restart = this.shouldRestart({ host, port, securePort, secureOpts })
+    const restart = this.shouldRestart({ host, port, secure })
 
-    this.securePort = securePort
+    this.secure = secure
     this.port = port
     this.host = host
-    this.secureOpts = secureOpts
     restart &&
       await this.restart()
 
@@ -84,7 +83,7 @@ export default class Container {
   }
 
   initSecureServer () {
-    this.httpsServer = new HttpsServer(this.secureOpts)
+    this.httpsServer = new HttpsServer(this.secure)
     this.httpsServer.on('request', this.collector.bind(this))
   }
 
@@ -93,9 +92,9 @@ export default class Container {
       this.initSecureServer()
       await Promise.all([
         this.server.listen(this.port, this.host),
-        this.httpsServer.listen(this.securePort, this.host)
+        this.httpsServer.listen(this.secure.port, this.host)
       ])
-      log.info(`Container is online: http://${this.host}:${this.port}, https://${this.host}:${this.securePort}`)
+      log.info(`Container is online: http://${this.host}:${this.port}, https://${this.host}:${this.secure.port}`)
       this.online = true
     }
 

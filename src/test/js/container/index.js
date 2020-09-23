@@ -6,13 +6,14 @@ import { HttpServer as Server } from '../../../main/js/container/server'
 describe('container', () => {
   const host = '127.0.0.1'
   const port = 8080
+  const secure = { port: 8081 }
   const foo = { handler () {} }
   const bar = { handler () { throw new Error('Bar unhandled') } }
   const servlets = { foo, bar }
 
   describe('constructor', () => {
     it('returns proper instance', async () => {
-      const container = await new Container().configure({ host, port, servlets })
+      const container = await new Container().configure({ host, port, servlets, secure })
 
       expect(container.server).to.be.an.instanceof(Server)
       expect(container.online).to.be.a('boolean')
@@ -21,7 +22,7 @@ describe('container', () => {
 
   describe('proto', () => {
     describe('configure', async () => {
-      const container = await new Container().configure({ host, port, servlets })
+      const container = await new Container().configure({ host, port, servlets, secure })
 
       beforeEach(() => {
         sinon.spy(container, 'restart')
@@ -40,7 +41,7 @@ describe('container', () => {
       it('triggers restart when `port` changes', () => {
         const host = '0.0.0.0'
         container.online = true
-        container.configure({ host })
+        container.configure({ host, secure })
 
         expect(container.host).to.equal(host)
         container.restart.should.have.been.called()
@@ -48,12 +49,11 @@ describe('container', () => {
 
       it('triggers restart when `host` changes', () => {
         const port = 8080
-        const securePort = 8081
         container.online = true
-        container.configure({ port, securePort })
+        container.configure({ port, secure })
 
         expect(container.port).to.equal(port)
-        expect(container.securePort).to.equal(securePort)
+        expect(container.secure).to.equal(secure)
         container.restart.should.have.been.called()
       })
     })
@@ -62,7 +62,7 @@ describe('container', () => {
       let container
 
       beforeEach(async () => {
-        container = await new Container().configure({ host, port, servlets })
+        container = await new Container().configure({ host, port, servlets, secure })
         const methods = ['listen', 'close']
 
         methods.forEach(m => {
@@ -136,7 +136,7 @@ describe('container', () => {
 
     describe('collector', () => {
       it('aggregates chunk data', async () => {
-        const container = await new Container().configure({ host, port, servlets })
+        const container = await new Container().configure({ host, port, servlets, secure })
         const req = new EventEmitter()
         const res = {}
 
@@ -162,7 +162,7 @@ describe('container', () => {
         sinon.spy(servlets.foo, 'handler')
         sinon.spy(servlets.bar, 'handler')
 
-        container = await new Container().configure({ host, port, servlets })
+        container = await new Container().configure({ host, port, servlets, secure })
         container.online = true
       })
 

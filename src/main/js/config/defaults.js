@@ -14,9 +14,11 @@ export default {
   server: {
     port: 9292,
     host: DEFAULT_HOST,
-    securePort: 9293,
-    keyPath: `${__dirname}/../../../../ssl/key.pem`,
-    certPath: `${__dirname}/../../../../ssl/cert.pem`,
+    secure: {
+      port: 9293,
+      key: `${__dirname}/../../../../ssl/key.pem`,
+      cert: `${__dirname}/../../../../ssl/cert.pem`
+    },
     ip: IP
   },
   crumbs: {

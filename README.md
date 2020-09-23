@@ -36,9 +36,9 @@ curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' →
 ### CLI options
 - `--host`, `-h` DNS name or IP address. Defaults to `localhost`.
 - `--port`, `-p` defines exposed port. Defaults to `9292`.
-- `--sport`, `-sp` defines exposed secure port. Defaults to `9293`.
-- `--cpath`, `-cp` path to SSL certificate. Defaults to certificate in `https/cert.pem`.
-- `--kpath`, `-kp` path to SSL private key. Defaults to key in `https/cert.pem`.
+- `--secure.port`, defines exposed secure port. Defaults to `9293`.
+- `--secure.cert`, path to SSL certificate. Defaults to certificate in `ssl/cert.pem`.
+- `--secure.key`, path to SSL private key. Defaults to key in `ssl/cert.pem`.
 - `--config`, `-c` sets path to the custom config.
 - `--watch`, `-w` if defined sets `fs.watchFile` interval for config update.
 If `port` or `host` has been changed, the server [would be restarted](src/main/js/container/index.js#L19). 

@@ -1,8 +1,9 @@
 import { readFileSync } from 'fs'
 
-export function getCertOptions (keyPath, certPath) {
+export function getCertOptions (opts) {
   return {
-    key: readFileSync(keyPath),
-    cert: readFileSync(certPath)
+    ...opts,
+    key: readFileSync(opts.key),
+    cert: readFileSync(opts.cert)
   }
 }

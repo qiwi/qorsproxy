@@ -22,7 +22,8 @@ export default class Orchestrator {
     }
 
     config
-      .on(READY, ({ log, server: { host, port, securePort, keyPath, certPath }, rules }) => {
+      .on(READY, ({ log, server: { host, port, secure }, rules }) => {
+        const { port: securePort } = secure
         logger
           .configure(log)
           .info(`Config path=${config.path || '<empty>'}`)
@@ -42,12 +43,12 @@ export default class Orchestrator {
             host,
             port,
             servlets,
-            securePort,
-            secureOpts: getCertOptions(keyPath, certPath)
+            secure: getCertOptions(secure)
           })
           .then(c => c.start())
       })
-      .on(UPDATE, ({ log, server: { host, port, securePort, keyPath, certPath }, rules }) => {
+      .on(UPDATE, ({ log, server: { host, port, secure }, rules }) => {
+        const { port: securePort } = secure
         logger
           .configure(log)
           .warn('Config updated.')
@@ -55,8 +56,7 @@ export default class Orchestrator {
         container.configure({
           host,
           port,
-          securePort,
-          secureOpts: getCertOptions(keyPath, certPath)
+          secure: getCertOptions(secure)
         })
         corsproxy.configure({ host, port, rules, securePort })
       })
