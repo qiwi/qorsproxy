@@ -3,7 +3,6 @@
   "version": "2.2.1",
   "description": "Cors proxy for dev purposes",
   "main": "src/main/js/index.js",
-  "type": "module",
   "bin": {
     "qorsproxy": "src/main/js/index.js"
   },
