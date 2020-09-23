@@ -15,6 +15,9 @@ const cli = meow(`
     --config, -c  Override the default config
     --host, -h    DNS name or IP address
     --port, -p    Defines exposed port
+    --sport, -sp  Defined exposed secure port
+    --cpath, -cp  Path to SSL certificate
+    --kpath, -kp  Path to SSL private key
     --watch, -w   If defined sets 'fs.watchFile' interval for the config update
 
   Examples
@@ -39,6 +42,18 @@ const cli = meow(`
     port: {
       type: 'string',
       alias: 'p'
+    },
+    sport: {
+      type: 'string',
+      alias: 'sp'
+    },
+    cpath: {
+      type: 'string',
+      alias: 'cp'
+    },
+    kpath: {
+      type: 'string',
+      alias: 'kp'
     }
   }
 })

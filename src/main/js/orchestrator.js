@@ -2,6 +2,7 @@ import logger from './log'
 import Config, { READY, UPDATE, ERROR } from './config'
 import Container from './container'
 import { Corsproxy, Health, Metrics, Info } from './servlet'
+import { getCertOptions } from './cert'
 
 export default class Orchestrator {
   constructor (argv) {
@@ -21,14 +22,14 @@ export default class Orchestrator {
     }
 
     config
-      .on(READY, ({ log, server: { host, port }, rules }) => {
+      .on(READY, ({ log, server: { host, port, securePort, keyPath, certPath }, rules }) => {
         logger
           .configure(log)
           .info(`Config path=${config.path || '<empty>'}`)
           .info('Config ready.')
 
         corsproxy
-          .configure({ port, host, rules })
+          .configure({ port, host, rules, securePort })
 
         health
           .configure({ corsproxy })
@@ -40,17 +41,24 @@ export default class Orchestrator {
           .configure({
             host,
             port,
-            servlets
+            servlets,
+            securePort,
+            secureOpts: getCertOptions(keyPath, certPath)
           })
-          .start()
+          .then(c => c.start())
       })
-      .on(UPDATE, ({ log, server: { host, port }, rules }) => {
+      .on(UPDATE, ({ log, server: { host, port, securePort, keyPath, certPath }, rules }) => {
         logger
           .configure(log)
           .warn('Config updated.')
 
-        container.configure({ host, port })
-        corsproxy.configure({ host, port, rules })
+        container.configure({
+          host,
+          port,
+          securePort,
+          secureOpts: getCertOptions(keyPath, certPath)
+        })
+        corsproxy.configure({ host, port, rules, securePort })
       })
       .on(ERROR, error => {
         if (container.online) {

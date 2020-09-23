@@ -1,28 +1,40 @@
 import { find } from '../base'
 import log from '../log'
-import Server from './server'
+import { HttpServer, HttpsServer, ServerHelper } from './server'
 
 export default class Container {
   constructor () {
     this.online = false
-    this.server = new Server()
+    this.server = new HttpServer()
     this.server.on('request', this.collector.bind(this))
+    this.initSecureServer()
   }
 
-  configure ({ host, port, servlets }) {
+  shouldRestart ({ host, port, securePort, secureOpts }) {
+    return this.online && (
+      this.port !== port ||
+      this.host !== host ||
+      this.securePort !== securePort ||
+      this.secureOpts.cert !== secureOpts.cert ||
+      this.secureOpts.key !== secureOpts.key
+    )
+  }
+
+  async configure ({ host, port, securePort, servlets, secureOpts }) {
     if (servlets) {
       this.servlets = servlets
     }
 
     port = port | 0
 
-    const restart = this.online && (this.port !== port || this.host !== host)
+    const restart = this.shouldRestart({ host, port, securePort, secureOpts })
 
+    this.securePort = securePort
     this.port = port
     this.host = host
-
+    this.secureOpts = secureOpts
     restart &&
-      this.restart()
+      await this.restart()
 
     log.info('Container configured.')
 
@@ -60,50 +72,55 @@ export default class Container {
 
     if (!servlet) {
       log.error(`Servlet not found. url=${url}`)
-      this.server.constructor.notFound(req, res)
+      ServerHelper.notFound(req, res)
       return
     }
     try {
       servlet.handler(req, res)
     } catch (e) {
       log.error(`Servlet unhandled exception. route=${route} url=${url}`, e)
-      this.server.constructor.internalError(req, res)
+      ServerHelper.internalError(req, res)
     }
   }
 
-  start (cb) {
+  initSecureServer () {
+    this.httpsServer = new HttpsServer(this.secureOpts)
+    this.httpsServer.on('request', this.collector.bind(this))
+  }
+
+  async start () {
     if (!this.online) {
-      this.server.listen(
-        this.port,
-        this.host,
-        () => {
-          log.info('Container is online: ' + this.host + ':' + this.port)
-          cb && cb()
-        }
-      )
+      this.initSecureServer()
+      await Promise.all([
+        this.server.listen(this.port, this.host),
+        this.httpsServer.listen(this.securePort, this.host)
+      ])
+      log.info(`Container is online: http://${this.host}:${this.port}, https://${this.host}:${this.securePort}`)
       this.online = true
     }
 
     return this
   }
 
-  stop (cb) {
+  async stop () {
     if (this.online) {
       // NOTE Stops the server from accepting new connections and keeps existing connections.
       // This function is asynchronous, the server is finally closed when all connections are ended and the server emits a 'close' event.
       this.online = false
-      this.server.close(() => {
-        log.warn('Container stopped.')
-        cb && cb()
-      })
+      await Promise.all([
+        this.server.close(),
+        this.httpsServer.close()
+      ])
+      log.warn('Container stopped.')
     }
 
     return this
   }
 
-  restart () {
+  async restart () {
     log.warn('Container restart required.')
-    this.stop(this.start.bind(this))
+    await this.stop()
+    await this.start()
 
     return this
   }

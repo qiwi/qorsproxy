@@ -1,7 +1,7 @@
 import EventEmitter from 'events'
 import reqresnext from 'reqresnext'
 import Container from '../../../main/js/container'
-import Server from '../../../main/js/container/server'
+import { HttpServer as Server } from '../../../main/js/container/server'
 
 describe('container', () => {
   const host = '127.0.0.1'
@@ -11,8 +11,8 @@ describe('container', () => {
   const servlets = { foo, bar }
 
   describe('constructor', () => {
-    it('returns proper instance', () => {
-      const container = new Container().configure({ host, port, servlets })
+    it('returns proper instance', async () => {
+      const container = await new Container().configure({ host, port, servlets })
 
       expect(container.server).to.be.an.instanceof(Server)
       expect(container.online).to.be.a('boolean')
@@ -20,8 +20,8 @@ describe('container', () => {
   })
 
   describe('proto', () => {
-    describe('configure', () => {
-      const container = new Container().configure({ host, port, servlets })
+    describe('configure', async () => {
+      const container = await new Container().configure({ host, port, servlets })
 
       beforeEach(() => {
         sinon.spy(container, 'restart')
@@ -48,10 +48,12 @@ describe('container', () => {
 
       it('triggers restart when `host` changes', () => {
         const port = 8080
+        const securePort = 8081
         container.online = true
-        container.configure({ port })
+        container.configure({ port, securePort })
 
         expect(container.port).to.equal(port)
+        expect(container.securePort).to.equal(securePort)
         container.restart.should.have.been.called()
       })
     })
@@ -59,8 +61,8 @@ describe('container', () => {
     describe('server', () => {
       let container
 
-      beforeEach(() => {
-        container = new Container().configure({ host, port, servlets })
+      beforeEach(async () => {
+        container = await new Container().configure({ host, port, servlets })
         const methods = ['listen', 'close']
 
         methods.forEach(m => {
@@ -68,9 +70,14 @@ describe('container', () => {
             if (typeof arg0 === 'function') { arg0() }
             if (typeof arg2 === 'function') { arg2() }
           })
+          sinon.stub(container.httpsServer, m).callsFake((arg0, arg1, arg2) => {
+            if (typeof arg0 === 'function') { arg0() }
+            if (typeof arg2 === 'function') { arg2() }
+          })
         })
 
         const listeners = {}
+        const httpsServer = container.httpsServer
         sinon.stub(container.server, 'on').callsFake((event, handler) => {
           listeners[event] = handler
         })
@@ -80,52 +87,56 @@ describe('container', () => {
             handler(...args)
           }
         })
+        sinon.stub(container, 'initSecureServer').callsFake(() => httpsServer)
       })
 
       describe('start', () => {
-        it('starts inner server if it looks stopped', () => {
-          const cb = sinon.spy()
+        it('starts inner server if it looks stopped', async () => {
           container.online = false
-          container.start(cb)
+          await container.start()
           expect(container.server.listen).to.have.been.called()
-          expect(cb).to.have.been.called()
+          expect(container.httpsServer.listen).to.have.been.called()
         })
 
-        it('does nothing otherwise', () => {
+        it('does nothing otherwise', async () => {
           container.online = true
-          container.start()
+          await container.start()
           expect(container.server.listen).to.not.have.been.called()
+          expect(container.httpsServer.listen).to.not.have.been.called()
         })
       })
 
       describe('stop', () => {
-        it('turns off inner server if it\'s online', () => {
+        it('turns off inner server if it\'s online', async () => {
           container.online = true
-          container.stop(() => {})
+          await container.stop()
           expect(container.server.close).to.have.been.called()
+          expect(container.httpsServer.close).to.have.been.called()
         })
 
-        it('does nothing otherwise', () => {
+        it('does nothing otherwise', async () => {
           container.online = false
-          container.stop()
+          await container.stop()
           expect(container.server.close).to.not.have.been.called()
+          expect(container.httpsServer.close).to.not.have.been.called()
         })
       })
 
       describe('restart', () => {
-        it('restarts server', () => {
+        it('restarts server', async () => {
           container.online = true
-          container.restart()
+          await container.restart()
           expect(container.server.listen).to.have.been.called()
           expect(container.server.close).to.have.been.called()
+          expect(container.httpsServer.close).to.have.been.called()
           expect(container.online).to.be.true()
         })
       })
     })
 
     describe('collector', () => {
-      it('aggregates chunk data', () => {
-        const container = new Container().configure({ host, port, servlets })
+      it('aggregates chunk data', async () => {
+        const container = await new Container().configure({ host, port, servlets })
         const req = new EventEmitter()
         const res = {}
 
@@ -146,12 +157,12 @@ describe('container', () => {
       let container
       let servlets
 
-      beforeEach(() => {
+      beforeEach(async () => {
         servlets = { foo: { handler: foo.handler }, bar: { handler: bar.handler } }
         sinon.spy(servlets.foo, 'handler')
         sinon.spy(servlets.bar, 'handler')
 
-        container = new Container().configure({ host, port, servlets })
+        container = await new Container().configure({ host, port, servlets })
         container.online = true
       })
 
