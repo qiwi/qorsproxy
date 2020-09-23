@@ -1,7 +1,7 @@
 import ip from 'ip'
 
 export const IP = ip.address()
-export const DEFAULT_HOST = IP // 'localhost'?
+export const DEFAULT_HOST = 'localhost'
 
 export default {
   log: {
@@ -14,6 +14,9 @@ export default {
   server: {
     port: 9292,
     host: DEFAULT_HOST,
+    securePort: 9293,
+    keyPath: `${__dirname}/../../../../ssl/key.pem`,
+    certPath: `${__dirname}/../../../../ssl/cert.pem`,
     ip: IP
   },
   crumbs: {

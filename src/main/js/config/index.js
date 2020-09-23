@@ -9,11 +9,14 @@ export const UPDATE = 'update'
 export const ERROR = 'error'
 
 export default class Config {
-  constructor ({ config: path, host, port, watch }) {
+  constructor ({ config: path, host, port, securePort, kpath, cpath, watch }) {
     this.id = Math.random()
     this.host = host
     this.port = port
     this.path = path
+    this.securePort = securePort
+    this.keyPath = kpath
+    this.certPath = cpath
 
     if (path) {
       this.loader = new ConfigLoader(path, watch)
@@ -48,13 +51,13 @@ export default class Config {
   }
 
   inject (data) {
-    const { host, port } = this
+    const { host, port, securePort, keyPath, certPath } = this
 
     this.data = merge(
       {},
       DEFAULTS,
       data,
-      { server: { host, port } } // NOTE run opts has priority
+      { server: { host, port, securePort, keyPath, certPath } } // NOTE run opts has priority
     )
   }
 
