@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/qiwi/qorsproxy/compare/v2.2.1...v2.3.0) (2020-09-24)
+
+
+### Features
+
+* introduce https support ([#40](https://github.com/qiwi/qorsproxy/issues/40)) ([55b0af5](https://github.com/qiwi/qorsproxy/commit/55b0af5353480e9bbaf2d0af90249ba0f7c1d000))
+
 ## [2.2.1](https://github.com/qiwi/qorsproxy/compare/v2.2.0...v2.2.1) (2020-05-26)
 
 
