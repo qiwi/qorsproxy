@@ -29,6 +29,7 @@
     "jsonschema": "^1.2.6",
     "lodash-es": "^4.17.15",
     "meow": "^7.1.1",
+    "pkg-dir": "^4.2.0",
     "request": "^2.88.2",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
