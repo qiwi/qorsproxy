@@ -54,7 +54,7 @@ export default class Server {
 
   contextify (req, res, next) {
     const { from, to, secret, user, path, origin } = this.constructor.parse(req)
-    const { host, port } = this
+    const { host, port, securePort } = this
     const id = crypto.randomBytes(8).toString('hex')
     const rule = this.rules.get(from, to, secret)
 
@@ -68,7 +68,7 @@ export default class Server {
       user,
       secret,
       path,
-      server: { host, port },
+      server: { host, port, securePort },
       origin
     }
 
@@ -79,10 +79,12 @@ export default class Server {
    *
    * @param {String} host
    * @param {Number} port
+   * @param {Number} securePort
    * @param {Object} rules
    */
-  configure ({ host, port, rules } = {}) {
+  configure ({ host, port, securePort, rules } = {}) {
     this.port = port
+    this.securePort = securePort
     this.host = host
     this.rules.configure(rules)
 

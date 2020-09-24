@@ -1,7 +1,14 @@
 import ip from 'ip'
+import { join } from 'path'
+import pkgDir from 'pkg-dir'
 
 export const IP = ip.address()
-export const DEFAULT_HOST = IP // 'localhost'?
+export const DEFAULT_HOST = 'localhost'
+
+const root = pkgDir.sync(__dirname)
+
+const keyPath = join(root, 'ssl', 'key.pem')
+const certPath = join(root, 'ssl', 'cert.pem')
 
 export default {
   log: {
@@ -14,6 +21,11 @@ export default {
   server: {
     port: 9292,
     host: DEFAULT_HOST,
+    secure: {
+      port: 9293,
+      key: keyPath,
+      cert: certPath
+    },
     ip: IP
   },
   crumbs: {

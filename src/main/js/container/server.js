@@ -1,6 +1,33 @@
 import { Server } from 'http'
+import { Server as SecureServer } from 'https'
 
-export default class extends Server {
+export function applyServerMixin (Class) {
+  return class extends Class {
+    close () {
+      return new Promise((resolve, reject) => {
+        super.close(function (err) {
+          if (err) {
+            reject(err)
+            return
+          }
+          resolve()
+        })
+      })
+    }
+
+    listen (host, port) {
+      return new Promise((resolve, reject) => {
+        try {
+          super.listen(host, port, resolve)
+        } catch (e) {
+          reject(e)
+        }
+      })
+    }
+  }
+}
+
+export class ServerHelper {
   static notFound (req, res) {
     this.sendError(res, 404, 'Not Found')
   }
@@ -15,3 +42,7 @@ export default class extends Server {
     res.end()
   }
 }
+
+export const HttpServer = applyServerMixin(Server)
+
+export const HttpsServer = applyServerMixin(SecureServer)
