@@ -16,8 +16,12 @@ export function applyServerMixin (Class) {
     }
 
     listen (host, port) {
-      return new Promise((resolve) => {
-        super.listen(host, port, resolve)
+      return new Promise((resolve, reject) => {
+        try {
+          super.listen(host, port, resolve)
+        } catch (e) {
+          reject(e)
+        }
       })
     }
   }
