@@ -39,9 +39,9 @@ jobs:
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
     - stage: release
+      if: branch = master AND $TRAVIS_PULL_REQUEST = false
       node_js: 14
       workspaces:
         use: shared
       install: skip
-      script:
-        - if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then npm run release ; fi
+      script: npm run release
