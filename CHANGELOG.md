@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/qiwi/qorsproxy/compare/v2.3.0...v2.4.0) (2020-09-25)
+
+
+### Features
+
+* added version printing on start ([#44](https://github.com/qiwi/qorsproxy/issues/44)) ([b710f4c](https://github.com/qiwi/qorsproxy/commit/b710f4ccfd9404b14c5feb8cc94cd9ae1e448969)), closes [#43](https://github.com/qiwi/qorsproxy/issues/43)
+
 # [2.3.0](https://github.com/qiwi/qorsproxy/compare/v2.2.1...v2.3.0) (2020-09-24)
 
 
