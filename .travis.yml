@@ -1,28 +1,47 @@
 language: node_js
-node_js:
-  - '10'
 
-before_install:
-  - npm install -g nyc
-  - npm install -g mocha
+jobs:
+  include:
+    - stage: build
+      os: linux
+      node_js: 14
+      before_install:
+        - npm install -g nyc
+        - npm install -g mocha
+      install: npm install
+      script: skip
+      # https://docs.travis-ci.com/user/using-workspaces/
+      workspaces:
+        create:
+          name: shared
+          paths:
+            - node_modules
 
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+    - &test
+      stage: test
+      node_js: 10
+      install: skip
+      script: npm test
+      workspaces:
+        use: shared
+    - <<: *test
+      node_js: 12
+    - <<: *test
+      node_js: 14
+      before_script:
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+      script:
+        - npm run test:report
+      after_script:
+        - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.info
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
-after_script:
-  - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.info
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
-install:
-  - npm install
-
-script:
-  - npm run test:report
-
-deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-    - npx semantic-release
+    - stage: release
+      if: branch = master AND $TRAVIS_PULL_REQUEST = false
+      node_js: 14
+      workspaces:
+        use: shared
+      install: skip
+      script: npm run release
