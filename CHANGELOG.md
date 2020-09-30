@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/qiwi/qorsproxy/compare/v2.4.0...v2.4.1) (2020-09-30)
+
+
+### Performance Improvements
+
+* **deps:** updated http-status-codes ([#46](https://github.com/qiwi/qorsproxy/issues/46)) ([d97e045](https://github.com/qiwi/qorsproxy/commit/d97e04530ad348f44565938c17c489aec9e7d884))
+
 # [2.4.0](https://github.com/qiwi/qorsproxy/compare/v2.3.0...v2.4.0) (2020-09-25)
 
 
