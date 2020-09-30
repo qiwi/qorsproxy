@@ -1,4 +1,6 @@
-import {
+import { StatusCodes } from 'http-status-codes'
+
+const {
   OK,
   NO_CONTENT,
   BAD_REQUEST,
@@ -7,7 +9,7 @@ import {
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
   SERVICE_UNAVAILABLE
-} from 'http-status-codes'
+} = StatusCodes
 
 // NOTE Cloudflare's reverse proxy codes
 export const REMOTE_UNKNOWN = 520
