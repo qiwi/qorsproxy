@@ -1,5 +1,6 @@
 ## Qorsproxy
-> cors proxy for ~~dev~~ any purposes
+~~Cors~~ http(s) proxy for ~~dev~~ any purposes  
+  
 [![Build Status](https://travis-ci.com/qiwi/qorsproxy.svg?branch=master)](https://travis-ci.com/qiwi/qorsproxy)
 [![npm (tag)](https://img.shields.io/npm/v/qorsproxy/latest.svg)](https://www.npmjs.com/package/qorsproxy)
 [![dependencyStatus](https://img.shields.io/david/qiwi/qorsproxy.svg?maxAge=3600)](https://david-dm.org/qiwi/qorsproxy)
