@@ -1,0 +1,4 @@
+{
+  "exit": true,
+  "require": "esm, src/test/js/setup.js, chai/register-expect, chai/register-should"
+}
