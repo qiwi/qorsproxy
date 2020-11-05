@@ -1,27 +1,27 @@
 language: node_js
+os: linux
+node_js: 14
 
 jobs:
   include:
     - stage: build
-      os: linux
-      node_js: 14
       before_install:
-        - npm install -g nyc
-        - npm install -g mocha
+        - npm install -g nyc mocha
       install: npm install
-      script: skip
+      script: npm run docs
       # https://docs.travis-ci.com/user/using-workspaces/
       workspaces:
         create:
           name: shared
           paths:
             - node_modules
+            - docs
 
     - &test
       stage: test
       node_js: 10
       install: skip
-      script: npm test
+      script: npm run test:unit
       workspaces:
         use: shared
     - <<: *test
@@ -40,7 +40,6 @@ jobs:
 
     - stage: release
       if: branch = master AND type != pull_request
-      node_js: 14
       workspaces:
         use: shared
       install: skip
