@@ -34,7 +34,7 @@ describe('corsproxy.middleware.pipe', () => {
 
   it('handles ECONNREFUSED error', () => {
     sandbox.stub(request, method.toLocaleLowerCase()).callsFake((opts, cb) => {
-      cb({ code: ECONNREFUSED }) // eslint-disable-line standard/no-callback-literal
+      cb({ code: ECONNREFUSED }) // eslint-disable-line
     })
     const { req, res, next } = reqresnext({
       method,
@@ -47,7 +47,7 @@ describe('corsproxy.middleware.pipe', () => {
 
   it('handles unexpected error', () => {
     sandbox.stub(request, method.toLocaleLowerCase()).callsFake((opts, cb) => {
-      cb({ code: 'unknown' }) // eslint-disable-line standard/no-callback-literal
+      cb({ code: 'unknown' }) // eslint-disable-line
     })
     const { req, res, next } = reqresnext({
       method,
