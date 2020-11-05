@@ -1,3 +1,10 @@
+## [2.4.2](https://github.com/qiwi/qorsproxy/compare/v2.4.1...v2.4.2) (2020-11-05)
+
+
+### Performance Improvements
+
+* **package:** deps revision ([8f26535](https://github.com/qiwi/qorsproxy/commit/8f26535c5f4258c05a8e408d562f6e6bfb8cfda5))
+
 ## [2.4.1](https://github.com/qiwi/qorsproxy/compare/v2.4.0...v2.4.1) (2020-09-30)
 
 
