@@ -1,3 +1,10 @@
+## [2.4.3](https://github.com/qiwi/qorsproxy/compare/v2.4.2...v2.4.3) (2021-01-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency meow to v9 ([cdff4f8](https://github.com/qiwi/qorsproxy/commit/cdff4f89aa5438f85b69ba2128ddae982b6998c0))
+
 ## [2.4.2](https://github.com/qiwi/qorsproxy/compare/v2.4.1...v2.4.2) (2020-11-05)
 
 
