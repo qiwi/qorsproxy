@@ -1,3 +1,10 @@
+## [2.4.4](https://github.com/qiwi/qorsproxy/compare/v2.4.3...v2.4.4) (2021-01-28)
+
+
+### Bug Fixes
+
+* migrate from lodash-es to lodash ([f03717d](https://github.com/qiwi/qorsproxy/commit/f03717dc25733878659d0d814a636bc9c122f595))
+
 ## [2.4.3](https://github.com/qiwi/qorsproxy/compare/v2.4.2...v2.4.3) (2021-01-27)
 
 
