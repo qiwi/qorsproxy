@@ -1,7 +1,7 @@
 {
   "name": "qorsproxy",
   "version": "2.4.3",
-  "description": "Cors proxy for dev purposes",
+  "description": "HTTP(S) proxy for dev purposes",
   "main": "src/main/js/index.js",
   "bin": {
     "qorsproxy": "src/main/js/index.js"
@@ -10,11 +10,10 @@
     "start:pm2": "pm2 start npm --name qorsproxy -- start",
     "start": "node --use_strict src/main/js/index.js",
     "test": "npm run lint && npm run test:unit",
-    "test:unit": "npm run mocha",
+    "test:unit": "nyc mocha './src/test/js/**/*.js' && nyc report --reporter=text-lcov > ./coverage/lcov.info",
     "lint": "standard src/**/*.js",
     "lint:fix": "npm run lint -- --fix",
     "docs": "mkdir -p docs && cp -r README.md docs/README.md",
-    "mocha": "nyc mocha ./src/test/js/**/*.js && nyc report --reporter=text-lcov > ./coverage/lcov.info",
     "test:report": "npm test && npm run coveralls:push",
     "coveralls:push": "cat ./coverage/lcov.info | coveralls",
     "postupdate": "npm i && npm audit fix && npm test",
@@ -30,15 +29,12 @@
     "http-status-codes": "^2.1.4",
     "ip": "^1.1.5",
     "jsonschema": "^1.4.0",
-    "lodash-es": "^4.17.20",
+    "lodash": "^4.17.20",
     "meow": "^9.0.0",
     "pkg-dir": "^5.0.0",
     "request": "^2.88.2",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
-  },
-  "esm": {
-    "cjs": true
   },
   "license": "MIT",
   "files": [

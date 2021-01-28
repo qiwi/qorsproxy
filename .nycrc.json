@@ -11,5 +11,5 @@
     "esm"
   ],
   "check-coverage": false,
-  "cache": true
+  "cache": false
 }
