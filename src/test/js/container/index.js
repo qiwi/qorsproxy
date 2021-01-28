@@ -1,7 +1,6 @@
 import EventEmitter from 'events'
 import reqresnext from 'reqresnext'
-import Container from '../../../main/js/container'
-import { HttpServer as Server } from '../../../main/js/container/server'
+import { Container, HttpServer as Server } from '../../../main/js/container'
 
 describe('container', () => {
   const host = '127.0.0.1'
