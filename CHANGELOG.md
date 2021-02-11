@@ -1,3 +1,10 @@
+## [2.4.5](https://github.com/qiwi/qorsproxy/compare/v2.4.4...v2.4.5) (2021-02-11)
+
+
+### Bug Fixes
+
+* fix container loading ([629e94f](https://github.com/qiwi/qorsproxy/commit/629e94f822ca1187dd19cc3a2d47c42d4e9f4c3a)), closes [#55](https://github.com/qiwi/qorsproxy/issues/55)
+
 ## [2.4.4](https://github.com/qiwi/qorsproxy/compare/v2.4.3...v2.4.4) (2021-01-28)
 
 
