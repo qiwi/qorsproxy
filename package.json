@@ -2,9 +2,14 @@
   "name": "qorsproxy",
   "version": "2.4.6",
   "description": "HTTP(S) proxy for dev purposes",
-  "main": "src/main/js/index.js",
+  "main": "./src/main/js/index.js",
+  "_type": "module",
+  "exports": {
+    "import": "./src/main/js/index.js",
+    "require": "./src/main/js/index.js"
+  },
   "bin": {
-    "qorsproxy": "src/main/js/index.js"
+    "qorsproxy": "./src/main/js/cli.cjs"
   },
   "scripts": {
     "start:pm2": "pm2 start npm --name qorsproxy -- start",
@@ -16,12 +21,14 @@
     "docs": "mkdir -p docs && cp -r README.md docs/README.md",
     "test:report": "npm test && npm run coveralls:push",
     "test:deps": "npm-run-all -p -l test:depcheck test:depaudit",
-    "test:depcheck": "npx depcheck --ignores mocha-*",
+    "test:depcheck": "npx depcheck --ignores mocha-*,esm,meow",
     "test:depaudit": "npm audit",
     "test:depauditfix": "npm audit fix",
     "coveralls:push": "cat ./coverage/lcov.info | coveralls",
     "postupdate": "npm i && npm audit fix && npm test",
-    "release": "npx -p @qiwi/semrel-toolkit semrel -e @qiwi/semrel-config"
+    "release": "npx -p @qiwi/semrel-toolkit semrel -e @qiwi/semrel-config",
+    "publish:beta": "npm publish --no-git-tag-version --tag beta",
+    "publish:rc": "npm publish --no-git-tag-version --tag rc"
   },
   "dependencies": {
     "@qiwi/npm-run-all": "^4.1.7",

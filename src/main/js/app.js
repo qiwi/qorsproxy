@@ -2,7 +2,7 @@ import log from './log'
 import Orchestrator from './orchestrator'
 import packageJson from '../../../package.json'
 
-export default class App {
+export class App {
   static main (argv) {
     log.info(`Qorsproxy@${packageJson.version} is loading...`)
     log.info(`argv=${JSON.stringify(argv)}`)
@@ -10,3 +10,5 @@ export default class App {
     return new Orchestrator(argv)
   }
 }
+
+export default App
