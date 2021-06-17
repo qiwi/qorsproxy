@@ -1,3 +1,10 @@
+## [2.4.6](https://github.com/qiwi/qorsproxy/compare/v2.4.5...v2.4.6) (2021-06-17)
+
+
+### Bug Fixes
+
+* **deps:** update deps, fix vuls ([1991bd6](https://github.com/qiwi/qorsproxy/commit/1991bd68ebc7fe924a919e55f358fe277b986dbc))
+
 ## [2.4.5](https://github.com/qiwi/qorsproxy/compare/v2.4.4...v2.4.5) (2021-02-11)
 
 
