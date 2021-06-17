@@ -5,8 +5,6 @@ node_js: 16
 jobs:
   include:
     - stage: build
-      before_install:
-        - npm install -g nyc mocha
       install: npm install
       script: npm run docs
       # https://docs.travis-ci.com/user/using-workspaces/
@@ -21,6 +19,8 @@ jobs:
       stage: test
       node_js: 10
       install: skip
+      before_script:
+        - sudo apt-get -y install moreutils
       script: npm run test:unit
       workspaces:
         use: shared
@@ -31,6 +31,7 @@ jobs:
     - <<: *test
       node_js: 16
       before_script:
+        - sudo apt-get -y install moreutils
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
         - ./cc-test-reporter before-build
