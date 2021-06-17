@@ -1,3 +1,20 @@
+## [2.4.7](https://github.com/qiwi/qorsproxy/compare/v2.4.6...v2.4.7) (2021-06-17)
+
+
+### Bug Fixes
+
+* fix cjs entry point ext ([cf8bfed](https://github.com/qiwi/qorsproxy/commit/cf8bfed7ebe25719dd8b0b2914addb4174c5f138))
+
+
+### Code Refactoring
+
+* separate cli, cjs and mjs entry points ([5dc1369](https://github.com/qiwi/qorsproxy/commit/5dc13690379e1647a8c2172d3685547aef4a5cb7))
+
+
+### BREAKING CHANGES
+
+* repacked as mjs module
+
 ## [2.4.6](https://github.com/qiwi/qorsproxy/compare/v2.4.5...v2.4.6) (2021-06-17)
 
 
