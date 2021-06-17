@@ -6,7 +6,7 @@
   "type": "module",
   "exports": {
     "import": "./src/main/js/index.js",
-    "require": "./src/main/js/index.js"
+    "require": "./src/main/js/index.сjs"
   },
   "bin": {
     "qorsproxy": "./src/main/js/cli.cjs"
