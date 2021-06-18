@@ -1,12 +1,8 @@
 #!/usr/bin/env node
 
-require = require('esm')(module, { // eslint-disable-line
-  mode: 'all',
-  cjs: true
-})
+import meow from 'meow'
+import { App } from './app.js'
 
-const meow = require('meow')
-const app = require('./app').default
 const cli = meow(`
   Usage
     $ qorsproxy --config=/Users/foo/projects/bar/proxy.config.json
@@ -26,6 +22,7 @@ const cli = meow(`
     $ qorsproxy --version
     $ qorsproxy --help
 `, {
+  importMeta: import.meta,
   flags: {
     config: {
       type: 'string',
@@ -50,4 +47,4 @@ const cli = meow(`
   }
 })
 
-app.main(cli.flags)
+App.main(cli.flags)
