@@ -1,6 +1,6 @@
-import { each } from '../../../../../main/js/base'
 import reqresnext from 'reqresnext'
-import { from, parsePattern, to } from '../../../../../main/js/servlet/corsproxy/middlewares/mutator'
+import { each } from '../../../../../main/js/base/index.js'
+import { from, parsePattern, to } from '../../../../../main/js/servlet/corsproxy/middlewares/mutator.js'
 
 describe('corsproxy.middleware.mutator', () => {
   describe('parsePattern', () => {
@@ -19,7 +19,7 @@ describe('corsproxy.middleware.mutator', () => {
   })
 
   it('`from` assigns new response headers', () => {
-    const { req, res, next } = reqresnext(
+    const { req, res, next } = reqresnext.default(
       {
         proxy: {
           rule: {
@@ -89,7 +89,7 @@ describe('corsproxy.middleware.mutator', () => {
   })
 
   it('`to` assigns new request headers', () => {
-    const { req, res, next } = reqresnext(
+    const { req, res, next } = reqresnext.default(
       {
         headers: {
           foo: 'bar',

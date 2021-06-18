@@ -1,6 +1,6 @@
-import log, { INFO, WARN, ERROR } from '../../../log'
-import { BAD_REQUEST, INTERNAL_SERVER_ERROR } from '../../common/status'
-import url from '../url'
+import log, { INFO, WARN, ERROR } from '../../../log/index.js'
+import { BAD_REQUEST, INTERNAL_SERVER_ERROR } from '../../common/status.js'
+import url from '../url.js'
 
 // TODO Support configurations
 export default (req, res, next) => {

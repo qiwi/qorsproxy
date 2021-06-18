@@ -1,9 +1,11 @@
 import fs from 'fs'
-import path from 'path'
+import path, { dirname } from 'path'
 import chai from 'chai'
-import Config, { READY, UPDATE, ERROR } from '../../../main/js/config'
+import Config, { READY, UPDATE, ERROR } from '../../../main/js/config/index.js'
+import { fileURLToPath } from 'url'
 
 const { expect } = chai
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 describe('config', () => {
   const host = '127.0.0.1'

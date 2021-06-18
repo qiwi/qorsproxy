@@ -1,6 +1,6 @@
 import reqresnext from 'reqresnext'
 import { StandardIndicator, Endpoint } from '@qiwi/health-indicator'
-import Health from '../../../../main/js/servlet/health'
+import Health from '../../../../main/js/servlet/health/index.js'
 
 describe('health', () => {
   it('constructor returns proper instance', () => {
@@ -15,7 +15,7 @@ describe('health', () => {
   describe('proto', () => {
     describe('handler', () => {
       it('sends proper value to client', () => {
-        const { req, res } = reqresnext()
+        const { req, res } = reqresnext.default()
         const dep1 = { health () { return { status: 'UP' } } }
         const dep2 = { health () { return { status: 'DOWN', critical: false } } }
         const health = new Health({ dep1, dep2 })

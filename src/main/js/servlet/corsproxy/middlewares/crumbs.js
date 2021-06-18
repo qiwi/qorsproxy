@@ -1,4 +1,4 @@
-import { XFH, XFF, HOST } from '../../common/header'
+import { XFH, XFF, HOST } from '../../common/header.js'
 
 export const SEP = ' '
 

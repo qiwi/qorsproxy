@@ -1,6 +1,6 @@
-import { find } from '../base'
-import log from '../log'
-import { HttpServer, HttpsServer, ServerHelper } from './server'
+import { find } from '../base/index.js'
+import log from '../log/index.js'
+import { HttpServer, HttpsServer, ServerHelper } from './server.js'
 
 export class Container {
   constructor () {

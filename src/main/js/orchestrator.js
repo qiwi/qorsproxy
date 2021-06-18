@@ -1,8 +1,8 @@
-import logger from './log'
-import Config, { READY, UPDATE, ERROR } from './config'
-import { Container } from './container'
-import { Corsproxy, Health, Metrics, Info } from './servlet'
-import { getCertOptions } from './cert'
+import logger from './log/index.js'
+import Config, { READY, UPDATE, ERROR } from './config/index.js'
+import { Container } from './container/index.js'
+import { Corsproxy, Health, Metrics, Info } from './servlet/index.js'
+import { getCertOptions } from './cert.js'
 
 export default class Orchestrator {
   constructor (argv) {

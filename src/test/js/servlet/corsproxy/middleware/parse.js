@@ -1,9 +1,9 @@
 import reqresnext from 'reqresnext'
-import parse from '../../../../../main/js/servlet/corsproxy/middlewares/parse'
+import parse from '../../../../../main/js/servlet/corsproxy/middlewares/parse.js'
 
 describe('corsproxy.middleware.parse', () => {
   it('parses request data', () => {
-    const { req, res, next } = reqresnext({
+    const { req, res, next } = reqresnext.default({
       url: '/http://example.com',
       headers: {
         authorization: 'Basic Zm9vOmJhcg==',

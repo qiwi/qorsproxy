@@ -1,11 +1,11 @@
-import proxyquire from 'proxyquire'
+// import proxyquire from 'proxyquire'
 import reqresnext from 'reqresnext'
 
-const stubRequest = request =>
-  proxyquire(
-    '../../../../../main/js/servlet/corsproxy/middlewares/customAuthorization',
-    { request: request }
-  ).default
+import customAuthorization from '../../../../../main/js/servlet/corsproxy/middlewares/customAuthorization.js'
+const _request = customAuthorization.request
+const stubRequest = request => { customAuthorization.request = request }
+
+after(() => stubRequest(_request))
 
 describe('corsproxy.middleware.customAuthorization', () => {
   const authBody = '{"key1":{"key2":"SuchSecretMuchSecurity"}}'
@@ -51,9 +51,9 @@ describe('corsproxy.middleware.customAuthorization', () => {
       authReqOpts = opts
       cb(null, {}, authBody)
     })
-    const customAuthorization = stubRequest(request)
+    stubRequest(request)
 
-    const { req, res, next } = reqresnext(
+    const { req, res, next } = reqresnext.default(
       { proxy, url: targetUrl, headers },
       {}
     )
@@ -74,9 +74,9 @@ describe('corsproxy.middleware.customAuthorization', () => {
       authReqOpts = opts
       cb(null, {}, authBody)
     })
-    const customAuthorization = stubRequest(request)
+    stubRequest(request)
 
-    const { req, res, next } = reqresnext(
+    const { req, res, next } = reqresnext.default(
       { proxy, url: targetUrl, headers, body },
       {}
     )
@@ -94,10 +94,10 @@ describe('corsproxy.middleware.customAuthorization', () => {
 
   it('does nothing to urls not from config', () => {
     const request = sinon.stub()
-    const customAuthorization = stubRequest(request)
+    stubRequest(request)
     const pass = sinon.stub()
 
-    const { req, res } = reqresnext(
+    const { req, res } = reqresnext.default(
       { proxy, url: otherUrl, headers },
       {}
     )

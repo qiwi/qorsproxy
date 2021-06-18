@@ -3,11 +3,11 @@ import {
   HttpServer,
   ServerHelper,
   applyServerMixin
-} from './server'
+} from './server.js'
 
 import {
   Container
-} from './container'
+} from './container.js'
 
 export {
   HttpsServer,

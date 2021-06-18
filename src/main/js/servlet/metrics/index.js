@@ -1,5 +1,5 @@
-import { isFunction, mapValues } from '../../base'
-import env from '../../env'
+import { isFunction, mapValues } from '../../base/index.js'
+import env from '../../env/index.js'
 
 export default class Metrics {
   constructor (components) {

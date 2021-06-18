@@ -1,5 +1,5 @@
 import request from 'request'
-import { get, pick } from '../../../base'
+import { get, pick } from '../../../base/index.js'
 
 const normalizeUrl = url => url.replace(/^\//, '')
 
@@ -19,7 +19,7 @@ const processRequest = (req, res, next, config) => {
     url: config.authorizationUrl,
     headers: pick(req.headers, config.headers)
   }
-  request.get(options, (error, response, body) => {
+  customAuthorization.request.get(options, (error, response, body) => {
     const authorization = extractAuthorization(body, config.authPath)
     if (authorization) {
       const options = {
@@ -30,17 +30,21 @@ const processRequest = (req, res, next, config) => {
         }),
         body: req.body
       }
-      request(options).pipe(res)
+      customAuthorization.request(options).pipe(res)
     } else {
       next(error)
     }
   })
 }
 
-export default (req, res, next) => {
+const customAuthorization = (req, res, next) => {
   const config = get(req, 'proxy.rule.customAuthorization')
   if (config && checkUrl(req.url, config.targetUrl)) {
     return processRequest(req, res, next, config)
   }
   return next()
 }
+
+customAuthorization.request = request
+
+export default customAuthorization

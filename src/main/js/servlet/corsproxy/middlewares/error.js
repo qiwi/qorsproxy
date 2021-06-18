@@ -1,5 +1,5 @@
-import { INTERNAL_SERVER_ERROR } from '../../common/status'
-import log from '../../../log'
+import { INTERNAL_SERVER_ERROR } from '../../common/status.js'
+import log from '../../../log/index.js'
 
 /**
  * Error handler middleware

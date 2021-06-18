@@ -1,4 +1,4 @@
-import { each } from '../../base'
+import { each } from '../../base/index.js'
 
 export const ANY = '*'
 export const SEPARATOR = '__'

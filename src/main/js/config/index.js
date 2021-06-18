@@ -1,7 +1,7 @@
-import { get, merge } from '../base'
-import emitter from '../emitter'
-import DEFAULTS from './defaults'
-import ConfigLoader, { LOAD, LOAD_ERROR } from './loader'
+import { get, merge } from '../base/index.js'
+import emitter from '../emitter/index.js'
+import DEFAULTS from './defaults.js'
+import ConfigLoader, { LOAD, LOAD_ERROR } from './loader.js'
 
 export const EVT_PREFIX = 'config_'
 export const READY = 'ready'

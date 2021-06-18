@@ -1,5 +1,5 @@
-import { each, isObject, isNull, isArray } from './../../../base'
-import { normalizeHeader } from '../../common/header'
+import { each, isObject, isNull, isArray } from './../../../base/index.js'
+import { normalizeHeader } from '../../common/header.js'
 
 export const FROM = 'from'
 export const TO = 'to'
