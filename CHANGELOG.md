@@ -1,3 +1,10 @@
+## [2.4.10](https://github.com/qiwi/qorsproxy/compare/v2.4.9...v2.4.10) (2021-06-18)
+
+
+### Bug Fixes
+
+* fix internal modules refs ([13b5a83](https://github.com/qiwi/qorsproxy/commit/13b5a83474b9122b23fa6203cebb586a926e5b8b))
+
 ## [2.4.9](https://github.com/qiwi/qorsproxy/compare/v2.4.8...v2.4.9) (2021-06-18)
 
 

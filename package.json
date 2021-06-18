@@ -1,6 +1,6 @@
 {
   "name": "qorsproxy",
-  "version": "2.4.9",
+  "version": "2.4.10",
   "description": "HTTP(S) proxy for dev purposes",
   "main": "./src/main/js/app.js",
   "type": "module",
