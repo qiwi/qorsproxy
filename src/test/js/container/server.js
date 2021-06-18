@@ -1,4 +1,4 @@
-import { applyServerMixin } from '../../../main/js/container/server'
+import { applyServerMixin } from '../../../main/js/container/server.js'
 
 describe('applyServerMixin', () => {
   it('returns class with promisified close and listen', async () => {

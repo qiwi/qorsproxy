@@ -1,7 +1,7 @@
 import reqresnext from 'reqresnext'
-import logger, { getLogLevelByStatus } from '../../../../../main/js/servlet/corsproxy/middlewares/logger'
-import { OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_SERVER_ERROR } from '../../../../../main/js/servlet/common/status'
-import log, { INFO, WARN, ERROR } from '../../../../../main/js/log'
+import logger, { getLogLevelByStatus } from '../../../../../main/js/servlet/corsproxy/middlewares/logger.js'
+import { OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, INTERNAL_SERVER_ERROR } from '../../../../../main/js/servlet/common/status.js'
+import log, { INFO, WARN, ERROR } from '../../../../../main/js/log/index.js'
 
 const sandbox = sinon.createSandbox()
 
@@ -26,7 +26,7 @@ describe('corsproxy.middleware.logger', () => {
     })
 
     it('logs current request', () => {
-      const { req, res, next } = reqresnext({
+      const { req, res, next } = reqresnext.default({
         method: 'GET',
         proxy: {
           id: '123',
@@ -45,7 +45,7 @@ describe('corsproxy.middleware.logger', () => {
     })
 
     it('logs response on finish', () => {
-      const { req, res, next } = reqresnext({
+      const { req, res, next } = reqresnext.default({
         method: 'GET',
         proxy: {
           id: '123',
@@ -70,7 +70,7 @@ describe('corsproxy.middleware.logger', () => {
     let req, res, next, send, end, write
 
     before(() => {
-      ({ req, res, next } = reqresnext({
+      ({ req, res, next } = reqresnext.default({
         method: 'GET',
         proxy: {
           id: '123',

@@ -1,12 +1,12 @@
 import reqresnext from 'reqresnext'
-import Stats from '../../../../main/js/servlet/corsproxy/stats'
+import Stats from '../../../../main/js/servlet/corsproxy/stats.js'
 
 describe('corsproxy.stats', () => {
   let stats, req, res, next
   const length = 100
 
   beforeEach(() => {
-    ({ req, res, next } = reqresnext({}, { piped: { body: { length } } }))
+    ({ req, res, next } = reqresnext.default({}, { piped: { body: { length } } }))
     stats = new Stats()
   })
 

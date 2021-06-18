@@ -7,8 +7,9 @@
   "include": [
     "src/**/*.js"
   ],
-  "require": [
-    "esm"
+  "extension": [
+    ".js",
+    ".mjs"
   ],
   "check-coverage": false,
   "cache": false

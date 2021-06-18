@@ -1,4 +1,4 @@
-import Rules, { ANY, SEPARATOR } from '../../../../main/js/servlet/corsproxy/rules'
+import Rules, { ANY, SEPARATOR } from '../../../../main/js/servlet/corsproxy/rules.js'
 
 describe('corsproxy.Rules', () => {
   const rules = new Rules()

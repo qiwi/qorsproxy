@@ -1,13 +1,13 @@
 import reqresnext from 'reqresnext'
-import intercept from '../../../../../main/js/servlet/corsproxy/middlewares/intercept'
-import { GET } from '../../../../../main/js/servlet/common/method'
-import { FORBIDDEN, OK } from '../../../../../main/js/servlet/common/status'
+import intercept from '../../../../../main/js/servlet/corsproxy/middlewares/intercept.js'
+import { GET } from '../../../../../main/js/servlet/common/method.js'
+import { FORBIDDEN, OK } from '../../../../../main/js/servlet/common/status.js'
 
 describe('corsproxy.middleware.intercept', () => {
   it('captures request by method match', () => {
     const headers = { foo: 'bar' }
     const body = 'Baz'
-    const { req, res, next } = reqresnext({
+    const { req, res, next } = reqresnext.default({
       method: GET,
       proxy: {
         rule: {
@@ -28,7 +28,7 @@ describe('corsproxy.middleware.intercept', () => {
   it('captures request by header match', () => {
     const headers = { foo: 'bar' }
     const body = 'Baz'
-    const { req, res, next } = reqresnext({
+    const { req, res, next } = reqresnext.default({
       method: GET,
       headers,
       proxy: {
@@ -48,7 +48,7 @@ describe('corsproxy.middleware.intercept', () => {
 
   it('proceeds to next if no match found', () => {
     const next = sinon.spy(() => {})
-    const { req, res } = reqresnext()
+    const { req, res } = reqresnext.default()
 
     intercept(req, res, next)
     expect(next).to.be.called()

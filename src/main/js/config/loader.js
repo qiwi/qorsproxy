@@ -1,10 +1,10 @@
 import fs from 'fs'
 import jsonschema from 'jsonschema'
 
-import { isError } from '../base'
-import emitter from '../emitter'
-import { SCHEMA } from './schemas'
-import Error from '../common/error'
+import { isError } from '../base/index.js'
+import emitter from '../emitter/index.js'
+import { SCHEMA } from './schemas.js'
+import Error from '../common/error.js'
 
 export const EVT_PREFIX = 'config_loader_'
 export const LOAD = 'load'

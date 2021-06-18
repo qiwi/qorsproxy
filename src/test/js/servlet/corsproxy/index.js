@@ -1,7 +1,7 @@
 import reqresnext from 'reqresnext'
-import Corsproxy from '../../../../main/js/servlet/corsproxy'
-import Rules from '../../../../main/js/servlet/corsproxy/rules'
-import Stats from '../../../../main/js/servlet/corsproxy/stats'
+import Corsproxy from '../../../../main/js/servlet/corsproxy/index.js'
+import Rules from '../../../../main/js/servlet/corsproxy/rules.js'
+import Stats from '../../../../main/js/servlet/corsproxy/stats.js'
 
 describe('corsproxy', () => {
   const proxy = new Corsproxy()
@@ -34,7 +34,7 @@ describe('corsproxy', () => {
 
     it('contextify sets req/res context', () => {
       const origin = 'http://localhost:3000'
-      const { req, res, next } = reqresnext({
+      const { req, res, next } = reqresnext.default({
         url: '/http://example.com',
         headers: {
           origin

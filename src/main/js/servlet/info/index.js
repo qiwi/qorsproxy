@@ -1,4 +1,4 @@
-import env from '../../env'
+import env from '../../env/index.js'
 
 export default class Info {
   handler (req, res) {

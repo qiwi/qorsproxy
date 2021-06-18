@@ -1,9 +1,9 @@
 import request from 'request'
 import reqresnext from 'reqresnext'
-import pipe from '../../../../../main/js/servlet/corsproxy/middlewares/pipe'
-import { ECONNREFUSED } from '../../../../../main/js/servlet/common/error'
-import { GET } from '../../../../../main/js/servlet/common/method'
-import { OK, REMOTE_IS_DOWN, REMOTE_UNKNOWN } from '../../../../../main/js/servlet/common/status'
+import pipe from '../../../../../main/js/servlet/corsproxy/middlewares/pipe.js'
+import { ECONNREFUSED } from '../../../../../main/js/servlet/common/error.js'
+import { GET } from '../../../../../main/js/servlet/common/method.js'
+import { OK, REMOTE_IS_DOWN, REMOTE_UNKNOWN } from '../../../../../main/js/servlet/common/status.js'
 
 const sandbox = sinon.createSandbox()
 
@@ -21,7 +21,7 @@ describe('corsproxy.middleware.pipe', () => {
     sandbox.stub(request, method.toLocaleLowerCase()).callsFake((opts, cb) => {
       cb(null, { statusCode, headers, body }, body)
     })
-    const { req, res, next } = reqresnext({
+    const { req, res, next } = reqresnext.default({
       method,
       url: 'http://example.com'
     })
@@ -36,7 +36,7 @@ describe('corsproxy.middleware.pipe', () => {
     sandbox.stub(request, method.toLocaleLowerCase()).callsFake((opts, cb) => {
       cb({ code: ECONNREFUSED }) // eslint-disable-line
     })
-    const { req, res, next } = reqresnext({
+    const { req, res, next } = reqresnext.default({
       method,
       url: 'http://example.com'
     })
@@ -49,7 +49,7 @@ describe('corsproxy.middleware.pipe', () => {
     sandbox.stub(request, method.toLocaleLowerCase()).callsFake((opts, cb) => {
       cb({ code: 'unknown' }) // eslint-disable-line
     })
-    const { req, res, next } = reqresnext({
+    const { req, res, next } = reqresnext.default({
       method,
       url: 'http://example.com'
     })

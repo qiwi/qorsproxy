@@ -1,8 +1,10 @@
 import reqresnext from 'reqresnext'
-import memo from '../../../../../main/js/servlet/corsproxy/middlewares/memo'
-import path from 'path'
+import memo from '../../../../../main/js/servlet/corsproxy/middlewares/memo.js'
+import path, { dirname } from 'path'
 import fs from 'fs'
+import { fileURLToPath } from 'url'
 
+const __dirname = dirname(fileURLToPath(import.meta.url))
 const stub = path.resolve(__dirname, './stub.json')
 const sandbox = sinon.createSandbox()
 
@@ -18,7 +20,7 @@ describe('corsproxy.middleware.memo', () => {
     })
 
     it('collects response data to stub.json', () => {
-      const { req, res, next } = reqresnext({
+      const { req, res, next } = reqresnext.default({
         method: 'GET',
         proxy: {
           id: '123',
@@ -56,7 +58,7 @@ describe('corsproxy.middleware.memo', () => {
     })
 
     it('replaces errored (>=500) responses with sucessed (<=500) stubs', () => {
-      const { req, res, next } = reqresnext({
+      const { req, res, next } = reqresnext.default({
         method: 'GET',
         proxy: {
           id: '123',

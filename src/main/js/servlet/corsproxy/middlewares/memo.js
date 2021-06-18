@@ -1,10 +1,10 @@
-import { get } from '../../../base'
+import { get } from '../../../base/index.js'
 import factory from '@qiwi/primitive-storage'
 
 const storages = {}
 const storageFactory = (dir) => {
   if (!storages[dir]) {
-    storages[dir] = factory({
+    storages[dir] = factory.default({
       defaultTtl: 60000000,
       path: dir
     })

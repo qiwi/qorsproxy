@@ -1,5 +1,5 @@
-import log from './log'
-import Orchestrator from './orchestrator'
+import log from './log/index.js'
+import Orchestrator from './orchestrator.js'
 import packageJson from '../../../package.json'
 
 export class App {

@@ -1,6 +1,6 @@
 import EventEmitter from 'events'
 import reqresnext from 'reqresnext'
-import { Container, HttpServer as Server } from '../../../main/js/container'
+import { Container, HttpServer as Server } from '../../../main/js/container/index.js'
 
 describe('container', () => {
   const host = '127.0.0.1'
@@ -166,7 +166,7 @@ describe('container', () => {
       })
 
       it('passes request control to handler', () => {
-        const { req, res } = reqresnext({ url: 'foo/inner' })
+        const { req, res } = reqresnext.default({ url: 'foo/inner' })
 
         // TODO fix reqresnext
         req.on = (e, f) => { f(); return req }
@@ -178,14 +178,14 @@ describe('container', () => {
       })
 
       it('invokes found servlet', () => {
-        const { req, res } = reqresnext({ url: 'foo/inner' })
+        const { req, res } = reqresnext.default({ url: 'foo/inner' })
 
         container.handler(req, res)
         expect(servlets.foo.handler).to.have.been.called()
       })
 
       it('returns InternalError on servlet unhandled', () => {
-        const { req, res } = reqresnext({ url: 'bar/some' })
+        const { req, res } = reqresnext.default({ url: 'bar/some' })
 
         container.handler(req, res)
         expect(servlets.bar.handler).to.have.been.called()
@@ -193,14 +193,14 @@ describe('container', () => {
       })
 
       it('returns NotFound otherwise', () => {
-        const { req, res } = reqresnext({ url: 'bazzz' })
+        const { req, res } = reqresnext.default({ url: 'bazzz' })
 
         container.handler(req, res)
         expect(res.body).to.equal('Not Found')
       })
 
       it('drops connection if offline', () => {
-        const { req, res } = reqresnext({ url: 'bazzz' })
+        const { req, res } = reqresnext.default({ url: 'bazzz' })
 
         container.online = false
         container.handler(req, res)

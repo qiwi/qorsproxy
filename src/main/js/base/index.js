@@ -13,7 +13,7 @@ import {
   assign,
   isMatch,
   pick
-} from 'lodash'
+} from 'lodash-es'
 
 export {
   isNull,

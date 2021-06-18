@@ -2,9 +2,9 @@ import express from 'express'
 import crypto from 'crypto'
 import basicAuth from 'basic-auth'
 
-import url from './url'
-import Stats from './stats'
-import Rules from './rules'
+import url from './url.js'
+import Stats from './stats.js'
+import Rules from './rules.js'
 import {
   pipe,
   cors,
@@ -18,7 +18,7 @@ import {
   crumbs,
   customAuthorization,
   memo
-} from './middlewares'
+} from './middlewares/index.js'
 
 export default class Server {
   constructor () {

@@ -1,10 +1,10 @@
 import reqresnext from 'reqresnext'
-import Corsproxy from '../../../../main/js/servlet/corsproxy'
-import url from '../../../../main/js/servlet/corsproxy/url'
+import Corsproxy from '../../../../main/js/servlet/corsproxy/index.js'
+import url from '../../../../main/js/servlet/corsproxy/url.js'
 
 describe('corsproxy.parse', () => {
   it('parses request data', () => {
-    const { req } = reqresnext({
+    const { req } = reqresnext.default({
       url: '/http://example.com',
       headers: {
         authorization: 'Basic Zm9vOmJhcg==',

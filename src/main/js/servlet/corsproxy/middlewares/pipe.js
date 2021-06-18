@@ -1,7 +1,7 @@
 import request from 'request'
-import { ECONNREFUSED } from '../../common/error'
-import { REMOTE_UNKNOWN, REMOTE_IS_DOWN } from '../../common/status'
-import url from '../url'
+import { ECONNREFUSED } from '../../common/error.js'
+import { REMOTE_UNKNOWN, REMOTE_IS_DOWN } from '../../common/status.js'
+import url from '../url.js'
 
 /**
  * Pipe middleware

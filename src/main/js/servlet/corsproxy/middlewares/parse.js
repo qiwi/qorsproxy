@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 import basicAuth from 'basic-auth'
-import url from '../url'
+import url from '../url.js'
 
 export default (req, res, next) => {
   const path = url.parseRequest(req)
