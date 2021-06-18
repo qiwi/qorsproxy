@@ -2,10 +2,10 @@
   "name": "qorsproxy",
   "version": "2.4.9",
   "description": "HTTP(S) proxy for dev purposes",
-  "main": "./src/main/js/index.js",
+  "main": "./src/main/js/app.js",
   "type": "module",
   "exports": {
-    "import": "./src/main/js/index.js"
+    "import": "./src/main/js/app.js"
   },
   "bin": {
     "qorsproxy": "./src/main/js/cli.js"
