@@ -1,3 +1,10 @@
+## [2.4.9](https://github.com/qiwi/qorsproxy/compare/v2.4.8...v2.4.9) (2021-06-18)
+
+
+### Bug Fixes
+
+* avoid --experimental-json-modules, read pkg.json via fs ([376e8fd](https://github.com/qiwi/qorsproxy/commit/376e8fdb439b559e0b586f57b49c698bc9e7854f))
+
 ## [2.4.8](https://github.com/qiwi/qorsproxy/compare/v2.4.7...v2.4.8) (2021-06-18)
 
 
