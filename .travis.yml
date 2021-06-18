@@ -17,15 +17,13 @@ jobs:
 
     - &test
       stage: test
-      node_js: 10
+      node_js: 12
       install: skip
       before_script:
         - sudo apt-get -y install moreutils
       script: npm run test:unit
       workspaces:
         use: shared
-    - <<: *test
-      node_js: 12
     - <<: *test
       node_js: 14
     - <<: *test
