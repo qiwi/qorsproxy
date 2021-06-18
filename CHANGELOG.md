@@ -1,3 +1,20 @@
+## [2.4.8](https://github.com/qiwi/qorsproxy/compare/v2.4.7...v2.4.8) (2021-06-18)
+
+
+### Bug Fixes
+
+* fix cli entry point ([6d7bd2a](https://github.com/qiwi/qorsproxy/commit/6d7bd2a95920b8a6dd509ca37d341703acf7592f))
+
+
+### Code Refactoring
+
+* drop support of Node.js <= 12.12 ([9e3af7f](https://github.com/qiwi/qorsproxy/commit/9e3af7f62b8f08e07b4e6c4109937fcc8d2bee63))
+
+
+### BREAKING CHANGES
+
+* require native esm/mjs modules support
+
 ## [2.4.7](https://github.com/qiwi/qorsproxy/compare/v2.4.6...v2.4.7) (2021-06-17)
 
 
