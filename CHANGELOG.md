@@ -1,3 +1,5 @@
+## [2.4.11](https://github.com/qiwi/qorsproxy/compare/v2.4.10...v2.4.11) (2021-06-19)
+
 ## [2.4.10](https://github.com/qiwi/qorsproxy/compare/v2.4.9...v2.4.10) (2021-06-18)
 
 
