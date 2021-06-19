@@ -10,11 +10,13 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 
 ## Install
-
 ```bash
 npm i qorsproxy --save-dev
 ```
-
+through nxp / npm exec:
+```bash
+npx qorsproxy [options]
+```
 ## Start 
 ```bash
 qorsproxy -p 8080 -c /Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
@@ -26,6 +28,15 @@ pm2 start npm --name qorsproxy -- start -- --port=8080 --config=/Users/a.golub/r
 npm run start:pm2 -- -- --port=8080
 ```
 
+```shell
+{"message":"Qorsproxy@2.4.10 is loading...","level":"info"}
+{"message":"argv={}","level":"info"}
+{"message":"Config path=<empty>","level":"info"}
+{"message":"Config ready.","level":"info"}
+{"message":"Container configured.","level":"info"}
+{"message":"Container is online: http://localhost:9292, https://localhost:9293","level":"info"}
+```
+
 ## Use
 
 ```bash
@@ -33,6 +44,8 @@ curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' →
 ```
 
 ## Configuration
+### JS API
+
 ### CLI options
 - `--host`, `-h` DNS name or IP address. Defaults to `localhost`.
 - `--port`, `-p` defines exposed port. Defaults to `9292`.
@@ -253,3 +266,6 @@ function handler(req, res) {
 	});
 }
 ```
+
+### License
+MIT

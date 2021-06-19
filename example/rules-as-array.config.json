@@ -3,8 +3,8 @@
     "host": "localhost",
     "port": 8080
   },
-  "rules": {
-    "localhost": {
+  "rules": [
+    {
       "from": [
         "*"
       ],
@@ -49,5 +49,5 @@
         }
       ]
     }
-  }
+  ]
 }
