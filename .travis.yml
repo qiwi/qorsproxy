@@ -6,7 +6,7 @@ jobs:
   include:
     - stage: build
       install: npm install
-      script: npm run docs
+      script: yarn docs
       # https://docs.travis-ci.com/user/using-workspaces/
       workspaces:
         create:
@@ -21,7 +21,7 @@ jobs:
       install: skip
       before_script:
         - sudo apt-get -y install moreutils
-      script: npm run test:unit
+      script: yarn test:unit
       workspaces:
         use: shared
     - <<: *test
@@ -34,7 +34,7 @@ jobs:
         - chmod +x ./cc-test-reporter
         - ./cc-test-reporter before-build
       script:
-        - npm run test:report
+        - yarn test:report
       after_script:
         - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.info
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
@@ -44,4 +44,4 @@ jobs:
       workspaces:
         use: shared
       install: skip
-      script: npm run release
+      script: yarn release
