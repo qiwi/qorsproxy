@@ -1,13 +1,13 @@
 import ip from 'ip'
 import { join, dirname } from 'path'
-import pkgDir from 'pkg-dir'
+import { packageDirectorySync } from 'pkg-dir'
 import { fileURLToPath } from 'url'
 
 export const IP = ip.address()
 export const DEFAULT_HOST = 'localhost'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const root = pkgDir.sync(__dirname)
+const root = packageDirectorySync(__dirname)
 
 const keyPath = join(root, 'ssl', 'key.pem')
 const certPath = join(root, 'ssl', 'cert.pem')
