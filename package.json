@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start:pm2": "pm2 start npm --name qorsproxy -- start",
-    "start": "node --use_strict src/main/js/index.js",
+    "start": "node --use_strict src/main/js/cli.js",
     "test": "npm-run-all -p -l lint test:unit test:deps",
     "test:premocha": "mkdir -p .nyc_output",
     "test:mocha": "c8 mocha './src/test/js/**/*.js' && c8 report -r lcov",
