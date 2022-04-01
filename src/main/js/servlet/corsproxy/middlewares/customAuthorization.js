@@ -22,12 +22,11 @@ const processRequest = (req, res, next, config) => {
   customAuthorization.request.get(options, (error, response, body) => {
     const authorization = extractAuthorization(body, config.authPath)
     if (authorization) {
+      req.headers.Authorization = req.headers.authorization = authorization
       const options = {
         uri: normalizeUrl(req.url),
         method: req.method,
-        headers: Object.assign(req.headers, {
-          Authorization: authorization
-        }),
+        headers: req.headers,
         body: req.body
       }
       customAuthorization.request(options).pipe(res)

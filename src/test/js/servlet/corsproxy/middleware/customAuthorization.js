@@ -13,28 +13,28 @@ describe('corsproxy.middleware.customAuthorization', () => {
     customAuthorization: {
       targetUrl: 'http://target',
       authorizationUrl: 'http://authorization',
-      headers: ['Authorization', 'additionalHeader'],
+      headers: ['authorization', 'additionalheader'],
       authPath: 'key1.key2'
     }
   }
   const proxy = { rule }
   const headers = {
-    Authorization: '1',
-    additionalHeader: '2',
-    badHeader: '3',
+    authorization: '1',
+    additionalheader: '2',
+    badheader: '3',
     host: null
   }
   const body = {
     bodyKey: 'bodyKey Value'
   }
   const expectedAuthEndpointHeaders = {
-    Authorization: '1',
-    additionalHeader: '2'
+    authorization: '1',
+    additionalheader: '2'
   }
   const expectedTargetEndpointHeaders = {
-    Authorization: 'SuchSecretMuchSecurity',
-    additionalHeader: '2',
-    badHeader: '3',
+    authorization: 'SuchSecretMuchSecurity',
+    additionalheader: '2',
+    badheader: '3',
     host: 'localhost'
   }
   const targetUrl = '/http://target'
@@ -59,8 +59,8 @@ describe('corsproxy.middleware.customAuthorization', () => {
     )
     customAuthorization(req, res, next)
 
-    expect(authReqOpts.headers).to.deep.equal(expectedAuthEndpointHeaders)
-    expect(proxyedReqOpts.headers).to.deep.equal(expectedTargetEndpointHeaders)
+    expect(authReqOpts.headers).to.containSubset(expectedAuthEndpointHeaders)
+    expect(proxyedReqOpts.headers).to.containSubset(expectedTargetEndpointHeaders)
   })
 
   it('transmits body to target endpoint', () => {
@@ -86,8 +86,8 @@ describe('corsproxy.middleware.customAuthorization', () => {
     expect(authReqOpts).to.containSubset({
       url: 'http://authorization',
       headers: {
-        Authorization: '1',
-        additionalHeader: '2'
+        authorization: '1',
+        additionalheader: '2'
       }
     })
   })

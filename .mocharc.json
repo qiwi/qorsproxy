@@ -1,4 +1,4 @@
 {
   "exit": true,
-  "require": "src/test/js/setup.js, chai/register-expect, chai/register-should"
+  "require": "src/test/js/setup.js, chai/register-expect.js, chai/register-should.js"
 }

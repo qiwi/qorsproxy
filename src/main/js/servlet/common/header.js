@@ -1,9 +1,9 @@
-export const HOST = 'Host'
+export const HOST = 'Host'.toLowerCase()
 
-export const X_FORWARDED_FOR = 'X-Forwarded-For'
+export const X_FORWARDED_FOR = 'X-Forwarded-For'.toLowerCase()
 export const XFF = X_FORWARDED_FOR
 
-export const X_FORWARDED_HOST = 'X-Forwarded-Host'
+export const X_FORWARDED_HOST = 'X-Forwarded-Host'.toLowerCase()
 export const XFH = X_FORWARDED_HOST
 
 export default {
