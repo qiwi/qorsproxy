@@ -19,6 +19,8 @@ jobs:
     needs: init
     if: ${{ needs.init.outputs.skip == 'false' }}
     runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
 
   test_push:
     needs: build
