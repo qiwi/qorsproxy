@@ -38,7 +38,7 @@ npm run start:pm2 -- -- --port=8080
 {"message":"Container is online: http://localhost:9292, https://localhost:9293","level":"info"}
 ```
 
-## Use
+## Usage
 
 ```bash
 curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' → <!doctype html> ...
@@ -174,7 +174,7 @@ If intermediate authorization is required (change auth for [JWT](https://jwt.io/
 ```
 
 ## Cypress
-Cypress [has a trouble](https://github.com/cypress-io/cypress/issues/1185) with `Transfer-Encoding: chunked` header, so in this case you may use workaround:
+Cypress [has a trouble](https://github.com/cypress-io/cypress/issues/1185) with `Transfer-Encoding: chunked` header, so in this case you may use a workaround:
 ```json
 {
   "mutations": [
@@ -192,7 +192,7 @@ Cypress [has a trouble](https://github.com/cypress-io/cypress/issues/1185) with 
 ```
 
 ## Monitoring
-There're several features to clarify what's going on with proxy.
+There are several features to clarify what's going on with proxy.
 
 #### `GET /health`
 Exposes liveness probe.
@@ -268,5 +268,5 @@ function handler(req, res) {
 }
 ```
 
-### License
+## License
 [MIT](./LICENSE)
