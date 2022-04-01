@@ -105,4 +105,4 @@ jobs:
           GIT_COMMITTER_EMAIL: 'opensource@qiwi.com'
           GIT_AUTHOR_NAME: '@qiwibot'
           GIT_COMMITTER_NAME: '@qiwibot'
-        run: npx -p @qiwi/semrel-toolkit semrel
+        run: npx -p @qiwi/semrel-toolkit semrel -e @qiwi/semrel-config
