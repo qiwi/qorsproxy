@@ -1,17 +1,18 @@
 ## Qorsproxy
 ~~Cors~~ http(s) proxy for ~~dev~~ any purposes  
-  
-[![Build Status](https://travis-ci.com/qiwi/qorsproxy.svg?branch=master)](https://travis-ci.com/qiwi/qorsproxy)
-[![npm (tag)](https://img.shields.io/npm/v/qorsproxy/latest.svg)](https://www.npmjs.com/package/qorsproxy)
-[![dependencyStatus](https://img.shields.io/david/qiwi/qorsproxy.svg?maxAge=3600)](https://david-dm.org/qiwi/qorsproxy)
-[![devDependencyStatus](https://img.shields.io/david/dev/qiwi/qorsproxy.svg?maxAge=3600)](https://david-dm.org/qiwi/qorsproxy)
+
+[![CI](https://github.com/qiwi/qorsproxy/workflows/CI/badge.svg)](https://github.com/qiwi/qorsproxy/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/50acfd98bab6f903d950/maintainability)](https://codeclimate.com/github/qiwi/qorsproxy/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/50acfd98bab6f903d950/test_coverage)](https://codeclimate.com/github/qiwi/qorsproxy/test_coverage)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+[![npm (tag)](https://img.shields.io/npm/v/qorsproxy/latest.svg)](https://www.npmjs.com/package/qorsproxy)
 
 ## Install
 ```bash
+# npm
 npm i qorsproxy --save-dev
+
+# yarn
+yarn add -D qorsproxy
 ```
 through nxp / npm exec:
 ```bash
@@ -37,7 +38,7 @@ npm run start:pm2 -- -- --port=8080
 {"message":"Container is online: http://localhost:9292, https://localhost:9293","level":"info"}
 ```
 
-## Use
+## Usage
 
 ```bash
 curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' → <!doctype html> ...
@@ -173,7 +174,7 @@ If intermediate authorization is required (change auth for [JWT](https://jwt.io/
 ```
 
 ## Cypress
-Cypress [has a trouble](https://github.com/cypress-io/cypress/issues/1185) with `Transfer-Encoding: chunked` header, so in this case you may use workaround:
+Cypress [has a trouble](https://github.com/cypress-io/cypress/issues/1185) with `Transfer-Encoding: chunked` header, so in this case you may use a workaround:
 ```json
 {
   "mutations": [
@@ -191,7 +192,7 @@ Cypress [has a trouble](https://github.com/cypress-io/cypress/issues/1185) with 
 ```
 
 ## Monitoring
-There're several features to clarify what's going on with proxy.
+There are several features to clarify what's going on with proxy.
 
 #### `GET /health`
 Exposes liveness probe.
@@ -267,5 +268,5 @@ function handler(req, res) {
 }
 ```
 
-### License
-MIT
+## License
+[MIT](./LICENSE)
