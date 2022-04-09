@@ -1,3 +1,10 @@
+## [2.4.15](https://github.com/qiwi/qorsproxy/compare/v2.4.14...v2.4.15) (2022-04-09)
+
+
+### Bug Fixes
+
+* update winston to v3.7.2 ([c1b501b](https://github.com/qiwi/qorsproxy/commit/c1b501b4f01ab0f8cb8f2fd5d7573c873d46b912))
+
 ## [2.4.14](https://github.com/qiwi/qorsproxy/compare/v2.4.13...v2.4.14) (2022-04-02)
 
 ## [2.4.12](https://github.com/qiwi/qorsproxy/compare/v2.4.11...v2.4.12) (2021-08-20)
