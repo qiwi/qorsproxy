@@ -1,3 +1,10 @@
+## [2.4.16](https://github.com/qiwi/qorsproxy/compare/v2.4.15...v2.4.16) (2022-05-04)
+
+
+### Bug Fixes
+
+* ssl default paths resolving ([#80](https://github.com/qiwi/qorsproxy/issues/80)) ([d620359](https://github.com/qiwi/qorsproxy/commit/d620359bc4970f52e2a3ceb1268733f4539cd3f9))
+
 ## [2.4.15](https://github.com/qiwi/qorsproxy/compare/v2.4.14...v2.4.15) (2022-04-09)
 
 
