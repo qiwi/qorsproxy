@@ -39,7 +39,7 @@
     "basic-auth": "^2.0.1",
     "express": "^4.17.3",
     "http-status-codes": "^2.2.0",
-    "ip": "^1.1.5",
+    "ip": "^2.0.0",
     "jsonschema": "^1.4.0",
     "lodash-es": "^4.17.21",
     "meow": "^10.1.2",
