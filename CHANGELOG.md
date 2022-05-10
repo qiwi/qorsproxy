@@ -1,3 +1,10 @@
+## [2.4.17](https://github.com/qiwi/qorsproxy/compare/v2.4.16...v2.4.17) (2022-05-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ip to v2 ([1705d0d](https://github.com/qiwi/qorsproxy/commit/1705d0dcc0e2c86a348c3af059ddcb2ed34d184c))
+
 ## [2.4.16](https://github.com/qiwi/qorsproxy/compare/v2.4.15...v2.4.16) (2022-05-04)
 
 
