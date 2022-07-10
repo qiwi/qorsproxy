@@ -1,3 +1,10 @@
+## [2.4.18](https://github.com/qiwi/qorsproxy/compare/v2.4.17...v2.4.18) (2022-07-10)
+
+
+### Bug Fixes
+
+* up deps, fix some vuls ([de198b1](https://github.com/qiwi/qorsproxy/commit/de198b18d52c3088b63cf10061508a079f4e4637))
+
 ## [2.4.17](https://github.com/qiwi/qorsproxy/compare/v2.4.16...v2.4.17) (2022-05-10)
 
 
