@@ -4,7 +4,7 @@ import factory from '@qiwi/primitive-storage'
 const storages = {}
 const storageFactory = (dir) => {
   if (!storages[dir]) {
-    storages[dir] = factory.default({
+    storages[dir] = factory({
       defaultTtl: 60000000,
       path: dir
     })
