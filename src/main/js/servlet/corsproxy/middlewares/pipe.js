@@ -36,7 +36,7 @@ export default (req, res, next) => {
     res.piped = {
       statusCode: response.statusCode,
       headers: response.headers,
-      body: body // Buffer
+      body // Buffer
     }
     next()
   })

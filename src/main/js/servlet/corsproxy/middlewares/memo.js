@@ -42,7 +42,7 @@ export default (req, res, next) => {
     }
   } else {
     const entry = {
-      statusCode: statusCode,
+      statusCode,
       body: content.toString('utf8'),
       headers
     }

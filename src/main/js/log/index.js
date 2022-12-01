@@ -60,7 +60,7 @@ export class Log {
 
   static formatOptions ({ dir, filename, name, size, level = INFO, pattern }) {
     return {
-      level: level,
+      level,
       exitOnError: false,
       format: createFormat(),
       transports: [
