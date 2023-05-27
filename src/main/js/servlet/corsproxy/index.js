@@ -39,12 +39,12 @@ export default class Server {
       .use(gatekeeper)
       .use(intercept)
       .use(to)
+      .use(customAuthorization)
       .use(pipe)
       .use(from)
       .use(cors) // NOTE Handles res.piped.headers
       .use(statsRes)
       .use(crumbs)
-      .use(customAuthorization)
       .use(memo)
       .use(end)
       .use(error)
