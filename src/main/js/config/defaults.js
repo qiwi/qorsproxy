@@ -46,7 +46,7 @@ export default {
           }
         ]
       }],
-      memo: {
+      memo_: {
         dir: './memo/stub.json',
         strategy: 'override',
         host: ['example.com']
