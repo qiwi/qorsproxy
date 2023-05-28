@@ -1,4 +1,5 @@
 import fs from 'fs'
+import yml from 'js-yaml'
 
 import { isError } from '../base/index.js'
 import emitter from '../emitter/index.js'
@@ -69,7 +70,11 @@ export default class ConfigLoader {
    */
   static parse (data) {
     try {
-      return JSON.parse(data)
+      try {
+        return JSON.parse(data)
+      } catch {
+        return yml.load(data)
+      }
     } catch (e) {
       return new Error('config_loader: parse error', e)
     }

@@ -2,6 +2,7 @@ import fs from 'fs'
 import chai from 'chai'
 import { temporaryFile } from 'tempy'
 import Config, { READY, UPDATE, ERROR } from '../../../main/js/config/index.js'
+import ConfigLoader from '../../../main/js/config/loader.js'
 import DEFAULTS from '../../../main/js/config/defaults.js'
 
 const { expect } = chai
@@ -80,7 +81,7 @@ describe('config', () => {
 
     it('ERROR (parse)', done => {
       const file = temporaryFile()
-      fs.writeFileSync(file, 'foo:bar')
+      fs.writeFileSync(file, 'foo: bar: baz')
 
       const config = new Config({ host, port, config: file })
       config
@@ -104,6 +105,20 @@ describe('config', () => {
           done()
         })
         .load()
+    })
+  })
+
+  describe('parse', () => {
+    it('json', () => {
+      expect(ConfigLoader.parse('{"foo": "bar"}')).to.deep.equal({ foo: 'bar' })
+    })
+
+    it('yaml', () => {
+      expect(ConfigLoader.parse('foo: bar')).to.deep.equal({ foo: 'bar' })
+    })
+
+    it('invalid', () => {
+      expect(ConfigLoader.parse('foo: bar: baz')).to.be.instanceOf(Error)
     })
   })
 })
