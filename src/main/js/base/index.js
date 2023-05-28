@@ -1,7 +1,9 @@
 // Oooh... We so need reexport!
 import {
+  isString,
   isNull,
   isError,
+  isPlainObject,
   isObject,
   isArray,
   isFunction,
@@ -16,8 +18,10 @@ import {
 } from 'lodash-es'
 
 export {
+  isString,
   isNull,
   isError,
+  isPlainObject,
   isObject,
   isArray,
   isFunction,

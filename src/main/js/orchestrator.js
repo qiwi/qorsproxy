@@ -7,13 +7,13 @@ import { getCertOptions } from './cert.js'
 export default class Orchestrator {
   constructor (argv) {
     // TODO IoC/DI
-    const config = new Config(argv)
-    const container = new Container()
+    this.config = new Config(argv)
+    this.container = new Container()
+
     const corsproxy = new Corsproxy()
     const health = new Health()
     const metrics = new Metrics()
     const info = new Info()
-
     const servlets = {
       '/info': info,
       '/health': health,
@@ -21,12 +21,12 @@ export default class Orchestrator {
       '': corsproxy
     }
 
-    config
+    this.config
       .on(READY, ({ log, server: { host, port, secure }, rules }) => {
         const { port: securePort } = secure
         logger
           .configure(log)
-          .info(`Config path=${config.path || '<empty>'}`)
+          .info(`Config path=${this.config.path || '<empty>'}`)
           .info('Config ready.')
 
         corsproxy
@@ -38,7 +38,7 @@ export default class Orchestrator {
         metrics
           .configure({ corsproxy })
 
-        container
+        this.container
           .configure({
             host,
             port,
@@ -53,7 +53,7 @@ export default class Orchestrator {
           .configure(log)
           .warn('Config updated.')
 
-        container.configure({
+        this.container.configure({
           host,
           port,
           secure: getCertOptions(secure)
@@ -61,7 +61,7 @@ export default class Orchestrator {
         corsproxy.configure({ host, port, rules, securePort })
       })
       .on(ERROR, error => {
-        if (container.online) {
+        if (this.container.online) {
           logger.warn(error)
           logger.warn('Container uses the previous valid config.')
         } else {

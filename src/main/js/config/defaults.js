@@ -36,7 +36,7 @@ export default {
   rules: {
     example: {
       from: '*',
-      to: 'example.com',
+      to: '*',
       mutations: [{
         direction: 'to',
         headers: [
@@ -45,12 +45,7 @@ export default {
             value: null
           }
         ]
-      }],
-      memo_: {
-        dir: './memo/stub.json',
-        strategy: 'override',
-        host: ['example.com']
-      }
+      }]
     }
   }
 }

@@ -1,0 +1,26 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 8080
+  },
+  "rules": {
+    "example": {
+      "from": "*",
+      "to": "example.com",
+      "mutations": [{
+        "direction": "to",
+        "headers": [
+          {
+            "name": "host",
+            "value": null
+          }
+        ]
+      }],
+      "memo": {
+        "dir": "./memo/stub.json",
+        "strategy": "override",
+        "host": ["example.com"]
+      }
+    }
+  }
+}

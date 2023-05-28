@@ -13,6 +13,7 @@ export const INTEGER = { type: 'integer' }
 
 const URL = { type: 'string', pattern: '^https?://.+' }
 const STRING_ARRAY = { type: 'array', items: STRING_NON_EMPTY }
+const STRING_OR_STRING_ARRAY = { oneOf: [STRING_ARRAY, STRING_NON_EMPTY] }
 const CUSTOM_AUTHORIZATION = {
   type: 'object',
   properties: {
@@ -59,8 +60,8 @@ const RULE = {
   properties: {
     customAuthorization: CUSTOM_AUTHORIZATION,
     memo: MEMO,
-    from: STRING_ARRAY,
-    to: STRING_ARRAY,
+    from: STRING_OR_STRING_ARRAY,
+    to: STRING_OR_STRING_ARRAY,
     interceptions: { type: 'array', items: INTERCEPTION }
   }
 }

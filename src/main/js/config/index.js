@@ -1,7 +1,10 @@
-import { get, merge } from '../base/index.js'
+import { get, merge, isError, isPlainObject, isString } from '../base/index.js'
 import emitter from '../emitter/index.js'
 import DEFAULTS from './defaults.js'
 import ConfigLoader, { LOAD, LOAD_ERROR } from './loader.js'
+import jsonschema from 'jsonschema'
+import { SCHEMA } from './schemas.js'
+import Error from '../common/error.js'
 
 export const EVT_PREFIX = 'config_'
 export const READY = 'ready'
@@ -16,34 +19,49 @@ export default class Config {
     this.path = path
     this.secure = secure
 
-    if (path) {
+    if (isString(path)) {
       this.loader = new ConfigLoader(path, watch)
-        .on(LOAD, this.update.bind(this))
-        .on(LOAD_ERROR, this.error.bind(this))
+        .on(LOAD, (data) => this.update(data))
+        .on(LOAD_ERROR, (err) => this.emit(ERROR, err))
+    }
+  }
+
+  /**
+   * Validates profile data.
+   */
+  validate (data) {
+    const validationResult = jsonschema.validate(data, SCHEMA)
+
+    if (validationResult.valid) {
+      return data
+    } else {
+      return new Error('config_loader: invalid by schema', validationResult.errors)
     }
   }
 
   load () {
     if (this.loader) {
       this.loader.load()
+    } else if (isPlainObject(this.path)) {
+      this.update(this.path)
     } else {
-      this.update()
+      this.update(DEFAULTS)
     }
 
     return this
   }
 
   update (data) {
-    const event = this.data ? UPDATE : READY
+    const _data = this.validate(data)
 
+    if (isError(_data)) {
+      this.emit(ERROR, _data)
+      return this
+    }
+
+    const event = this.data ? UPDATE : READY
     this.inject(data)
     this.emit(event, this.data)
-
-    return this
-  }
-
-  error (error) {
-    this.emit(ERROR, error)
 
     return this
   }

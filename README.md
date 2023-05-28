@@ -14,7 +14,8 @@ npm i qorsproxy --save-dev
 # yarn
 yarn add -D qorsproxy
 ```
-through npx / npm exec:
+
+or just run via `npx` / `npm exec`:
 ```bash
 npx qorsproxy [options]
 ```
@@ -45,9 +46,25 @@ curl 'http://127.0.0.1:9292/http://example.com' -H 'origin:http://localhost' →
 ```
 
 ## Configuration
-### JS API
+### JS/TS API
+```js
+import {App} from 'qorsproxy'
 
-### CLI options
+const options = {
+  config: 'path/to/config.json',  // or plain object
+  watch: true,                    // if true, config would be reloaded on change
+  port: 9292,                     // http port. Optional
+  host: 'localhost',              // http host. Optional
+}
+const orchestrator = App.main(options)
+
+// later
+orchestrator.config.update({server: {port: 8080}, ...rest})
+// ...
+await orchestrator.container.stop()
+```
+
+### CLI
 - `--host`, `-h` DNS name or IP address. Defaults to `localhost`.
 - `--port`, `-p` defines exposed port. Defaults to `9292`.
 - `--secure.port`, defines exposed secure port. Defaults to `9293`.
@@ -238,7 +255,7 @@ Common app info: version, name, etc.
 
 ## Alternatives
 * Get any [from google](https://www.google.ru/search?q=http+proxy+js)
-* Write your own. That's pretty easy:
+* Write your own.
 
 ```javascript
 const http = require('http');
