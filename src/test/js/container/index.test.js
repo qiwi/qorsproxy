@@ -22,6 +22,10 @@ describe('container', () => {
   describe('proto', () => {
     describe('configure', async () => {
       const container = await new Container().configure({ host, port, servlets, secure })
+      container.server.listen = () => {}
+      container.server.close = () => {}
+      container.httpsServer.listen = () => {}
+      container.httpsServer.close = () => {}
 
       beforeEach(() => {
         sinon.spy(container, 'restart')
@@ -31,25 +35,25 @@ describe('container', () => {
         container.restart.restore()
       })
 
-      it('registers new servlets', () => {
+      it('registers new servlets', async () => {
         const servlets = {}
-        container.configure({ servlets })
+        await container.configure({ servlets })
         expect(container.servlets).to.equal(servlets)
       })
 
-      it('triggers restart when `port` changes', () => {
+      it('triggers restart when `port` changes', async () => {
         const host = '0.0.0.0'
         container.online = true
-        container.configure({ host, secure })
+        await container.configure({ host, secure })
 
         expect(container.host).to.equal(host)
         container.restart.should.have.been.called()
       })
 
-      it('triggers restart when `host` changes', () => {
+      it('triggers restart when `host` changes', async () => {
         const port = 8080
         container.online = true
-        container.configure({ port, secure })
+        await container.configure({ port, secure })
 
         expect(container.port).to.equal(port)
         expect(container.secure).to.equal(secure)

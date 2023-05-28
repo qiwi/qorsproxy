@@ -27,7 +27,7 @@ describe('corsproxy.middleware.memo', () => {
           path: {
             protocol: 'http',
             host: 'example.com',
-            href: 'http://example.com/'
+            href: 'https://example.com/'
           },
           to: 'example.com',
           rule: {
@@ -50,7 +50,7 @@ describe('corsproxy.middleware.memo', () => {
       })
       memo(req, res, next)
 
-      const key = 'GET::http://example.com/::'
+      const key = 'GET::https://example.com/::'
       const value = { statusCode: 200, body: '{"foo":"bar"}', headers: { 'content-type': 'application/json; charset=utf-8', 'content-length': '13' } }
       const json = JSON.parse(fs.readFileSync(stub, 'utf8'))
 
@@ -65,7 +65,7 @@ describe('corsproxy.middleware.memo', () => {
           path: {
             protocol: 'http',
             host: 'example.com',
-            href: 'http://example.com/'
+            href: 'https://example.com/'
           },
           to: 'example.com',
           rule: {
@@ -86,7 +86,7 @@ describe('corsproxy.middleware.memo', () => {
           headers: { 'content-type': 'application/json; charset=utf-8', 'content-length': '37' }
         }
       })
-      const key = 'GET::http://example.com/::'
+      const key = 'GET::https://example.com/::'
       const value = { statusCode: 200, body: '{"foo":"bar"}', headers: { 'content-type': 'application/json; charset=utf-8', 'content-length': '13' } }
       const json = { [key]: { value, exp: Date.now() * 2 } }
 

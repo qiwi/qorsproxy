@@ -4,10 +4,10 @@ import parse from '../../../../../main/js/servlet/corsproxy/middlewares/parse.js
 describe('corsproxy.middleware.parse', () => {
   it('parses request data', () => {
     const { req, res, next } = reqresnext.default({
-      url: '/http://example.com',
+      url: '/https://example.com',
       headers: {
         authorization: 'Basic Zm9vOmJhcg==',
-        origin: 'http://localhost:3000'
+        origin: 'https://localhost:3000'
       }
     })
 
