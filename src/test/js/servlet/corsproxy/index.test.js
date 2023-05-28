@@ -35,7 +35,7 @@ describe('corsproxy', () => {
     it('contextify sets req/res context', () => {
       const origin = 'http://localhost:3000'
       const { req, res, next } = reqresnext.default({
-        url: '/http://example.com',
+        url: '/https://example.com',
         headers: {
           origin
         }

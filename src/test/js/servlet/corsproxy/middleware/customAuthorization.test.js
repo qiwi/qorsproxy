@@ -12,8 +12,8 @@ describe('corsproxy.middleware.customAuthorization', () => {
   const authBody = Buffer.from('{"key1":{"key2":"SuchSecretMuchSecurity"}}')
   const rule = {
     customAuthorization: {
-      targetUrl: 'http://target',
-      authorizationUrl: 'http://authorization',
+      targetUrl: 'https://target',
+      authorizationUrl: 'https://authorization',
       headers: ['authorization', 'additionalheader'],
       authPath: 'key1.key2'
     }
@@ -25,7 +25,7 @@ describe('corsproxy.middleware.customAuthorization', () => {
     badheader: '3',
     host: null
   }
-  const targetUrl = '/http://target'
+  const targetUrl = '/https://target'
 
   it('adds Authorization to headers ', (done) => {
     sandbox.stub(transport, 'request')
