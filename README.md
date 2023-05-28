@@ -75,7 +75,7 @@ await orchestrator.container.stop()
 If `port` or `host` has been changed, the server [would be restarted](src/main/js/container/index.js#L19). 
 If config becomes invalid, the prev working version [remains applied](src/main/js/orchestrator.js#L59).
 
-### JSON config
+### JSON / YAML
 At the top level config describes `server`, `log` and proxy `rules` sections.
 
 #### `rules` is the main one
