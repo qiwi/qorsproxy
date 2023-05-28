@@ -14,7 +14,7 @@ npm i qorsproxy --save-dev
 # yarn
 yarn add -D qorsproxy
 ```
-through nxp / npm exec:
+through npx / npm exec:
 ```bash
 npx qorsproxy [options]
 ```
@@ -117,8 +117,6 @@ Or as array:
   ]
 }
 ```
-
-
 
 #### `log`
 [Winston](https://github.com/winstonjs/winston) is under the hood and you're able to set some parameters:
