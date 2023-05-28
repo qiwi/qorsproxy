@@ -1,9 +1,7 @@
 import fs from 'fs'
-import jsonschema from 'jsonschema'
 
 import { isError } from '../base/index.js'
 import emitter from '../emitter/index.js'
-import { SCHEMA } from './schemas.js'
 import Error from '../common/error.js'
 
 export const EVT_PREFIX = 'config_loader_'
@@ -13,11 +11,15 @@ export const LOAD_ERROR = 'error'
 export default class ConfigLoader {
   constructor (path, watch) {
     this.id = Math.random()
-    this.watch = watch | 0
+    this.watch = (watch | 0) * 1000
     this.path = path
 
     if (this.watch > 0) {
-      fs.watchFile(this.path, { persistent: true, interval: this.watch }, this.load.bind(this))
+      fs.watchFile(this.path, { persistent: true, interval: this.watch }, (curr, prev) => {
+        if (curr.mtimeMs !== prev.mtimeMs) {
+          this.load()
+        }
+      })
     }
   }
 
@@ -40,12 +42,6 @@ export default class ConfigLoader {
     }
 
     data = constructor.parse(data)
-    if (isError(data)) {
-      this.emitError(data)
-      return this
-    }
-
-    data = constructor.validate(data)
     if (isError(data)) {
       this.emitError(data)
       return this
@@ -76,19 +72,6 @@ export default class ConfigLoader {
       return JSON.parse(data)
     } catch (e) {
       return new Error('config_loader: parse error', e)
-    }
-  }
-
-  /**
-   * Validates profile data.
-   */
-  static validate (data) {
-    const validationResult = jsonschema.validate(data, SCHEMA)
-
-    if (validationResult.valid) {
-      return data
-    } else {
-      return new Error('config_loader: invalid by schema', validationResult.errors)
     }
   }
 

@@ -1,22 +1,22 @@
 import fs from 'fs'
-import path, { dirname } from 'path'
 import chai from 'chai'
+import { temporaryFile } from 'tempy'
 import Config, { READY, UPDATE, ERROR } from '../../../main/js/config/index.js'
-import { fileURLToPath } from 'url'
+import DEFAULTS from '../../../main/js/config/defaults.js'
 
 const { expect } = chai
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 describe('config', () => {
   const host = '127.0.0.1'
   const port = 8080
-  const watch = 10
-  const configPath = path.resolve(__dirname, './test.json')
-  const configData = { a: 'a', b: 'b' }
+  const watch = 1
+  const configData = DEFAULTS
   const configDataStr = JSON.stringify(configData)
 
-  describe('default', () => {
+  describe('default', async () => {
     const config = new Config({ host, port }).load()
+
+    await new Promise((resolve) => config.on(READY, resolve))
 
     it('exports argv params', () => {
       expect(config.host).to.be.a('string')
@@ -40,19 +40,23 @@ describe('config', () => {
 
   describe('events', () => {
     it('READY', done => {
-      fs.writeFileSync(configPath, configDataStr)
-      const config = new Config({ host, port, watch, config: configPath })
+      const file = temporaryFile()
+      fs.writeFileSync(file, configDataStr)
+      const config = new Config({ host, port, watch, config: file })
+      const expected = { ...configData, ...{ server: { ...configData.server, host, port } } }
+
       config
         .on(READY, data => {
-          expect(data).to.own.include(configData)
+          expect(data).to.deep.equal(expected)
           done()
         })
         .load()
     })
 
     it('UPDATE', done => {
-      const config = new Config({ host, port, watch, config: configPath })
-      fs.writeFileSync(configPath, JSON.stringify({ c: 'c' }))
+      const file = temporaryFile()
+      const config = new Config({ host, port, watch, config: file })
+      fs.writeFileSync(file, JSON.stringify({ c: 'c' }))
 
       config
         .on(UPDATE, data => {
@@ -60,25 +64,25 @@ describe('config', () => {
           done()
         })
         .load()
-    })
+    }, 3000)
 
     it('ERROR (read)', done => {
-      fs.unlinkSync(configPath)
-
-      const config = new Config({ host, port, config: configPath })
+      const file = temporaryFile()
+      const config = new Config({ host, port, config: file })
       config
         .on(ERROR, data => {
           expect(data).to.be.an('error')
-          expect(data.message).to.equal(`config_loader: read error path=${configPath}`)
+          expect(data.message).to.equal(`config_loader: read error path=${file}`)
           done()
         })
         .load()
     })
 
     it('ERROR (parse)', done => {
-      fs.writeFileSync(configPath, 'foo:bar')
+      const file = temporaryFile()
+      fs.writeFileSync(file, 'foo:bar')
 
-      const config = new Config({ host, port, config: configPath })
+      const config = new Config({ host, port, config: file })
       config
         .on(ERROR, data => {
           expect(data).to.be.an('error')
@@ -89,9 +93,10 @@ describe('config', () => {
     })
 
     it('ERROR (validate)', done => {
-      fs.writeFileSync(configPath, JSON.stringify({ server: 'foo' }))
+      const file = temporaryFile()
+      fs.writeFileSync(file, JSON.stringify({ server: 'foo' }))
 
-      const config = new Config({ host, port, config: configPath })
+      const config = new Config({ host, port, config: file })
       config
         .on(ERROR, data => {
           expect(data).to.be.an('error')
