@@ -43,7 +43,7 @@
     "ip": "^2.0.0",
     "jsonschema": "^1.4.1",
     "lodash-es": "^4.17.21",
-    "meow": "^11.0.0",
+    "meow": "^12.0.0",
     "undici": "^5.22.1",
     "winston": "^3.9.0",
     "winston-daily-rotate-file": "^4.7.1"
