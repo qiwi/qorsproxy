@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/qiwi/qorsproxy/compare/v3.0.0...v3.0.1) (2023-05-28)
+
+
+### Bug Fixes
+
+* replace requestjs with undici ([4dddb70](https://github.com/qiwi/qorsproxy/commit/4dddb70573638e98c60bfc5d46aa049accb77cd7))
+
 ## [2.4.18](https://github.com/qiwi/qorsproxy/compare/v2.4.17...v2.4.18) (2022-07-10)
 
 
