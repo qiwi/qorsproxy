@@ -1,3 +1,8 @@
+## [3.2.1](https://github.com/qiwi/qorsproxy/compare/v3.2.0...v3.2.1) (2023-05-28)
+
+### Fixes & improvements
+* fix: move to @qiwi scope, migrate to zx-semrel ([c235b98](https://github.com/qiwi/qorsproxy/commit/c235b980100f75b985c4239fa917edd7b9f96e3e))
+
 # [3.2.0](https://github.com/qiwi/qorsproxy/compare/v3.1.0...v3.2.0) (2023-05-28)
 
 
