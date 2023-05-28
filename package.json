@@ -18,7 +18,7 @@
     "start:bun": "bun src/main/js/cli.js",
     "test": "npm-run-all -p -l lint test:unit test:deps",
     "test:premocha": "mkdir -p .nyc_output",
-    "test:mocha": "c8 mocha './src/test/js/**/*.js' && c8 report -r lcov",
+    "test:mocha": "c8 mocha './src/test/js/**/*.test.js' && c8 report -r lcov",
     "test:unit": "yarn test:premocha && yarn test:mocha",
     "lint": "standard src/**/*.js",
     "lint:fix": "yarn lint -- --fix",
