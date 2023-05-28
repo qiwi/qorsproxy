@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/qiwi/qorsproxy/compare/v3.1.0...v3.2.0) (2023-05-28)
+
+
+### Features
+
+* provide support for yaml ([1b33bda](https://github.com/qiwi/qorsproxy/commit/1b33bda371c44352acbaa961f2f02ec2698c9e10)), closes [#65](https://github.com/qiwi/qorsproxy/issues/65)
+
 # [3.1.0](https://github.com/qiwi/qorsproxy/compare/v3.0.1...v3.1.0) (2023-05-28)
 
 
