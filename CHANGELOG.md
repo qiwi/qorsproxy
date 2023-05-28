@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/qiwi/qorsproxy/compare/v3.0.1...v3.1.0) (2023-05-28)
+
+
+### Features
+
+* accept config as object ([7dcce22](https://github.com/qiwi/qorsproxy/commit/7dcce226c39e0c786792d81eceb73a00c9722188)), closes [#64](https://github.com/qiwi/qorsproxy/issues/64)
+
 ## [3.0.1](https://github.com/qiwi/qorsproxy/compare/v3.0.0...v3.0.1) (2023-05-28)
 
 
