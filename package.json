@@ -1,5 +1,6 @@
 {
-  "name": "qorsproxy",
+  "name": "@qiwi/qorsproxy",
+  "alias": "qorsproxy",
   "version": "3.2.0",
   "description": "HTTP(S) proxy for dev purposes",
   "type": "module",
