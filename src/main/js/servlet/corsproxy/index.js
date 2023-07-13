@@ -1,5 +1,5 @@
 import express from 'express'
-import crypto from 'crypto'
+import crypto from 'node:crypto'
 
 import parse from './parse.js'
 import Stats from './stats.js'

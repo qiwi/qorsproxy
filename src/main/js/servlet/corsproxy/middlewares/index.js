@@ -1,28 +1,13 @@
-import cors from './cors.js'
-import pipe from './pipe.js'
-import error from './error.js'
-import gatekeeper from './gatekeeper.js'
-import parse from './parse.js'
-import { from, to } from './mutator.js'
-import end from './end.js'
-import intercept from './intercept.js'
-import crumbs from './crumbs.js'
-import logger from './logger.js'
-import customAuthorization from './customAuthorization.js'
-import memo from './memo.js'
+export { default as logger } from './logger.js'
+export { default as customAuthorization } from './customAuthorization.js'
+export { default as memo} from './memo.js'
 
-export {
-  cors,
-  pipe,
-  error,
-  gatekeeper,
-  parse,
-  memo,
-  from,
-  to,
-  end,
-  intercept,
-  crumbs,
-  logger,
-  customAuthorization
-}
+export {default as cors} from './cors.js'
+export {default as pipe} from './pipe.js'
+export {default as error} from './error.js'
+export {default as gatekeeper} from './gatekeeper.js'
+export {default as parse} from './parse.js'
+export {from, to} from './mutator.js'
+export {default as end} from './end.js'
+export {default as intercept} from './intercept.js'
+export {default as crumbs} from './crumbs.js'

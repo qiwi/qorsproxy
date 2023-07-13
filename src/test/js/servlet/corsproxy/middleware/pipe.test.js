@@ -37,7 +37,7 @@ describe('corsproxy.middleware.pipe', () => {
 
     sandbox.stub(transport, 'request')
       .callsFake((url, opts) => ({
-        then (cb) { cb({ statusCode, body: [body], headers }); return this }, // eslint-disable-line n/no-callback-literal
+        then (cb) { cb({ statusCode, body: [body], headers }); return this },
         catch () { return this }
       }))
 

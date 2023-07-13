@@ -1,8 +1,8 @@
 import reqresnext from 'reqresnext'
 import memo from '../../../../../main/js/servlet/corsproxy/middlewares/memo.js'
-import path, { dirname } from 'path'
-import fs from 'fs'
-import { fileURLToPath } from 'url'
+import path, { dirname } from 'node:path'
+import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const stub = path.resolve(__dirname, './stub.json')

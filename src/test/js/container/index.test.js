@@ -1,4 +1,4 @@
-import EventEmitter from 'events'
+import EventEmitter from 'node:events'
 import reqresnext from 'reqresnext'
 import { Container, HttpServer as Server } from '../../../main/js/container/index.js'
 
@@ -19,6 +19,7 @@ describe('container', () => {
     })
   })
 
+  // eslint-disable-next-line  sonarjs/cognitive-complexity
   describe('proto', () => {
     describe('configure', async () => {
       const container = await new Container().configure({ host, port, servlets, secure })

@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import winston from 'winston'
 import DailyRotateFile from 'winston-daily-rotate-file'
 
@@ -12,7 +12,7 @@ export const ERROR = 'error'
 
 export {
   Console,
-  DailyRotateFile
+  
 }
 
 export const level = {
@@ -92,7 +92,7 @@ export class Log {
    * @return {string}
    */
   static formatter ({ level, timestamp, meta, message, colorize }) {
-    return `${timestamp()} [${colorize(level, level.toUpperCase())}] ${undefined !== message ? message : ''} ${meta && Object.keys(meta).length ? '\n\t' + JSON.stringify(meta) : ''}`
+    return `${timestamp()} [${colorize(level, level.toUpperCase())}] ${undefined === message ? '' : message} ${meta && Object.keys(meta).length > 0 ? '\n\t' + JSON.stringify(meta) : ''}`
   }
 
   static now () {
@@ -105,3 +105,4 @@ export class Log {
 }
 
 export default new Log()
+export {default as DailyRotateFile} from 'winston-daily-rotate-file'

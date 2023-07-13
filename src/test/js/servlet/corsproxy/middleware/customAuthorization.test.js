@@ -32,7 +32,7 @@ describe('corsproxy.middleware.customAuthorization', () => {
       .callsFake((url, opts) => ({
         then (cb) {
           expect(url).to.equal(rule.customAuthorization.authorizationUrl)
-          cb({ statusCode, body: [authBody], headers }) // eslint-disable-line n/no-callback-literal
+          cb({ statusCode, body: [authBody], headers })
           return this
         },
         catch () { return this }

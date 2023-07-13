@@ -5,7 +5,7 @@ const storages = {}
 const storageFactory = (dir) => {
   if (!storages[dir]) {
     storages[dir] = factory({
-      defaultTtl: 60000000,
+      defaultTtl: 60_000_000,
       path: dir
     })
   }

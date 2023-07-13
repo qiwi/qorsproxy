@@ -1,0 +1,18 @@
+{
+  "extends": ["eslint-config-qiwi"],
+  "rules": {},
+  "overrides": [{
+    "files": ["./src/**/*.js"],
+    "rules": {
+      "sonarjs/no-duplicate-string": "off",
+      "unicorn/no-thenable": "off",
+      "unicorn/consistent-function-scoping": "off",
+      "unicorn/consistent-destructuring": "off"
+    },
+    "globals": {
+      "before": true,
+      "after": true,
+      "sinon": true
+    }
+  }]
+}

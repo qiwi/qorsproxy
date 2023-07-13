@@ -1,3 +1,3 @@
-import events from 'events'
+import events from 'node:events'
 
 export default new events.EventEmitter()

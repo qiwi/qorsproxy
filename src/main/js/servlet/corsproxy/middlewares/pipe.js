@@ -13,7 +13,7 @@ export default (req, res, next) => {
   const dest = url.format(url.parseRequest(req))
   const method = req.method.toUpperCase()
   const headers = req.headers
-  const body = req.body && req.body.length ? Buffer.from(req.body.toString()) : null
+  const body = req.body && req.body.length > 0 ? Buffer.from(req.body.toString()) : null
 
   transport.request(dest, {
     method,
@@ -35,13 +35,10 @@ export default (req, res, next) => {
       next()
     })
     .catch((error) => {
-      switch (error?.code) {
-        case ECONNREFUSED:
-          res.status(REMOTE_IS_DOWN).json({ message: 'Connection refused: ' + dest })
-          break
-
-        default:
-          res.status(REMOTE_UNKNOWN).json({ message: 'Unreachable dest: ' + dest })
+      if (error?.code === ECONNREFUSED) {
+        res.status(REMOTE_IS_DOWN).json({ message: 'Connection refused: ' + dest })
+      } else {
+        res.status(REMOTE_UNKNOWN).json({ message: 'Unreachable dest: ' + dest })
       }
     })
 }
