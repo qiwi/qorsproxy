@@ -1,3 +1,11 @@
+## [4.0.0](https://github.com/qiwi/qorsproxy/compare/v3.2.1...v4.0.0) (2023-07-13)
+
+### BREAKING CHANGES
+* following meow@12, require nodejs >= 16 ([326a25c](https://github.com/qiwi/qorsproxy/commit/326a25cbb9bce4e3dd19fb16ffdc27bf5edf0ebb))
+
+### Fixes & improvements
+* refactor: replace standard with eslint-config-qiwi ([2f5fcac](https://github.com/qiwi/qorsproxy/commit/2f5fcac01b4f09b4af48c4491aff048a5de6c022))
+
 ## [3.2.1](https://github.com/qiwi/qorsproxy/compare/v3.2.0...v3.2.1) (2023-05-28)
 
 ### Fixes & improvements
