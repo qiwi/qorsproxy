@@ -20,7 +20,7 @@
     "start:bun": "bun src/main/js/cli.js",
     "build": "exit 0",
     "build:docs": "mkdir -p docs && cp -r README.md docs/README.md",
-    "test": "concurrently 'npm:test:*'",
+    "test": "concurrently -m 2 --kill-others-on-fail 'npm:test:*'",
     "test:unit": "mkdir -p .nyc_output && c8 mocha './src/test/js/**/*.test.js' && c8 report -r lcov",
     "test:lint": "eslint -c .eslintrc.json src/**/*.js",
     "test:depcheck": "npm_config_yes=true npx depcheck --ignores mocha-*",
@@ -39,7 +39,7 @@
     "js-yaml": "^4.1.0",
     "jsonschema": "^1.4.1",
     "lodash-es": "^4.17.21",
-    "meow": "^11.0.0",
+    "meow": "^12.0.1",
     "undici": "^5.22.1",
     "winston": "^3.10.0",
     "winston-daily-rotate-file": "^4.7.1"
@@ -78,7 +78,7 @@
   },
   "author": "Anton Golub <a.golub@qiwi.com>",
   "engines": {
-    "node": ">=12.12",
+    "node": ">=16",
     "npm": ">=5.6"
   }
 }

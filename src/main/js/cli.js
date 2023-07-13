@@ -26,19 +26,19 @@ const cli = meow(`
   flags: {
     config: {
       type: 'string',
-      alias: 'c'
+      shortFlag: 'c'
     },
     watch: {
       type: 'string',
-      alias: 'w'
+      shortFlag: 'w'
     },
     host: {
       type: 'string',
-      alias: 'h'
+      shortFlag: 'h'
     },
     port: {
       type: 'string',
-      alias: 'p'
+      shortFlag: 'p'
     },
     secure: {
       type: 'string',
