@@ -12,7 +12,6 @@ export const ERROR = 'error'
 
 export {
   Console,
-  
 }
 
 export const level = {
