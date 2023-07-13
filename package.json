@@ -39,7 +39,7 @@
   "dependencies": {
     "@qiwi/health-indicator": "^2.0.3",
     "@qiwi/npm-run-all": "^4.1.7",
-    "@qiwi/primitive-storage": "^1.4.14",
+    "@qiwi/primitive-storage": "^2.0.0",
     "basic-auth": "^2.0.1",
     "express": "^4.18.2",
     "http-status-codes": "^2.2.0",

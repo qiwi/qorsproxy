@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@antongolub/repeater@^1.5.1":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@antongolub/repeater/-/repeater-1.5.2.tgz#06aa221264dc0524041dc9a8635c561baa6530a6"
-  integrity sha512-dhch8MAJOYpUlujjECXMC+DP3W4rWejEXOuivglAvWYY7dP6fws+hS4DJSeWJUNesulid6NxsNjheXoLxeOjIQ==
+"@antongolub/r@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@antongolub/r/-/r-0.0.1.tgz#f681d0fccf8472c97a58731a54f7270e360dfd1d"
+  integrity sha512-FkOk931a99qcDufgxdvJbgyvZTZb8BxxpvwUBWNbjI7wflD+LAVFCj3u2/F/YPqvVmIXhd55zbazAgp/GWQHcQ==
 
 "@babel/code-frame@^7.0.0":
   version "7.21.4"
@@ -166,14 +166,14 @@
     shell-quote "^1.7.2"
     string.prototype.padend "^3.1.2"
 
-"@qiwi/primitive-storage@^1.4.14":
-  version "1.4.14"
-  resolved "https://registry.yarnpkg.com/@qiwi/primitive-storage/-/primitive-storage-1.4.14.tgz#3c9e6228ebf2116876840ccc7899d581bb7d3518"
-  integrity sha512-zD833Y9wAYrSzhU5Y37HymzDrp+T+bRgy1jll4JE4rH3e6xIspKjOrBg1NgIOFFxjMTM1wexb/DzJ55Z1zUHJg==
+"@qiwi/primitive-storage@^2.0.0":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@qiwi/primitive-storage/-/primitive-storage-2.0.1.tgz#6a463185a4024430ba6e418042c409443fd74c1e"
+  integrity sha512-0O/AnjIZ0OQjOL37IjqNJ6BfinULUpQeD+c+aXstyekwcZQb8Hg3y8lV0O9AvMv/BwWb4/TFR/k3WvrjtDeWJQ==
   dependencies:
-    "@qiwi/substrate" "^2.0.0"
-    push-it-to-the-limit "^1.18.5"
-    tslib "^2.4.1"
+    "@antongolub/r" "0.0.1"
+    "@qiwi/substrate" "^2.0.4"
+    push-it-to-the-limit "^2.0.1"
 
 "@qiwi/substrate-abstract@2.0.4":
   version "2.0.4"
@@ -195,7 +195,7 @@
   resolved "https://registry.yarnpkg.com/@qiwi/substrate-types/-/substrate-types-2.0.4.tgz#df7ccb9953c45c63d608bde4142c519f279b621a"
   integrity sha512-XXVPfaBoN27Lim/jClxy9ofCXAPkHMAb/PX/a/kqS3ijhOv0TbDqN34Ko4D9OCqLdEvhu1prYOhA58zlXtr8/g==
 
-"@qiwi/substrate@^2.0.0":
+"@qiwi/substrate@^2.0.4":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@qiwi/substrate/-/substrate-2.0.4.tgz#b62a8790285ae24b251e5a783f4db210a6b0030a"
   integrity sha512-MCJfVyqnc5gasdeAYWQnFo/P3eysvrQzrS5NB9g5WKMWBvAmBz6BkzOgMOGaHRgW0dkGsGT/iDu5c5sFhdISPQ==
@@ -2468,12 +2468,10 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
   integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
 
-push-it-to-the-limit@^1.18.5:
-  version "1.18.5"
-  resolved "https://registry.yarnpkg.com/push-it-to-the-limit/-/push-it-to-the-limit-1.18.5.tgz#ddb2773995c94ecc41223d8dcfe20f49b2492c3d"
-  integrity sha512-GOzpJKrSjFWTa3pOS19NPuswjWAupOSPG60oRzxeXVmjPAAffmpV4o6vWFEnT7YVSgaSE/dUpTiNKI2PNxyLRQ==
-  dependencies:
-    "@antongolub/repeater" "^1.5.1"
+push-it-to-the-limit@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/push-it-to-the-limit/-/push-it-to-the-limit-2.0.1.tgz#188d3ca84cae2a5f6e9f113bdbeab3a43574b91e"
+  integrity sha512-gvZkfwfpbWlfrFbY8KipQW8rn7DNvSJCQn1N+ChQGA/LCQSHiQlT0S5vJdofv+NogoJNTLhHVYEKpPgw153S7A==
 
 qs@6.11.0:
   version "6.11.0"
@@ -3031,7 +3029,7 @@ tsconfig-paths@^3.14.1:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tslib@^2.4.0, tslib@^2.4.1, tslib@^2.5.2:
+tslib@^2.4.0, tslib@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.2.tgz#1b6f07185c881557b0ffa84b111a0106989e8338"
   integrity sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==
