@@ -48,7 +48,7 @@ export class Container {
         chunk && body.push(chunk)
       })
       .on('end', () => {
-        if (body.length) {
+        if (body.length > 0) {
           req.body = Buffer.concat(body)
         }
         this.handler(req, res)

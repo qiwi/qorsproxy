@@ -32,11 +32,7 @@ export default class Config {
   validate (data) {
     const validationResult = jsonschema.validate(data, SCHEMA)
 
-    if (validationResult.valid) {
-      return data
-    } else {
-      return new Error('config_loader: invalid by schema', validationResult.errors)
-    }
+    return validationResult.valid ? data : new Error('config_loader: invalid by schema', validationResult.errors);
   }
 
   load () {

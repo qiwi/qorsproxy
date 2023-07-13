@@ -1,4 +1,4 @@
-import url from 'url'
+import url from 'node:url'
 
 /**
  *
@@ -12,4 +12,5 @@ url.parseRequest = (req) => {
   return url.parse(path) // eslint-disable-line
 }
 
-export default url
+
+export {default} from 'node:url'

@@ -1,5 +1,5 @@
 import basicAuth from 'basic-auth'
-import crypto from 'crypto'
+import crypto from 'node:crypto'
 import url from './url.js'
 
 export default (req) => {

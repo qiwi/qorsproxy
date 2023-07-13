@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'node:fs'
 import yml from 'js-yaml'
 
 import { isError } from '../base/index.js'

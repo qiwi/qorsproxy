@@ -35,7 +35,7 @@ export default class Metrics {
       }
 
       return component.metrics || null // NOTE It may be getter
-    } catch (e) {
+    } catch {
       return null
     }
   }

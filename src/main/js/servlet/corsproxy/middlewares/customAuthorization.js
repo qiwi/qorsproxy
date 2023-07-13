@@ -9,7 +9,7 @@ const extractAuthorization = (body, path) => {
   try {
     const json = JSON.parse(body.toString())
     return get(json, path)
-  } catch (error) {
+  } catch {
     return false
   }
 }

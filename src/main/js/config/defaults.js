@@ -1,6 +1,6 @@
 import ip from 'ip'
-import { join, dirname } from 'path'
-import { fileURLToPath } from 'url'
+import { join, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 export const IP = ip.address()
 export const DEFAULT_HOST = 'localhost'

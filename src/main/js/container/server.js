@@ -1,5 +1,5 @@
-import { Server } from 'http'
-import { Server as SecureServer } from 'https'
+import { Server } from 'node:http'
+import { Server as SecureServer } from 'node:https'
 
 export function applyServerMixin (Class) {
   return class extends Class {
@@ -27,6 +27,7 @@ export function applyServerMixin (Class) {
   }
 }
 
+// eslint-disable-next-line unicorn/no-static-only-class
 export class ServerHelper {
   static notFound (req, res) {
     this.sendError(res, 404, 'Not Found')

@@ -14,9 +14,9 @@ export default class Rules {
     let key
 
     each(rules, rule => {
-      each([].concat(rule.from || ANY), origin => {
-        each([].concat(rule.to || ANY), target => {
-          each([].concat(rule.secret || rule.secrets || ANY), secret => {
+      each([rule.from || ANY].flat(), origin => {
+        each([rule.to || ANY].flat(), target => {
+          each([rule.secret || rule.secrets || ANY].flat(), secret => {
             key = this.constructor.getKey(origin, target, secret)
             this.rules.set(key, rule)
           })

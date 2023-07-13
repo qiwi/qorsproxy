@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'node:fs'
 import chai from 'chai'
 import { temporaryFile } from 'tempy'
 import Config, { READY, UPDATE, ERROR } from '../../../main/js/config/index.js'
@@ -44,7 +44,7 @@ describe('config', () => {
       const file = temporaryFile()
       fs.writeFileSync(file, configDataStr)
       const config = new Config({ host, port, watch, config: file })
-      const expected = { ...configData, ...{ server: { ...configData.server, host, port } } }
+      const expected = { ...configData,  server: { ...configData.server, host, port }  }
 
       config
         .on(READY, data => {

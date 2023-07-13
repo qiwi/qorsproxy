@@ -1,23 +1,9 @@
-// Oooh... We so need reexport!
-import {
-  isString,
-  isNull,
-  isError,
-  isPlainObject,
-  isObject,
-  isArray,
-  isFunction,
-  get,
-  merge,
-  each,
-  find,
-  mapValues,
-  assign,
-  isMatch,
-  pick
-} from 'lodash-es'
-
 export {
+  find,
+  mapValues,
+  assign,
+  isMatch,
+  pick,
   isString,
   isNull,
   isError,
@@ -27,10 +13,5 @@ export {
   isFunction,
   get,
   merge,
-  each,
-  find,
-  mapValues,
-  assign,
-  isMatch,
-  pick
-}
+  each
+} from 'lodash-es'

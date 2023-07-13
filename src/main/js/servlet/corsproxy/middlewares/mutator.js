@@ -67,7 +67,7 @@ export function parsePattern (value) {
   }
   try {
     return new RegExp(args[1], args[2])
-  } catch (e) {
+  } catch {
     return value
   }
 }
