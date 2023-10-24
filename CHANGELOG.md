@@ -1,3 +1,8 @@
+## [4.0.3](https://github.com/qiwi/qorsproxy/compare/v4.0.2...v4.0.3) (2023-10-24)
+
+### Fixes & improvements
+* perf: up deps ([8b15497](https://github.com/qiwi/qorsproxy/commit/8b154979f31906d4acf762ad12c44fa2238f9dca))
+
 ## [4.0.2](https://github.com/qiwi/qorsproxy/compare/v4.0.1...v4.0.2) (2023-10-24)
 
 ### Fixes & improvements
