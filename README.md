@@ -1,4 +1,4 @@
-## Qorsproxy
+## qorsproxy
 ~~Cors~~ http(s) proxy for ~~dev~~ any purposes  
 
 [![CI](https://github.com/qiwi/qorsproxy/workflows/CI/badge.svg)](https://github.com/qiwi/qorsproxy/actions)
@@ -119,7 +119,7 @@ Qorsproxy applies [the first matched](./src/main/js/servlet/corsproxy/rules.js#L
   }
 }
 ```
-Or as array:
+array syntax is suitable too:
 ```json
 {
   "rules": [
@@ -150,12 +150,13 @@ Or as array:
 ```
 
 #### `server`
-Everything is simple here: `host` and `port`.
 ```json
 {
   "server": {
     "host": "127.0.0.1",
-    "port": 8080
+    "port": 8080,
+    "cert": "/path/to/cert.pem", // Defaults to ./ssl/cert.pem
+    "key": "/path/to/key.pem"    // and ./ssl/key.pem
   }
 }
 ```
