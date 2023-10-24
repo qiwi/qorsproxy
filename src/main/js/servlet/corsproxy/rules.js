@@ -39,26 +39,25 @@ export default class Rules {
     // TODO Support masks
     // TODO Use TreeMap
     const map = [
-      origin, host, secret,
-      origin, host, ANY,
-      ANY, host, secret,
-      origin, ANY, secret,
-      ANY, host, ANY,
-      origin, ANY, ANY,
-      ANY, ANY, secret,
-      ANY, ANY, ANY,
+      [origin, host, secret],
+      [origin, host, ANY],
+      [ANY, host, secret],
+      [origin, ANY, secret],
+      [ANY, host, ANY],
+      [origin, ANY, ANY],
+      [ANY, ANY, secret],
+      [ANY, ANY, ANY],
     ]
-    let rule
-    let key
 
-    for (let i = 0; i < 8 * 3; i += 3) {
-      key = this.constructor.getKey(map[i], map[i + 1], map[i + 2])
-      rule = this.rules.get(key)
+    for (const [o, h, s] of map) {
+      const key = this.constructor.getKey(o, h, s)
+      const rule = this.rules.get(key)
 
       if (rule) {
         return rule
       }
     }
+
     return null
   }
 

@@ -55,6 +55,21 @@ describe('corsproxy.Rules', () => {
         expect(rules.get(null, null, '640d91829fccaa0194ad192d484ee8ec')).to.be.null()
         expect(rules.get(null, null, null)).to.be.null()
       })
+
+      it ('returns the best match by priority', () => {
+        const rules = new Rules()
+
+        rules.rules.set('*__*__*', 'any-any-any')
+        rules.rules.set('origin__host__*', 'origin-host-any')
+        rules.rules.set('origin__*__*', 'origin-any-any')
+        rules.rules.set('*__host__*', 'any-host-any')
+
+        expect(rules.get('origin')).to.equal('origin-any-any')
+        expect(rules.get('origin', 'host')).to.equal('origin-host-any')
+        expect(rules.get(null, 'host')).to.equal('any-host-any')
+        expect(rules.get()).to.equal('any-any-any')
+        expect(rules.get(null, null, 'secret')).to.equal('any-any-any')
+      })
     })
   })
 })
