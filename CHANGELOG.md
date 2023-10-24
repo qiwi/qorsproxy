@@ -1,3 +1,8 @@
+## [4.0.1](https://github.com/qiwi/qorsproxy/compare/v4.0.0...v4.0.1) (2023-10-24)
+
+### Fixes & improvements
+* fix: add debug point for rule ([67c0310](https://github.com/qiwi/qorsproxy/commit/67c0310d545f6d18b1f165a21d61e63ea2b59ba4))
+
 ## [4.0.0](https://github.com/qiwi/qorsproxy/compare/v3.2.1...v4.0.0) (2023-07-13)
 
 ### BREAKING CHANGES
