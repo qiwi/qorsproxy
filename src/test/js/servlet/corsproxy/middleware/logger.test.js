@@ -62,7 +62,7 @@ describe('corsproxy.middleware.logger', () => {
       logger(req, res, next)
       res.send('foo')
 
-      expect(log.error).to.have.been.calledWith('RES 123 < status=500 duration=0ms headers={"content-type":"text/html; charset=utf-8","content-length":"3"} bufferLength=3')
+      expect(log.error).to.have.been.calledWith('RES 123 < status=500 method=GET duration=0ms headers={"content-type":"text/html; charset=utf-8","content-length":"3"} bufferLength=3')
     })
   })
 
