@@ -1,3 +1,8 @@
+## [4.0.2](https://github.com/qiwi/qorsproxy/compare/v4.0.1...v4.0.2) (2023-10-24)
+
+### Fixes & improvements
+* fix: fix rule matching priority order ([ad557c4](https://github.com/qiwi/qorsproxy/commit/ad557c47b087a067692f51c9d21cd2c3e6447756))
+
 ## [4.0.1](https://github.com/qiwi/qorsproxy/compare/v4.0.0...v4.0.1) (2023-10-24)
 
 ### Fixes & improvements
