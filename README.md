@@ -23,7 +23,7 @@ npx qorsproxy [options]
 ```bash
 qorsproxy -p 8080 -c /Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
 ```
-or any other way:
+or via runners:
 ```bash
 npm start -- --config=path
 pm2 start npm --name qorsproxy -- start -- --port=8080 --config=/Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
