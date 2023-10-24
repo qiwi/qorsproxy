@@ -41,12 +41,12 @@ export default class Rules {
     const map = [
       origin, host, secret,
       origin, host, ANY,
-      origin, ANY, ANY,
-      ANY, ANY, ANY,
-      ANY, ANY, secret,
       ANY, host, secret,
       origin, ANY, secret,
-      ANY, host, ANY
+      ANY, host, ANY,
+      origin, ANY, ANY,
+      ANY, ANY, secret,
+      ANY, ANY, ANY,
     ]
     let rule
     let key
