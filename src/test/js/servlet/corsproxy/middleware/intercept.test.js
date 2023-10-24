@@ -1,28 +1,32 @@
 import reqresnext from 'reqresnext'
 import intercept from '../../../../../main/js/servlet/corsproxy/middlewares/intercept.js'
-import { GET } from '../../../../../main/js/servlet/common/method.js'
+import { GET, OPTIONS, PUT, HEAD, POST, DELETE } from '../../../../../main/js/servlet/common/method.js'
 import { FORBIDDEN, OK } from '../../../../../main/js/servlet/common/status.js'
 
 describe('corsproxy.middleware.intercept', () => {
   it('captures request by method match', () => {
     const headers = { foo: 'bar' }
     const body = 'Baz'
-    const { req, res, next } = reqresnext.default({
-      method: GET,
-      proxy: {
-        rule: {
-          interceptions: [{
-            req: { method: GET },
-            res: { status: FORBIDDEN, headers, body }
-          }]
-        }
-      }
-    })
+    const methods = [GET, POST, PUT, OPTIONS, HEAD, DELETE]
 
-    intercept(req, res, next)
-    expect(res.statusCode).to.equal(FORBIDDEN)
-    expect(res.getHeaders()).to.include(headers)
-    expect(res.body).to.equal(body)
+    methods.forEach(method => {
+      const { req, res, next } = reqresnext.default({
+        method,
+        proxy: {
+          rule: {
+            interceptions: [{
+              req: { method },
+              res: { status: FORBIDDEN, headers, body }
+            }]
+          }
+        }
+      })
+
+      intercept(req, res, next)
+      expect(res.statusCode).to.equal(FORBIDDEN)
+      expect(res.getHeaders()).to.include(headers)
+      expect(res.body).to.equal(body)
+    })
   })
 
   it('captures request by header match', () => {
