@@ -1,3 +1,9 @@
+## [4.0.4](https://github.com/qiwi/qorsproxy/compare/v4.0.3...v4.0.4) (2023-10-24)
+
+### Fixes & improvements
+* docs: mention ssl opts ([ad4b66f](https://github.com/qiwi/qorsproxy/commit/ad4b66f3ae24904ced0112ccbeffc3eb0da85b97))
+* refactor: simplify rule matcher ([3903520](https://github.com/qiwi/qorsproxy/commit/390352013650240b9731e2b27bdbc4369f4e1cb8))
+
 ## [4.0.3](https://github.com/qiwi/qorsproxy/compare/v4.0.2...v4.0.3) (2023-10-24)
 
 ### Fixes & improvements
