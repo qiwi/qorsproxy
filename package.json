@@ -18,7 +18,7 @@
     "start:pm2": "pm2 start npm --name qorsproxy -- start",
     "start": "node --use_strict src/main/js/cli.js",
     "start:bun": "bun src/main/js/cli.js",
-    "build": "exit 0",
+    "build": "yarn build:docs",
     "build:docs": "mkdir -p docs && cp -r README.md docs/README.md",
     "test": "concurrently -m 2 --kill-others-on-fail 'npm:test:*'",
     "test:unit": "mkdir -p .nyc_output && c8 mocha './src/test/js/**/*.test.js' && c8 report -r lcov",
