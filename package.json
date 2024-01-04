@@ -40,7 +40,7 @@
     "jsonschema": "^1.4.1",
     "lodash-es": "^4.17.21",
     "meow": "^12.1.1",
-    "undici": "^5.28.2",
+    "undici": "^6.0.0",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1"
   },
