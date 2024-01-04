@@ -56,8 +56,9 @@ describe('config', () => {
 
     it('UPDATE', done => {
       const file = temporaryFile()
+      fs.writeFileSync(file, JSON.stringify({}))
+
       const config = new Config({ host, port, watch, config: file })
-      fs.writeFileSync(file, JSON.stringify({ c: 'c' }))
 
       config
         .on(UPDATE, data => {
@@ -65,7 +66,9 @@ describe('config', () => {
           done()
         })
         .load()
-    }).timeout(10_000)
+
+      fs.promises.writeFile(file, JSON.stringify({ c: 'c' }))
+    }).timeout(5_000)
 
     it('ERROR (read)', done => {
       const file = temporaryFile()
