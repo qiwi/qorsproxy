@@ -68,7 +68,7 @@ describe('config', () => {
         .load()
 
       fs.promises.writeFile(file, JSON.stringify({ c: 'c' }))
-    }).timeout(5_000)
+    }).timeout(5000)
 
     it('ERROR (read)', done => {
       const file = temporaryFile()
