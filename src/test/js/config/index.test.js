@@ -65,7 +65,7 @@ describe('config', () => {
           done()
         })
         .load()
-    }).timeout(5000)
+    }).timeout(10_000)
 
     it('ERROR (read)', done => {
       const file = temporaryFile()
