@@ -1,7 +1,7 @@
 {
   "name": "@qiwi/qorsproxy",
   "alias": "qorsproxy",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "description": "HTTP(S) proxy for dev purposes",
   "type": "module",
   "types": "./src/main/js/index.d.ts",
