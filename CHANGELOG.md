@@ -1,3 +1,8 @@
+## [4.0.6](https://github.com/qiwi/qorsproxy/compare/v4.0.5...v4.0.6) (2024-01-18)
+
+### Fixes & improvements
+* fix: apply npm pkg fix ([4f62c19](https://github.com/qiwi/qorsproxy/commit/4f62c195d2342892d066bdd408188d94a593b297))
+
 ## [4.0.5](https://github.com/qiwi/qorsproxy/compare/v4.0.4...v4.0.5) (2024-01-18)
 
 ### Fixes & improvements
