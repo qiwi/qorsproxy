@@ -38,6 +38,7 @@ export default (req, res, next) => {
       if (error?.code === ECONNREFUSED) {
         res.status(REMOTE_IS_DOWN).json({ message: 'Connection refused: ' + dest })
       } else {
+        console.error(error)
         res.status(REMOTE_UNKNOWN).json({ message: 'Unreachable dest: ' + dest })
       }
     })

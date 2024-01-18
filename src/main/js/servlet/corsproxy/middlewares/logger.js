@@ -15,7 +15,7 @@ export default (req, res, next) => {
   const { id, from, to, user, path, rule } = req.proxy // eslint-disable-line
   const target = url.format(path)
 
-  log.info(`REQ ${id} > method=${req.method} origin=${from} ip=${req.ip} dest=${target} user=${user} headers=${JSON.stringify(req.headers)}`)
+  log.info(`REQ ${id} > method=${req.method} origin=${from} ip=${req.ip} dest=${target} user=${user} headers=${JSON.stringify(req.headers)} bufferLength=${req.body?.length || 0}`)
   log.debug({'proxy.rule':rule})
 
   res.send = (...args) => {

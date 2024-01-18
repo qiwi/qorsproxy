@@ -41,7 +41,7 @@ describe('corsproxy.middleware.logger', () => {
       })
       logger(req, res, next)
 
-      expect(log.info).to.have.been.calledWith('REQ 123 > method=GET origin=undefined ip=192.168.1.10 dest=http://example.com user=undefined headers={"x-forwarded-for":"192.168.1.10","host":"localhost"}')
+      expect(log.info).to.have.been.calledWith('REQ 123 > method=GET origin=undefined ip=192.168.1.10 dest=http://example.com user=undefined headers={"x-forwarded-for":"192.168.1.10","host":"localhost"} bufferLength=0')
     })
 
     it('logs response on finish', () => {

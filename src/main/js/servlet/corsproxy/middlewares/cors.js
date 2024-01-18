@@ -8,7 +8,21 @@ export default (req, res, next) => {
   // TODO customize by config
   const corsHeaders = {
     [ALLOW_ORIGIN]: req.proxy.origin || '*',
-    [ALLOW_HEADERS]: 'set-cookie, Authorization, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+    [ALLOW_HEADERS]: [
+      'set-cookie',
+      'Authorization',
+      'Origin',
+      'X-Requested-With',
+      'Accept',
+      'Accept-Encoding',
+      'Origin',
+      'Connection',
+      'Content-Type',
+      'Content-Length',
+      'Access-Control-Allow-Headers',
+      'Access-Control-Request-Method',
+      'Access-Control-Request-Headers'
+    ].join(', '),
     [EXPOSE_HEADERS]: 'Cookie, Set-Cookie, Location',
     [ALLOW_METHODS]: 'GET, HEAD, PATCH, PUT, POST, DELETE, OPTIONS',
     [ALLOW_CREDENTIALS]: 'true'

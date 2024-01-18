@@ -5,8 +5,7 @@ import { HttpServer, HttpsServer, ServerHelper } from './server.js'
 export class Container {
   constructor () {
     this.online = false
-    this.server = new HttpServer()
-    this.server.on('request', this.collector.bind(this))
+    this.initServer()
     this.initSecureServer()
   }
 
@@ -32,6 +31,7 @@ export class Container {
     this.secure = secure
     this.port = port
     this.host = host
+
     restart &&
     await this.restart()
 
@@ -63,7 +63,6 @@ export class Container {
       res.end()
       return
     }
-
     const servlet = find(this.servlets, (servlet, r) => {
       route = r // TODO add servlet name prop
       return !url.indexOf(r)
@@ -82,6 +81,11 @@ export class Container {
     }
   }
 
+  initServer () {
+    this.server = new HttpServer()
+    this.server.on('request', this.collector.bind(this))
+  }
+
   initSecureServer () {
     this.httpsServer = new HttpsServer(this.secure)
     this.httpsServer.on('request', this.collector.bind(this))
@@ -92,9 +96,15 @@ export class Container {
       this.initSecureServer()
       await Promise.all([
         this.server.listen(this.port, this.host),
-        this.httpsServer.listen(this.secure.port, this.host)
+        this.secure ? this.httpsServer.listen(this.secure.port, this.host) : Promise.resolve()
       ])
-      log.info(`Container is online: http://${this.host}:${this.port}, https://${this.host}:${this.secure.port}`)
+
+      const entrypoints = [
+        `http://${this.host}:${this.port}`,
+        this.secure ? `https://${this.host}:${this.secure.port}` : ''
+      ].filter(Boolean)
+
+      log.info(`Container is online: ${entrypoints.join(', ')}`)
       this.online = true
     }
 
@@ -108,7 +118,7 @@ export class Container {
       this.online = false
       await Promise.all([
         this.server.close(),
-        this.httpsServer.close()
+        this.secure && this.httpsServer.close()
       ])
       log.warn('Container stopped.')
     }
