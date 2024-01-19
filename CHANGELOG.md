@@ -1,3 +1,8 @@
+## [4.0.7](https://github.com/qiwi/qorsproxy/compare/v4.0.6...v4.0.7) (2024-01-19)
+
+### Fixes & improvements
+* fix: let pipe recalculate buffer size ([d08d98e](https://github.com/qiwi/qorsproxy/commit/d08d98e5ab10f667c0122f0c5a3de378bdbf031d))
+
 ## [4.0.6](https://github.com/qiwi/qorsproxy/compare/v4.0.5...v4.0.6) (2024-01-18)
 
 ### Fixes & improvements
