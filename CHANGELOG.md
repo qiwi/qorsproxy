@@ -1,3 +1,8 @@
+## [4.0.10](https://github.com/qiwi/qorsproxy/compare/v4.0.9...v4.0.10) (2024-01-19)
+
+### Fixes & improvements
+* fix: avoid buffer transformation ([7c8b05b](https://github.com/qiwi/qorsproxy/commit/7c8b05b80957703fb30643eb4546a8a1b6e35fbb))
+
 ## [4.0.9](https://github.com/qiwi/qorsproxy/compare/v4.0.8...v4.0.9) (2024-01-19)
 
 ### Fixes & improvements
