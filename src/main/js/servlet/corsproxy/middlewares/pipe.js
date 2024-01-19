@@ -15,6 +15,10 @@ export default (req, res, next) => {
   const headers = req.headers
   const body = req.body && req.body.length > 0 ? Buffer.from(req.body.toString()) : null
 
+  // let the client recalculate content-length
+  // relates https://github.com/qiwi/qorsproxy/issues/110
+  delete headers['content-length']
+
   transport.request(dest, {
     method,
     headers,

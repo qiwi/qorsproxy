@@ -8,7 +8,7 @@ import { Corsproxy } from '../../../../main/js/servlet/index.js'
 import { Container } from '../../../../main/js/container/index.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const filePath = path.resolve(__dirname, '../../../fixtures/data.dat')
+const filePath = path.resolve(__dirname, '../../../fixtures/test.xlsx')
 
 const config = {
   "server": {
@@ -110,7 +110,7 @@ describe('formdata', () => {
       'sec-fetch-mode': 'cors',
       'user-agent': 'node',
       'accept-encoding': 'gzip, deflate',
-      'content-length': '214'
+      // 'content-length': '214'
     }
 
     expect(headers).to.include(extectedHeaders)
