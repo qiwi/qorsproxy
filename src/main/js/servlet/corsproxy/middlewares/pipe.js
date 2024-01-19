@@ -13,11 +13,7 @@ export default (req, res, next) => {
   const dest = url.format(url.parseRequest(req))
   const method = req.method.toUpperCase()
   const headers = req.headers
-  const body = req.body && req.body.length > 0 ? Buffer.from(req.body.toString()) : null
-
-  // let the client recalculate content-length
-  // relates https://github.com/qiwi/qorsproxy/issues/110
-  delete headers['content-length']
+  const body = req.body && req.body.length > 0 ? Buffer.from(req.body) : null
 
   transport.request(dest, {
     method,
