@@ -1,3 +1,8 @@
+## [4.0.8](https://github.com/qiwi/qorsproxy/compare/v4.0.7...v4.0.8) (2024-01-19)
+
+### Fixes & improvements
+* fix: force access public ([4226a55](https://github.com/qiwi/qorsproxy/commit/4226a550bd072fe335970752abe2c417b8157e65))
+
 ## [4.0.7](https://github.com/qiwi/qorsproxy/compare/v4.0.6...v4.0.7) (2024-01-19)
 
 ### Fixes & improvements
