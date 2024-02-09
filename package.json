@@ -45,7 +45,7 @@
     "meow": "^12.1.1",
     "undici": "^5.28.2",
     "winston": "^3.11.0",
-    "winston-daily-rotate-file": "^4.7.1"
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "license": "MIT",
   "files": [
