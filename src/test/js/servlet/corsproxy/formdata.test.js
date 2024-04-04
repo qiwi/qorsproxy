@@ -1,11 +1,20 @@
 // https://github.com/qiwi/qorsproxy/issues/110
-import { openAsBlob } from 'node:fs'
+import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { Blob } from 'node:buffer'
+import { FormData } from 'formdata-polyfill/esm.min.js'
+import fetch from 'node-fetch-native'
 
 import express from 'express'
+import { expect } from 'chai'
 import { Corsproxy } from '../../../../main/js/servlet/index.js'
 import { Container } from '../../../../main/js/container/index.js'
+
+const openAsBlob = fs.openAsBlob || (async (filePath) => {
+  const buffer = await fs.promises.readFile(filePath)
+  return new Blob([buffer])
+})
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const filePath = path.resolve(__dirname, '../../../fixtures/test.xlsx')
@@ -83,7 +92,17 @@ async function uploadFile({filePath, url}) {
   const formData = new FormData()
   formData.set('file', file, 'file_name.ext')
 
-  return fetch(url, { method: 'POST', body: formData })
+  return fetch(url, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      connection: 'keep-alive',
+      'accept-language': '*',
+      'sec-fetch-mode': 'cors',
+      'user-agent': 'node',
+      'accept-encoding': 'gzip, deflate'
+    }
+  })
 }
 
 describe('formdata', () => {

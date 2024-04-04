@@ -67,7 +67,9 @@
     "reqresnext": "^1.7.0",
     "sinon": "^17.0.1",
     "sinon-chai": "^3.7.0",
-    "tempy": "^3.1.0"
+    "tempy": "^3.1.0",
+    "node-fetch-native": "^1.6.4",
+    "formdata-polyfill": "^4.0.10"
   },
   "keywords": [
     "cors",
