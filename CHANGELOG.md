@@ -1,3 +1,9 @@
+## [4.0.11](https://github.com/qiwi/qorsproxy/compare/v4.0.10...v4.0.11) (2024-04-04)
+
+### Fixes & improvements
+* fix: adapt tests to nodejs v16 ([093b148](https://github.com/qiwi/qorsproxy/commit/093b1484ce3be1b124db41858e22961017ac7747))
+* fix: up deps, fix some vulns ([7b356e3](https://github.com/qiwi/qorsproxy/commit/7b356e3240792526db2f959e3706f595d608745a))
+
 ## [4.0.10](https://github.com/qiwi/qorsproxy/compare/v4.0.9...v4.0.10) (2024-01-19)
 
 ### Fixes & improvements
