@@ -62,6 +62,7 @@ const RULE = {
     memo: MEMO,
     from: STRING_OR_STRING_ARRAY,
     to: STRING_OR_STRING_ARRAY,
+    paths: STRING_ARRAY,
     interceptions: { type: 'array', items: INTERCEPTION }
   }
 }

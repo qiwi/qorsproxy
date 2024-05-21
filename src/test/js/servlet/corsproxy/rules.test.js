@@ -28,16 +28,22 @@ describe('corsproxy.Rules', () => {
           from: 'foobar.com',
           to: ['baz.org', 'qux.org'],
           secret: 'f4091876df6a5d39e6690b7395a95399'
-        }
+        },
+        {
+          from: 'zone.local',
+          to: 'qiwi.com',
+          paths: ['/foo']
+        },
       ])
       expect([...rules.rules.keys()]).to.include(
         'localhost__*__*',
         '*__example.com__*',
         '*__*__4e99e8c12de7e01535248d2bac85e732',
         'foobar.com__baz.org__f4091876df6a5d39e6690b7395a95399',
-        'foobar.com__qux.org__f4091876df6a5d39e6690b7395a95399'
+        'foobar.com__qux.org__f4091876df6a5d39e6690b7395a95399',
+        'zone.local__qiwi.com__*'
       )
-      expect(rules.rules.size).to.equal(5)
+      expect(rules.rules.size).to.equal(6)
     })
 
     describe('`get`', () => {
@@ -49,6 +55,12 @@ describe('corsproxy.Rules', () => {
 
       it('extracts rule by strict match', () => {
         expect(rules.get('foobar.com', 'qux.org', 'f4091876df6a5d39e6690b7395a95399')).to.be.an('object')
+      })
+
+      it('extracts rule by path', () => {
+        expect(rules.get('zone.local', 'qiwi.com', null, '/foo/bar')).to.be.an('object')
+        expect(rules.get('zone.local', 'qiwi.com', null, '/foo/baz')).to.be.an('object')
+        expect(rules.get('zone.local', 'qiwi.com', null, '/bar')).to.be.null()
       })
 
       it('return null if no match found', () => {

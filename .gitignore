@@ -80,3 +80,6 @@ buildcache
 *.key
 *.pem
 *.cert
+
+# Temp
+temp
