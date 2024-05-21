@@ -1,3 +1,8 @@
+## [4.1.0](https://github.com/qiwi/qorsproxy/compare/v4.0.11...v4.1.0) (2024-05-21)
+
+### Features
+* feat: provide `paths` predicate ([709fd87](https://github.com/qiwi/qorsproxy/commit/709fd871174019d2b6bdb4ffdf93def6ed5ec46f))
+
 ## [4.0.11](https://github.com/qiwi/qorsproxy/compare/v4.0.10...v4.0.11) (2024-04-04)
 
 ### Fixes & improvements
