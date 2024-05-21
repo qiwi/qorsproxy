@@ -32,9 +32,10 @@ export default class Rules {
    * @param {String} [origin]
    * @param {String} [host]
    * @param {String} [secret]
+   * @param {String} [path]
    * @returns {Object/null}
    */
-  get (origin, host, secret) {
+  get (origin, host, secret, path = '/') {
     // TODO Support ip
     // TODO Support masks
     // TODO Use TreeMap
@@ -54,6 +55,9 @@ export default class Rules {
       const rule = this.rules.get(key)
 
       if (rule) {
+        if (rule.paths?.every(p => !path.startsWith(p))) {
+            continue
+        }
         return rule
       }
     }

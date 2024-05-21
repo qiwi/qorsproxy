@@ -92,6 +92,9 @@ Qorsproxy applies [the first matched](./src/main/js/servlet/corsproxy/rules.js#L
       "to": [
         "example.com"
       ],
+      "paths": [
+        "/"
+      ],
       "mutations": [
         {
           "direction": "to",

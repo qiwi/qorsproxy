@@ -11,6 +11,9 @@
       "to": [
         "example.com"
       ],
+      "paths": [
+        "/"
+      ],
       "interceptions": [
         {
           "req": {
