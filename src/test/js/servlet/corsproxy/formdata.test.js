@@ -106,7 +106,9 @@ async function uploadFile({filePath, url}) {
 }
 
 describe('formdata', () => {
-  it('should pipe formdata', async () => {
+  // https://github.com/nodejs/undici/issues/1413
+  const t = process.versions.node.startsWith('18.') ? it.skip : it
+  t('should pipe formdata', async () => {
     const server = await remote.listen(8090)
     const proxy = await (await new Container()
       .configure({
