@@ -1,8 +1,8 @@
-import ip from 'ip'
+import { networkInterfaces } from 'node:os'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-export const IP = ip.address()
+export const IP = Object.values(networkInterfaces()).flat().find(v => v.family === 'IPv4' && !v.internal)?.address || '127.0.0.1'
 export const DEFAULT_HOST = 'localhost'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
