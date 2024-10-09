@@ -1,3 +1,8 @@
+## [4.1.1](https://github.com/qiwi/qorsproxy/compare/v4.1.0...v4.1.1) (2024-10-09)
+
+### Fixes & improvements
+* refactor: get rid of `ip` dep, use native node snippet ([6410aa2](https://github.com/qiwi/qorsproxy/commit/6410aa2fc587a9a050ea5fac38208518d750f318))
+
 ## [4.1.0](https://github.com/qiwi/qorsproxy/compare/v4.0.11...v4.1.0) (2024-05-21)
 
 ### Features
