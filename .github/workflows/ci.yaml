@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           # cache: 'yarn'
 
       - name: Fetch deps
@@ -61,7 +61,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-22.04 ]
-        node-version: [ 16, 20 ]
+        node-version: [ 18, 22 ]
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -73,9 +73,9 @@ jobs:
 
       - run: yarn
       - name: Unit test only
-        if: matrix.node-version != '20' || matrix.os != 'ubuntu-22.04'
+        if: matrix.node-version != '22' || matrix.os != 'ubuntu-22.04'
         run: yarn test:unit
 
       - name: Full test suite
-        if: matrix.node-version == '20' && matrix.os == 'ubuntu-22.04'
+        if: matrix.node-version == '22' && matrix.os == 'ubuntu-22.04'
         run: yarn test
