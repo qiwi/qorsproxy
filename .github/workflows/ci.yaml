@@ -73,7 +73,7 @@ jobs:
 
       - run: yarn
       - name: Unit test only
-        if: matrix.node-version != '22' || matrix.os != 'ubuntu-24.044'
+        if: matrix.node-version != '22' || matrix.os != 'ubuntu-24.04'
         run: yarn test:unit
 
       - name: Full test suite
