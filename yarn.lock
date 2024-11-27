@@ -108,13 +108,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/busboy@npm:^2.0.0":
-  version: 2.1.1
-  resolution: "@fastify/busboy@npm:2.1.1"
-  checksum: 10c0/6f8027a8cba7f8f7b736718b013f5a38c0476eea67034c94a0d3c375e2b114366ad4419e6a6fa7ffc2ef9c6d3e0435d76dd584a7a1cbac23962fda7650b579e3
-  languageName: node
-  linkType: hard
-
 "@humanwhocodes/config-array@npm:^0.13.0":
   version: 0.13.0
   resolution: "@humanwhocodes/config-array@npm:0.13.0"
@@ -292,7 +285,7 @@ __metadata:
     sinon: "npm:^19.0.2"
     sinon-chai: "npm:^4.0.0"
     tempy: "npm:^3.1.0"
-    undici: "npm:^5.28.4"
+    undici: "npm:^7.0.0"
     winston: "npm:^3.15.0"
     winston-daily-rotate-file: "npm:^5.0.0"
   bin:
@@ -4966,12 +4959,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.28.4":
-  version: 5.28.4
-  resolution: "undici@npm:5.28.4"
-  dependencies:
-    "@fastify/busboy": "npm:^2.0.0"
-  checksum: 10c0/08d0f2596553aa0a54ca6e8e9c7f45aef7d042c60918564e3a142d449eda165a80196f6ef19ea2ef2e6446959e293095d8e40af1236f0d67223b06afac5ecad7
+"undici@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "undici@npm:7.0.0"
+  checksum: 10c0/6d91d5ea5f858ac9ea8b8e28722167dcb4606dc8f3886b6768de94de96fb0817a7fec974ecbc51c1fec03131e2cc44df49a2ab966f5d2d191f32163776f36d91
   languageName: node
   linkType: hard
 
