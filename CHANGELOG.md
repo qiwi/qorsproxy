@@ -1,3 +1,8 @@
+## [4.1.2](https://github.com/qiwi/qorsproxy/compare/v4.1.1...v4.1.2) (2025-04-01)
+
+### Fixes & improvements
+* fix(deps): update dependency undici to v5.28.5 [security] ([73f2545](https://github.com/qiwi/qorsproxy/commit/73f2545092b119b3ed5e29c5a6b3cc6ada514446))
+
 ## [4.1.1](https://github.com/qiwi/qorsproxy/compare/v4.1.0...v4.1.1) (2024-10-09)
 
 ### Fixes & improvements
