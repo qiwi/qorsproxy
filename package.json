@@ -83,5 +83,5 @@
     "node": ">=16",
     "npm": ">=5.6"
   },
-  "packageManager": "yarn@4.9.1"
+  "packageManager": "yarn@4.9.3"
 }
