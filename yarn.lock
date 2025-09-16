@@ -261,7 +261,7 @@ __metadata:
     js-yaml: "npm:^4.1.0"
     jsonschema: "npm:^1.4.1"
     lodash-es: "npm:^4.17.21"
-    meow: "npm:^12.1.1"
+    meow: "npm:^14.0.0"
     mocha: "npm:^11.0.0"
     mocha-lcov-reporter: "npm:^1.3.0"
     mocha-sinon: "npm:^2.1.2"
@@ -2917,10 +2917,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"meow@npm:^12.1.1":
-  version: 12.1.1
-  resolution: "meow@npm:12.1.1"
-  checksum: 10c0/a125ca99a32e2306e2f4cbe651a0d27f6eb67918d43a075f6e80b35e9bf372ebf0fc3a9fbc201cbbc9516444b6265fb3c9f80c5b7ebd32f548aa93eb7c28e088
+"meow@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "meow@npm:14.0.0"
+  checksum: 10c0/dbe4e136e0f858472d8b8c24d382054fe9898f6f47c58a42be25e6b1985e5ae31048573bf399f6e5877bf9d5b89cb840beae7350682019f998ff30baaa5e4106
   languageName: node
   linkType: hard
 
