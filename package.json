@@ -52,7 +52,7 @@
   ],
   "devDependencies": {
     "c8": "^10.1.2",
-    "chai": "^4.5.0",
+    "chai": "^6.0.0",
     "chai-subset": "^1.6.0",
     "concurrently": "^9.0.1",
     "dirty-chai": "^2.0.1",
