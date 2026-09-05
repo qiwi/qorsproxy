@@ -54,7 +54,7 @@
     "c8": "^10.1.2",
     "chai": "^4.5.0",
     "chai-subset": "^1.6.0",
-    "concurrently": "^9.0.1",
+    "concurrently": "^10.0.0",
     "dirty-chai": "^2.0.1",
     "eslint": "^8.57.0",
     "eslint-config-qiwi": "^2.1.3",
