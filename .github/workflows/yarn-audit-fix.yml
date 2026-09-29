@@ -1,0 +1,123 @@
+# Copy to .github/workflows/yarn-audit-fix.yml in a Yarn Berry project.
+name: Fix Yarn vulnerabilities
+
+on:
+  schedule:
+    - cron: '0 0 * * 6' # Saturdays at 00:00 UTC.
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: yarn-berry-audit-fix
+  cancel-in-progress: false
+
+jobs:
+  fix:
+    name: Apply fix and deduplicate
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    outputs:
+      changed: ${{ steps.fix.outputs.changed }}
+      original-hash: ${{ steps.fix.outputs.original-hash }}
+      source-sha: ${{ steps.fix.outputs.source-sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Capture the original lockfile hash and apply fixes
+        id: fix
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: 'false'
+        shell: bash
+        run: |
+          set -euo pipefail
+          hash=$(sha256sum yarn.lock | cut -d ' ' -f 1)
+          echo "original-hash=$hash" >> "$GITHUB_OUTPUT"
+          echo "source-sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          mkdir -p "$RUNNER_TEMP/ybaf"
+          corepack enable
+          {
+            printf '%s\n' '```text'
+            yarn dlx --quiet yarn-berry-audit-fix --ignore-unfixed \
+              --audit-registry=https://registry.npmjs.org
+            printf '%s\n' '```'
+          } > "$RUNNER_TEMP/ybaf/body.md"
+          yarn dedupe
+          if git diff --quiet -- yarn.lock; then
+            exit 0
+          fi
+
+          cp yarn.lock "$RUNNER_TEMP/ybaf/yarn.lock"
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
+      - name: Pass the lockfile and description to the publisher
+        if: steps.fix.outputs.changed == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: ybaf
+          path: ${{ runner.temp }}/ybaf
+          retention-days: 1
+          if-no-files-found: error
+
+  publish:
+    name: Publish PR
+    needs: fix
+    if: needs.fix.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write # Force-push the branch for this original lockfile hash.
+      pull-requests: write # Create or update its pull request.
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/download-artifact@v8
+        with:
+          name: ybaf
+          path: ${{ runner.temp }}/ybaf
+      - name: Rebase and publish the lockfile
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+          ORIGINAL_HASH: ${{ needs.fix.outputs.original-hash }}
+          SOURCE_SHA: ${{ needs.fix.outputs.source-sha }}
+          TITLE: 'chore: apply yarn-berry-audit-fix'
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$ORIGINAL_HASH" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          branch="ybaf/$ORIGINAL_HASH"
+          git switch --detach "$SOURCE_SHA"
+          cp "$RUNNER_TEMP/ybaf/yarn.lock" yarn.lock
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- yarn.lock
+          git commit -m "$TITLE"
+          gh auth setup-git
+          git fetch origin "$BASE_BRANCH"
+          git rebase --onto "origin/$BASE_BRANCH" "$SOURCE_SHA"
+          if git diff --quiet "origin/$BASE_BRANCH" HEAD -- yarn.lock; then
+            exit 0
+          fi
+          git switch --create "$branch"
+          pr_number=$(gh pr list --state open --head "$branch" \
+            --json number --jq '.[0].number // empty')
+          git push --force origin "HEAD:refs/heads/$branch"
+          if [[ -n "$pr_number" ]]; then
+            gh pr edit "$pr_number" --title "$TITLE" --body-file "$RUNNER_TEMP/ybaf/body.md"
+          else
+            gh pr create --base "$BASE_BRANCH" --head "$branch" \
+              --title "$TITLE" --body-file "$RUNNER_TEMP/ybaf/body.md"
+          fi
