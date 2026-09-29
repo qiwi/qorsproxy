@@ -1,4 +1,3 @@
-# Copy to .github/workflows/yarn-audit-fix.yml in a Yarn Berry project.
 name: Fix Yarn vulnerabilities
 
 on:
