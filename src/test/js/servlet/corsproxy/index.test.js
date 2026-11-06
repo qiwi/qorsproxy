@@ -32,6 +32,20 @@ describe('corsproxy', () => {
       expect(proxy.metrics()).toMatchObject(new Stats().report())
     })
 
+    it('contextify picks rules by path', () => {
+      const api = { to: ['example.com'], paths: ['/api'] }
+      const proxy = new Corsproxy().configure({ host, port, rules: { api } })
+      const contextify = (url) => {
+        const { req, res, next } = reqresnext({ url })
+        proxy.contextify(req, res, next)
+        return req.proxy.rule
+      }
+
+      expect(contextify('/https://example.com/api/foo?bar=baz')).toBe(api)
+      expect(contextify('/https://example.com/other')).toBeNull()
+      expect(contextify('/')).toBeNull()
+    })
+
     it('contextify sets req/res context', () => {
       const origin = 'http://localhost:3000'
       const { req, res, next } = reqresnext({

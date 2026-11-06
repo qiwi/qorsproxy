@@ -55,7 +55,7 @@ export default class Server {
     const { from, to, secret, user, path, origin } = this.constructor.parse(req)
     const { host, port, securePort } = this
     const id = crypto.randomBytes(8).toString('hex')
-    const rule = this.rules.get(from, to, secret, path)
+    const rule = this.rules.get(from, to, secret, path.pathname || '/')
 
     req.id = res.id = id
 
