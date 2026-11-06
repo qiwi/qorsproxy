@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-import meow from 'meow'
+import { readFileSync } from 'node:fs'
+import { parseArgv } from './argv.js'
 import { App } from './app.js'
 
-const cli = meow(`
+const help = `
   Usage
     $ qorsproxy --config=/Users/foo/projects/bar/proxy.config.json
 
@@ -21,30 +22,14 @@ const cli = meow(`
     $ qorsproxy --config=/Users/foo/projects/bar/proxy.config.json -w=1000
     $ qorsproxy --version
     $ qorsproxy --help
-`, {
-  importMeta: import.meta,
-  flags: {
-    config: {
-      type: 'string',
-      shortFlag: 'c'
-    },
-    watch: {
-      type: 'string',
-      shortFlag: 'w'
-    },
-    host: {
-      type: 'string',
-      shortFlag: 'h'
-    },
-    port: {
-      type: 'string',
-      shortFlag: 'p'
-    },
-    secure: {
-      type: 'string',
-      multiple: true
-    }
-  }
-})
+`
 
-App.main(cli.flags)
+const flags = parseArgv(process.argv.slice(2))
+
+if (flags.help || flags.version) {
+  const { description, version } = JSON.parse(readFileSync(new URL('../../../package.json', import.meta.url), 'utf8'))
+  console.log(flags.help ? `\n  ${description}\n${help}` : version)
+  process.exit(0)
+}
+
+App.main(flags)

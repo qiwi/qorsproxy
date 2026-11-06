@@ -40,7 +40,7 @@
     "js-yaml": "^4.1.1",
     "jsonschema": "^1.5.0",
     "lodash-es": "^4.18.1",
-    "meow": "^12.1.1",
+    "mri": "^1.2.0",
     "winston": "^3.19.0",
     "winston-daily-rotate-file": "^5.0.0"
   },
