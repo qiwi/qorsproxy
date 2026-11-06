@@ -1,4 +1,4 @@
-import reqresnext from 'reqresnext'
+import { reqresnext } from '../../reqresnext.js'
 import Stats from '../../../../main/js/servlet/corsproxy/stats.js'
 
 describe('corsproxy.stats', () => {
@@ -6,40 +6,40 @@ describe('corsproxy.stats', () => {
   const length = 100
 
   beforeEach(() => {
-    ({ req, res, next } = reqresnext.default({}, { piped: { body: { length } } }))
+    ({ req, res, next } = reqresnext({}, { piped: { body: { length } } }))
     stats = new Stats()
   })
 
   it('constructor returns proper instance', () => {
-    expect(stats.traffic).to.equal(0)
-    expect(stats.count).to.equal(0)
+    expect(stats.traffic).toBe(0)
+    expect(stats.count).toBe(0)
   })
 
   describe('prototype', () => {
     it('`incrementCount` increases the request number', () => {
       stats.incrementCount()
-      expect(stats.count).to.equal(1)
+      expect(stats.count).toBe(1)
     })
 
     it('`incrementTraffic` adds buffer length to sum', () => {
       stats.incrementTraffic(100)
-      expect(stats.traffic).to.equal(100)
+      expect(stats.traffic).toBe(100)
     })
 
     it('`report` return map', () => {
       stats.incrementCount()
       stats.incrementTraffic(200)
-      expect(stats.report()).to.include({ count: 1, traffic: 200 })
+      expect(stats.report()).toMatchObject({ count: 1, traffic: 200 })
     })
 
     it('`req` mware triggers incrementCount', () => {
       stats.req(req, res, next)
-      expect(stats.count).to.equal(1)
+      expect(stats.count).toBe(1)
     })
 
     it('`res` mware triggers incrementTraffic', () => {
       stats.res(req, res, next)
-      expect(stats.traffic).to.equal(length)
+      expect(stats.traffic).toBe(length)
     })
   })
 })

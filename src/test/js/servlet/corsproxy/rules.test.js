@@ -4,12 +4,12 @@ describe('corsproxy.Rules', () => {
   const rules = new Rules()
 
   it('constructor returns proper instance', () => {
-    expect(rules.rules).to.be.an.instanceOf(Map)
+    expect(rules.rules).toBeInstanceOf(Map)
   })
 
   it('`getKey` returns properly formatted map key', () => {
-    expect(Rules.getKey()).to.equal(`${ANY}${SEPARATOR}${ANY}${SEPARATOR}${ANY}`)
-    expect(Rules.getKey('foo', 'bar', 'baz')).to.equal(`foo${SEPARATOR}bar${SEPARATOR}baz`)
+    expect(Rules.getKey()).toBe(`${ANY}${SEPARATOR}${ANY}${SEPARATOR}${ANY}`)
+    expect(Rules.getKey('foo', 'bar', 'baz')).toBe(`foo${SEPARATOR}bar${SEPARATOR}baz`)
   })
 
   describe('prototype', () => {
@@ -35,37 +35,37 @@ describe('corsproxy.Rules', () => {
           paths: ['/foo']
         },
       ])
-      expect([...rules.rules.keys()]).to.include(
+      expect([...rules.rules.keys()]).toEqual(expect.arrayContaining([
         'localhost__*__*',
         '*__example.com__*',
         '*__*__4e99e8c12de7e01535248d2bac85e732',
         'foobar.com__baz.org__f4091876df6a5d39e6690b7395a95399',
         'foobar.com__qux.org__f4091876df6a5d39e6690b7395a95399',
         'zone.local__qiwi.com__*'
-      )
-      expect(rules.rules.size).to.equal(6)
+      ]))
+      expect(rules.rules.size).toBe(6)
     })
 
     describe('`get`', () => {
       it('extracts rule by particular match', () => {
-        expect(rules.get('localhost', 'qiwi.com', null)).to.be.an('object')
-        expect(rules.get(null, 'example.com', '3cf68317dc5e093c5aba18acba72e38a')).to.be.an('object')
-        expect(rules.get('kassa.qiwi.com', null, '4e99e8c12de7e01535248d2bac85e732')).to.be.an('object')
+        expect(rules.get('localhost', 'qiwi.com', null)).toBeInstanceOf(Object)
+        expect(rules.get(null, 'example.com', '3cf68317dc5e093c5aba18acba72e38a')).toBeInstanceOf(Object)
+        expect(rules.get('kassa.qiwi.com', null, '4e99e8c12de7e01535248d2bac85e732')).toBeInstanceOf(Object)
       })
 
       it('extracts rule by strict match', () => {
-        expect(rules.get('foobar.com', 'qux.org', 'f4091876df6a5d39e6690b7395a95399')).to.be.an('object')
+        expect(rules.get('foobar.com', 'qux.org', 'f4091876df6a5d39e6690b7395a95399')).toBeInstanceOf(Object)
       })
 
       it('extracts rule by path', () => {
-        expect(rules.get('zone.local', 'qiwi.com', null, '/foo/bar')).to.be.an('object')
-        expect(rules.get('zone.local', 'qiwi.com', null, '/foo/baz')).to.be.an('object')
-        expect(rules.get('zone.local', 'qiwi.com', null, '/bar')).to.be.null()
+        expect(rules.get('zone.local', 'qiwi.com', null, '/foo/bar')).toBeInstanceOf(Object)
+        expect(rules.get('zone.local', 'qiwi.com', null, '/foo/baz')).toBeInstanceOf(Object)
+        expect(rules.get('zone.local', 'qiwi.com', null, '/bar')).toBeNull()
       })
 
       it('return null if no match found', () => {
-        expect(rules.get(null, null, '640d91829fccaa0194ad192d484ee8ec')).to.be.null()
-        expect(rules.get(null, null, null)).to.be.null()
+        expect(rules.get(null, null, '640d91829fccaa0194ad192d484ee8ec')).toBeNull()
+        expect(rules.get(null, null, null)).toBeNull()
       })
 
       it ('returns the best match by priority', () => {
@@ -76,11 +76,11 @@ describe('corsproxy.Rules', () => {
         rules.rules.set('origin__*__*', 'origin-any-any')
         rules.rules.set('*__host__*', 'any-host-any')
 
-        expect(rules.get('origin')).to.equal('origin-any-any')
-        expect(rules.get('origin', 'host')).to.equal('origin-host-any')
-        expect(rules.get(null, 'host')).to.equal('any-host-any')
-        expect(rules.get()).to.equal('any-any-any')
-        expect(rules.get(null, null, 'secret')).to.equal('any-any-any')
+        expect(rules.get('origin')).toBe('origin-any-any')
+        expect(rules.get('origin', 'host')).toBe('origin-host-any')
+        expect(rules.get(null, 'host')).toBe('any-host-any')
+        expect(rules.get()).toBe('any-any-any')
+        expect(rules.get(null, null, 'secret')).toBe('any-any-any')
       })
     })
   })

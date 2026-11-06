@@ -1,4 +1,4 @@
-import reqresnext from 'reqresnext'
+import { reqresnext } from '../../../reqresnext.js'
 import intercept from '../../../../../main/js/servlet/corsproxy/middlewares/intercept.js'
 import { GET, OPTIONS, PUT, HEAD, POST, DELETE } from '../../../../../main/js/servlet/common/method.js'
 import { FORBIDDEN, OK } from '../../../../../main/js/servlet/common/status.js'
@@ -10,7 +10,7 @@ describe('corsproxy.middleware.intercept', () => {
     const methods = [GET, POST, PUT, OPTIONS, HEAD, DELETE]
 
     methods.forEach(method => {
-      const { req, res, next } = reqresnext.default({
+      const { req, res, next } = reqresnext({
         method,
         proxy: {
           rule: {
@@ -23,16 +23,16 @@ describe('corsproxy.middleware.intercept', () => {
       })
 
       intercept(req, res, next)
-      expect(res.statusCode).to.equal(FORBIDDEN)
-      expect(res.getHeaders()).to.include(headers)
-      expect(res.body).to.equal(body)
+      expect(res.statusCode).toBe(FORBIDDEN)
+      expect(res.getHeaders()).toMatchObject(headers)
+      expect(res.body).toBe(method === HEAD ? undefined : body) // HEAD responses carry no body
     })
   })
 
   it('captures request by header match', () => {
     const headers = { foo: 'bar' }
     const body = 'Baz'
-    const { req, res, next } = reqresnext.default({
+    const { req, res, next } = reqresnext({
       method: GET,
       headers,
       proxy: {
@@ -46,16 +46,16 @@ describe('corsproxy.middleware.intercept', () => {
     })
 
     intercept(req, res, next)
-    expect(res.statusCode).to.equal(OK)
-    expect(res.body).to.equal(body)
+    expect(res.statusCode).toBe(OK)
+    expect(res.body).toBe(body)
   })
 
   it('proceeds to next if no match found', () => {
-    const next = sinon.spy(() => {})
-    const { req, res } = reqresnext.default()
+    const next = vi.fn()
+    const { req, res } = reqresnext()
 
     intercept(req, res, next)
-    expect(next).to.be.called()
-    expect(res.body).to.equal(undefined)
+    expect(next).toHaveBeenCalled()
+    expect(res.body).toBeUndefined()
   })
 })

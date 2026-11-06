@@ -1,10 +1,9 @@
-import rrn from 'reqresnext'
+import { reqresnext } from '../../../reqresnext.js'
 import crumbs from '../../../../../main/js/servlet/corsproxy/middlewares/crumbs.js'
 import { XFH, HOST } from '../../../../../main/js/servlet/common/header.js'
 
 const host = '127.0.0.1'
 const port = 8080
-const reqresnext = rrn.default
 
 describe('corsproxy.middleware.crumbs', () => {
   it('transfers XFH from response', () => {
@@ -12,7 +11,7 @@ describe('corsproxy.middleware.crumbs', () => {
     const { req, res, next } = reqresnext({ proxy: { server: { host, port } } }, { piped: { headers } })
 
     crumbs(req, res, next)
-    expect(headers).to.include({ foo: 'bar', [XFH]: 'qiwi.com' })
+    expect(headers).toMatchObject({ foo: 'bar', [XFH]: 'qiwi.com' })
   })
 
   it('sets XFH to request HOST header if exists', () => {
@@ -20,7 +19,7 @@ describe('corsproxy.middleware.crumbs', () => {
     const { req, res, next } = reqresnext({ headers: { [HOST]: 'example.com' }, proxy: { server: { host, port } } }, { piped: { headers } })
 
     crumbs(req, res, next)
-    expect(headers[XFH]).to.equal('example.com')
+    expect(headers[XFH]).toBe('example.com')
   })
 
   it('sets XFH to proxy host otherwise', () => {
@@ -29,6 +28,6 @@ describe('corsproxy.middleware.crumbs', () => {
 
     delete req.headers[HOST]
     crumbs(req, res, next)
-    expect(headers[XFH]).to.equal('127.0.0.1:8080')
+    expect(headers[XFH]).toBe('127.0.0.1:8080')
   })
 })

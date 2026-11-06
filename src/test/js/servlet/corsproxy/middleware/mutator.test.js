@@ -1,11 +1,11 @@
-import reqresnext from 'reqresnext'
+import { reqresnext } from '../../../reqresnext.js'
 import { each } from '../../../../../main/js/base/index.js'
 import { from, parsePattern, to } from '../../../../../main/js/servlet/corsproxy/middlewares/mutator.js'
 
 describe('corsproxy.middleware.mutator', () => {
   describe('parsePattern', () => {
     it('returns RegExp if possible', () => {
-      expect(parsePattern('/foo/gi')).to.be.a('regexp')
+      expect(parsePattern('/foo/gi')).toBeInstanceOf(RegExp)
     })
 
     it('returns input value otherwise', () => {
@@ -14,12 +14,12 @@ describe('corsproxy.middleware.mutator', () => {
         '/foo/giwtf',
         {},
         123
-      ], v => expect(parsePattern(v)).to.equal(v))
+      ], v => expect(parsePattern(v)).toBe(v))
     })
   })
 
   it('`from` assigns new response headers', () => {
-    const { req, res, next } = reqresnext.default(
+    const { req, res, next } = reqresnext(
       {
         proxy: {
           rule: {
@@ -79,17 +79,17 @@ describe('corsproxy.middleware.mutator', () => {
 
     from(req, res, next)
 
-    expect(resHeaders.foo).to.be.undefined()
-    expect(resHeaders.fooo).to.equal('')
-    expect(resHeaders.bar).to.equal('baz')
-    expect(resHeaders.baz).to.equal(';kassa.qiwi.tools;example.com;')
-    expect(resHeaders.qux).to.eql(['ba', 'dc', 'efg'])
-    expect(resHeaders.Authorization).to.equal('OtherToken')
-    expect(resHeaders.authorization).to.equal('OtherToken')
+    expect(resHeaders.foo).toBeUndefined()
+    expect(resHeaders.fooo).toBe('')
+    expect(resHeaders.bar).toBe('baz')
+    expect(resHeaders.baz).toBe(';kassa.qiwi.tools;example.com;')
+    expect(resHeaders.qux).toEqual(['ba', 'dc', 'efg'])
+    expect(resHeaders.Authorization).toBe('OtherToken')
+    expect(resHeaders.authorization).toBe('OtherToken')
   })
 
   it('`to` assigns new request headers', () => {
-    const { req, res, next } = reqresnext.default(
+    const { req, res, next } = reqresnext(
       {
         headers: {
           foo: 'bar',
@@ -143,11 +143,11 @@ describe('corsproxy.middleware.mutator', () => {
 
     to(req, res, next)
 
-    expect(reqHeaders.foo).to.be.undefined()
-    expect(reqHeaders.bar).to.equal('baz')
-    expect(reqHeaders['Foo-Bar-Baz']).to.equal('aaa')
-    expect(reqHeaders['foo-bar-baz']).to.equal('aaa')
-    expect(reqHeaders.baz).to.equal(';kassa.qiwi.tools;example.com;')
-    expect(reqHeaders.qux).to.eql(['ba', 'dc', 'efg'])
+    expect(reqHeaders.foo).toBeUndefined()
+    expect(reqHeaders.bar).toBe('baz')
+    expect(reqHeaders['Foo-Bar-Baz']).toBe('aaa')
+    expect(reqHeaders['foo-bar-baz']).toBe('aaa')
+    expect(reqHeaders.baz).toBe(';kassa.qiwi.tools;example.com;')
+    expect(reqHeaders.qux).toEqual(['ba', 'dc', 'efg'])
   })
 })

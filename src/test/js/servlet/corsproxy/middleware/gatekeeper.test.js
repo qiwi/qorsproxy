@@ -1,4 +1,4 @@
-import reqresnext from 'reqresnext'
+import { reqresnext } from '../../../reqresnext.js'
 import gatekeeper, {
   RECURSIVE_REQUEST,
   FORBIDDEN_REQUEST,
@@ -18,49 +18,49 @@ describe('corsproxy.middleware.gatekeeper', () => {
 
   it('asserts destination host existence', () => {
     const path = { host: null }
-    const { req, res, next } = reqresnext.default({ proxy: { server: { host, port }, rule, id, from, to, user, path } }, {})
+    const { req, res, next } = reqresnext({ proxy: { server: { host, port }, rule, id, from, to, user, path } }, {})
 
     gatekeeper(req, res, next)
-    expect(res.statusCode).to.equal(OK)
+    expect(res.statusCode).toBe(OK)
   })
 
   it('prevents recursive request', () => {
     const path = { hostname: host, host, port }
-    const { req, res, next } = reqresnext.default({ proxy: { server: { host, port }, rule, id, from, to, user, path } }, {})
+    const { req, res, next } = reqresnext({ proxy: { server: { host, port }, rule, id, from, to, user, path } }, {})
 
     gatekeeper(req, res, next)
-    expect(res.statusCode).to.equal(FORBIDDEN)
-    expect(res.body).to.equal(JSON.stringify({ message: RECURSIVE_REQUEST }))
+    expect(res.statusCode).toBe(FORBIDDEN)
+    expect(res.body).toBe(JSON.stringify({ message: RECURSIVE_REQUEST }))
   })
 
   it('breaks cycled request (XFH)', () => {
     const path = { hostname: host, host, port }
     const proxyHost = `${host}:${port}`
     const headers = { [XFH]: proxyHost }
-    const { req, res, next } = reqresnext.default({ headers, proxy: { server: { host, port }, path } }, {})
+    const { req, res, next } = reqresnext({ headers, proxy: { server: { host, port }, path } }, {})
 
     gatekeeper(req, res, next)
-    expect(res.statusCode).to.equal(FORBIDDEN)
-    expect(res.body).to.equal(JSON.stringify({ message: CYCLED_REQUEST }))
+    expect(res.statusCode).toBe(FORBIDDEN)
+    expect(res.body).toBe(JSON.stringify({ message: CYCLED_REQUEST }))
   })
 
   it('checks route/rule existence', () => {
     const path = { hostname: 'qiwi.com', host: 'qiwi.com', port: 80 }
-    const { req, res, next } = reqresnext.default({ proxy: { server: { host, port }, path } }, {})
+    const { req, res, next } = reqresnext({ proxy: { server: { host, port }, path } }, {})
 
     gatekeeper(req, res, next)
-    expect(res.statusCode).to.equal(FORBIDDEN)
-    expect(res.body).to.include(FORBIDDEN_REQUEST)
+    expect(res.statusCode).toBe(FORBIDDEN)
+    expect(res.body).toContain(FORBIDDEN_REQUEST)
   })
 
   it('proceeds to next otherwise', () => {
     const rule = true
     const path = { hostname: 'example.com', host: 'example.com', port: 80 }
-    const next = sinon.spy(() => {})
-    const { req, res } = reqresnext.default({ proxy: { rule, server: { host, port }, path } }, {})
+    const next = vi.fn()
+    const { req, res } = reqresnext({ proxy: { rule, server: { host, port }, path } }, {})
 
     gatekeeper(req, res, next)
-    expect(next).to.be.called()
-    expect(res.body).to.equal(undefined)
+    expect(next).toHaveBeenCalled()
+    expect(res.body).toBeUndefined()
   })
 })

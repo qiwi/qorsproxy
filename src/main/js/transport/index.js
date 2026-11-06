@@ -1,4 +1,4 @@
-import { request } from 'undici'
+import { request } from './undici.js'
 
 export const transport = {
   request

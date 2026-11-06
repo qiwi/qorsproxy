@@ -1,4 +1,4 @@
-import reqresnext from 'reqresnext'
+import { reqresnext } from '../../../reqresnext.js'
 import memo from '../../../../../main/js/servlet/corsproxy/middlewares/memo.js'
 import path, { dirname } from 'node:path'
 import fs from 'node:fs'
@@ -6,21 +6,18 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const stub = path.resolve(__dirname, './stub.json')
-const sandbox = sinon.createSandbox()
 
 describe('corsproxy.middleware.memo', () => {
   describe('', () => {
-    before(() => {
+    beforeAll(() => {
       fs.writeFileSync(stub, JSON.stringify({}), 'utf8')
     })
-    after(() => {
-      sandbox.restore()
-
+    afterAll(() => {
       fs.writeFileSync(stub, JSON.stringify({}), 'utf8')
     })
 
     it('collects response data to stub.json', () => {
-      const { req, res, next } = reqresnext.default({
+      const { req, res, next } = reqresnext({
         method: 'GET',
         proxy: {
           id: '123',
@@ -54,11 +51,11 @@ describe('corsproxy.middleware.memo', () => {
       const value = { statusCode: 200, body: '{"foo":"bar"}', headers: { 'content-type': 'application/json; charset=utf-8', 'content-length': '13' } }
       const json = JSON.parse(fs.readFileSync(stub, 'utf8'))
 
-      expect(json[key].value).to.deep.equal(value)
+      expect(json[key].value).toEqual(value)
     })
 
     it('replaces errored (>=500) responses with sucessed (<=500) stubs', () => {
-      const { req, res, next } = reqresnext.default({
+      const { req, res, next } = reqresnext({
         method: 'GET',
         proxy: {
           id: '123',
@@ -93,7 +90,7 @@ describe('corsproxy.middleware.memo', () => {
       fs.writeFileSync(stub, JSON.stringify(json), 'utf8')
       memo(req, res, next)
 
-      expect(JSON.parse(res.piped.body.toString('utf8'))).to.deep.equal({ foo: 'bar' })
+      expect(JSON.parse(res.piped.body.toString('utf8'))).toEqual({ foo: 'bar' })
     })
   })
 })

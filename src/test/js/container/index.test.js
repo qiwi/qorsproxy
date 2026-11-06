@@ -1,5 +1,5 @@
 import EventEmitter from 'node:events'
-import reqresnext from 'reqresnext'
+import { reqresnext } from '../reqresnext.js'
 import { Container, HttpServer as Server } from '../../../main/js/container/index.js'
 
 describe('container', () => {
@@ -10,16 +10,19 @@ describe('container', () => {
   const bar = { handler () { throw new Error('Bar unhandled') } }
   const servlets = { foo, bar }
 
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
   describe('constructor', () => {
     it('returns proper instance', async () => {
       const container = await new Container().configure({ host, port, servlets, secure })
 
-      expect(container.server).to.be.an.instanceof(Server)
-      expect(container.online).to.be.a('boolean')
+      expect(container.server).toBeInstanceOf(Server)
+      expect(container.online).toBeTypeOf('boolean')
     })
   })
 
-  // eslint-disable-next-line  sonarjs/cognitive-complexity
   describe('proto', () => {
     describe('configure', async () => {
       const container = await new Container().configure({ host, port, servlets, secure })
@@ -29,36 +32,32 @@ describe('container', () => {
       container.httpsServer.close = () => {}
 
       beforeEach(() => {
-        sinon.spy(container, 'restart')
-      })
-
-      afterEach(() => {
-        container.restart.restore()
+        vi.spyOn(container, 'restart')
       })
 
       it('registers new servlets', async () => {
         const servlets = {}
         await container.configure({ servlets })
-        expect(container.servlets).to.equal(servlets)
+        expect(container.servlets).toBe(servlets)
       })
 
-      it('triggers restart when `port` changes', async () => {
+      it('triggers restart when `host` changes', async () => {
         const host = '0.0.0.0'
         container.online = true
         await container.configure({ host, secure })
 
-        expect(container.host).to.equal(host)
-        container.restart.should.have.been.called()
+        expect(container.host).toBe(host)
+        expect(container.restart).toHaveBeenCalled()
       })
 
-      it('triggers restart when `host` changes', async () => {
+      it('triggers restart when `port` changes', async () => {
         const port = 8080
         container.online = true
         await container.configure({ port, secure })
 
-        expect(container.port).to.equal(port)
-        expect(container.secure).to.equal(secure)
-        container.restart.should.have.been.called()
+        expect(container.port).toBe(port)
+        expect(container.secure).toBe(secure)
+        expect(container.restart).toHaveBeenCalled()
       })
     })
 
@@ -68,45 +67,43 @@ describe('container', () => {
       beforeEach(async () => {
         container = await new Container().configure({ host, port, servlets, secure })
         const methods = ['listen', 'close']
+        const fake = (arg0, arg1, arg2) => {
+          if (typeof arg0 === 'function') { arg0() }
+          if (typeof arg2 === 'function') { arg2() }
+        }
 
         methods.forEach(m => {
-          sinon.stub(container.server, m).callsFake((arg0, arg1, arg2) => {
-            if (typeof arg0 === 'function') { arg0() }
-            if (typeof arg2 === 'function') { arg2() }
-          })
-          sinon.stub(container.httpsServer, m).callsFake((arg0, arg1, arg2) => {
-            if (typeof arg0 === 'function') { arg0() }
-            if (typeof arg2 === 'function') { arg2() }
-          })
+          vi.spyOn(container.server, m).mockImplementation(fake)
+          vi.spyOn(container.httpsServer, m).mockImplementation(fake)
         })
 
         const listeners = {}
         const httpsServer = container.httpsServer
-        sinon.stub(container.server, 'on').callsFake((event, handler) => {
+        vi.spyOn(container.server, 'on').mockImplementation((event, handler) => {
           listeners[event] = handler
         })
-        sinon.stub(container.server, 'emit').callsFake((event, ...args) => {
+        vi.spyOn(container.server, 'emit').mockImplementation((event, ...args) => {
           const handler = listeners[event]
           if (handler) {
             handler(...args)
           }
         })
-        sinon.stub(container, 'initSecureServer').callsFake(() => httpsServer)
+        vi.spyOn(container, 'initSecureServer').mockImplementation(() => httpsServer)
       })
 
       describe('start', () => {
         it('starts inner server if it looks stopped', async () => {
           container.online = false
           await container.start()
-          expect(container.server.listen).to.have.been.called()
-          expect(container.httpsServer.listen).to.have.been.called()
+          expect(container.server.listen).toHaveBeenCalled()
+          expect(container.httpsServer.listen).toHaveBeenCalled()
         })
 
         it('does nothing otherwise', async () => {
           container.online = true
           await container.start()
-          expect(container.server.listen).to.not.have.been.called()
-          expect(container.httpsServer.listen).to.not.have.been.called()
+          expect(container.server.listen).not.toHaveBeenCalled()
+          expect(container.httpsServer.listen).not.toHaveBeenCalled()
         })
       })
 
@@ -114,15 +111,15 @@ describe('container', () => {
         it('turns off inner server if it\'s online', async () => {
           container.online = true
           await container.stop()
-          expect(container.server.close).to.have.been.called()
-          expect(container.httpsServer.close).to.have.been.called()
+          expect(container.server.close).toHaveBeenCalled()
+          expect(container.httpsServer.close).toHaveBeenCalled()
         })
 
         it('does nothing otherwise', async () => {
           container.online = false
           await container.stop()
-          expect(container.server.close).to.not.have.been.called()
-          expect(container.httpsServer.close).to.not.have.been.called()
+          expect(container.server.close).not.toHaveBeenCalled()
+          expect(container.httpsServer.close).not.toHaveBeenCalled()
         })
       })
 
@@ -130,10 +127,10 @@ describe('container', () => {
         it('restarts server', async () => {
           container.online = true
           await container.restart()
-          expect(container.server.listen).to.have.been.called()
-          expect(container.server.close).to.have.been.called()
-          expect(container.httpsServer.close).to.have.been.called()
-          expect(container.online).to.be.true()
+          expect(container.server.listen).toHaveBeenCalled()
+          expect(container.server.close).toHaveBeenCalled()
+          expect(container.httpsServer.close).toHaveBeenCalled()
+          expect(container.online).toBe(true)
         })
       })
     })
@@ -144,7 +141,7 @@ describe('container', () => {
         const req = new EventEmitter()
         const res = {}
 
-        sinon.stub(container, 'handler').callsFake(() => {})
+        vi.spyOn(container, 'handler').mockImplementation(() => {})
         container.collector(req, res)
 
         req.emit('data', Buffer.from('foo'))
@@ -152,8 +149,8 @@ describe('container', () => {
         req.emit('data', Buffer.from('bar'))
         req.emit('end')
 
-        expect(req.body).to.deep.equal(Buffer.from('foobar'))
-        container.handler.should.have.been.calledWith(req, res)
+        expect(req.body).toEqual(Buffer.from('foobar'))
+        expect(container.handler).toHaveBeenCalledWith(req, res)
       })
     })
 
@@ -163,53 +160,52 @@ describe('container', () => {
 
       beforeEach(async () => {
         servlets = { foo: { handler: foo.handler }, bar: { handler: bar.handler } }
-        sinon.spy(servlets.foo, 'handler')
-        sinon.spy(servlets.bar, 'handler')
+        vi.spyOn(servlets.foo, 'handler')
+        vi.spyOn(servlets.bar, 'handler')
 
         container = await new Container().configure({ host, port, servlets, secure })
         container.online = true
       })
 
       it('passes request control to handler', () => {
-        const { req, res } = reqresnext.default({ url: 'foo/inner' })
+        const { req, res } = reqresnext({ url: 'foo/inner' })
 
-        // TODO fix reqresnext
         req.on = (e, f) => { f(); return req }
 
         container.server.emit('request', req, res)
         req.emit('end')
 
-        expect(servlets.foo.handler).to.have.been.called()
+        expect(servlets.foo.handler).toHaveBeenCalled()
       })
 
       it('invokes found servlet', () => {
-        const { req, res } = reqresnext.default({ url: 'foo/inner' })
+        const { req, res } = reqresnext({ url: 'foo/inner' })
 
         container.handler(req, res)
-        expect(servlets.foo.handler).to.have.been.called()
+        expect(servlets.foo.handler).toHaveBeenCalled()
       })
 
       it('returns InternalError on servlet unhandled', () => {
-        const { req, res } = reqresnext.default({ url: 'bar/some' })
+        const { req, res } = reqresnext({ url: 'bar/some' })
 
         container.handler(req, res)
-        expect(servlets.bar.handler).to.have.been.called()
-        expect(res.body).to.equal('Internal Server Error')
+        expect(servlets.bar.handler).toHaveBeenCalled()
+        expect(res.body).toBe('Internal Server Error')
       })
 
       it('returns NotFound otherwise', () => {
-        const { req, res } = reqresnext.default({ url: 'bazzz' })
+        const { req, res } = reqresnext({ url: 'bazzz' })
 
         container.handler(req, res)
-        expect(res.body).to.equal('Not Found')
+        expect(res.body).toBe('Not Found')
       })
 
       it('drops connection if offline', () => {
-        const { req, res } = reqresnext.default({ url: 'bazzz' })
+        const { req, res } = reqresnext({ url: 'bazzz' })
 
         container.online = false
         container.handler(req, res)
-        expect(res.body).to.equal(undefined)
+        expect(res.body).toBeUndefined()
       })
     })
   })

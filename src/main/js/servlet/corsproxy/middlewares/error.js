@@ -8,7 +8,7 @@ import log from '../../../log/index.js'
  * @param {Object} res
  * @param {Function} next
  */
-export default (err, req, res, next) => {
+export default (err, req, res, _next) => {
   log.error('Proxy unexpected error', err)
 
   res

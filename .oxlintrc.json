@@ -1,0 +1,56 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "unicorn",
+    "import",
+    "promise",
+    "node"
+  ],
+  "categories": {
+    "correctness": "error",
+    "perf": "warn",
+    "suspicious": "warn"
+  },
+  "env": {
+    "es2024": true,
+    "node": true
+  },
+  "globals": {
+    "describe": "readonly",
+    "it": "readonly",
+    "expect": "readonly",
+    "vi": "readonly",
+    "beforeAll": "readonly",
+    "afterAll": "readonly",
+    "beforeEach": "readonly",
+    "afterEach": "readonly"
+  },
+  "rules": {
+    "unicorn/prefer-type-error": "off",
+    "unicorn/consistent-function-scoping": "off",
+    "no-underscore-dangle": "off",
+    "no-shadow": "off",
+    "no-console": "off",
+    "no-empty": "error",
+    "no-debugger": "error",
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true
+      }
+    ],
+    "promise/no-callback-in-promise": "off",
+    "promise/always-return": "off"
+  },
+  "ignorePatterns": [
+    "src/test/fixtures/**",
+    "node_modules",
+    "coverage",
+    "docs",
+    "logs",
+    "temp"
+  ]
+}

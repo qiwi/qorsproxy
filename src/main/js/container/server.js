@@ -12,6 +12,8 @@ export function applyServerMixin (Class) {
           }
           resolve()
         })
+        // Node.js 19+ does it within `close()`, 18.2+ needs a hint, older versions wait for keep-alive timeouts
+        this.closeIdleConnections?.()
       })
     }
 
