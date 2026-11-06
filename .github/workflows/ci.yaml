@@ -46,10 +46,13 @@ jobs:
   # Legacy consumers run on Node.js 16: install the package the way they do
   # (npm, fresh resolution, no lockfile) and smoke-test that build.
   legacy:
-    name: Smoke (Node.js 16)
+    name: Smoke (Node.js ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    strategy:
+      matrix:
+        node-version: [16] # the lowest supported, see `engines.node`
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -59,7 +62,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v7
         with:
-          node-version: 16
+          node-version: ${{ matrix.node-version }}
           package-manager-cache: false
 
       - name: Install the package like a consumer
