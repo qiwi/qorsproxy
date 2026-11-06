@@ -19,4 +19,16 @@ describe('applyServerMixin', () => {
     expect(listen).toHaveBeenCalled()
     expect(close).toHaveBeenCalled()
   })
+
+  it('rejects on close and listen errors', async () => {
+    const error = new Error('boom')
+    class TestClass {
+      close (cb) { cb(error) }
+      listen () { throw error }
+    }
+    const instance = new (applyServerMixin(TestClass))()
+
+    await expect(instance.close()).rejects.toBe(error)
+    await expect(instance.listen()).rejects.toBe(error)
+  })
 })

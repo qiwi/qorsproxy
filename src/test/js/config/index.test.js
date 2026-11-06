@@ -68,6 +68,12 @@ describe('config', () => {
       fs.unwatchFile(file)
     }, 5000) // fs.watchFile polls every `watch` seconds
 
+    it('READY (config object)', async () => {
+      const data = await once(new Config({ host, port, config: { rules: {} } }), READY)
+
+      expect(data).toMatchObject({ rules: DEFAULTS.rules, server: { host, port } })
+    })
+
     it('ERROR (read)', async () => {
       const file = temporaryFile()
       const error = await once(new Config({ host, port, config: file }), ERROR)

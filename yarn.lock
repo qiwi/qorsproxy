@@ -288,6 +288,7 @@ __metadata:
     winston: "npm:^3.19.0"
     winston-daily-rotate-file: "npm:^5.0.0"
   bin:
+    qors: src/main/js/cli.js
     qorsproxy: src/main/js/cli.js
   languageName: unknown
   linkType: soft

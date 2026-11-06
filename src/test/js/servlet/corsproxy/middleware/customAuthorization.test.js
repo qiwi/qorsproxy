@@ -36,4 +36,38 @@ describe('corsproxy.middleware.customAuthorization', () => {
     expect(req.url).toBe(targetUrl)
     expect(req.headers.Authorization).toBe('SuchSecretMuchSecurity')
   })
+
+  it('responds 403 if the token is not found', async () => {
+    vi.spyOn(transport, 'request').mockResolvedValue({ statusCode, body: [Buffer.from('not a json')], headers })
+
+    const { req, res } = reqresnext({ proxy, url: targetUrl, headers }, {})
+    const next = vi.fn()
+    const finished = new Promise(resolve => res.on('finish', resolve))
+    customAuthorization(req, res, next)
+    await finished
+
+    expect(next).not.toHaveBeenCalled()
+    expect(res.statusCode).toBe(403)
+    expect(res.body).toBe('auth failed')
+  })
+
+  it('passes transport errors to next', async () => {
+    const error = new Error('unreachable')
+    vi.spyOn(transport, 'request').mockRejectedValue(error)
+
+    const { req, res } = reqresnext({ proxy, url: targetUrl, headers }, {})
+
+    expect(await new Promise(resolve => customAuthorization(req, res, resolve))).toBe(error)
+  })
+
+  it('skips requests out of the target url', () => {
+    vi.spyOn(transport, 'request')
+    const next = vi.fn()
+    const { req, res } = reqresnext({ proxy, url: '/https://other', headers }, {})
+
+    customAuthorization(req, res, next)
+
+    expect(next).toHaveBeenCalledWith()
+    expect(transport.request).not.toHaveBeenCalled()
+  })
 })

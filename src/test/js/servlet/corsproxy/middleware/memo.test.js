@@ -92,5 +92,25 @@ describe('corsproxy.middleware.memo', () => {
 
       expect(JSON.parse(res.piped.body.toString('utf8'))).toEqual({ foo: 'bar' })
     })
+
+    it('skips hosts out of the memo list', () => {
+      const piped = { statusCode: 500, body: Buffer.from('{}'), headers: {} }
+      const next = vi.fn()
+      const { req, res } = reqresnext({
+        method: 'GET',
+        proxy: {
+          path: { href: 'https://other.com/' },
+          to: 'other.com',
+          rule: { memo: { strategy: 'override', dir: stub, host: ['example.com'] } }
+        }
+      }, { piped })
+      const before = fs.readFileSync(stub, 'utf8')
+
+      memo(req, res, next)
+
+      expect(next).toHaveBeenCalled()
+      expect(res.piped).toBe(piped)
+      expect(fs.readFileSync(stub, 'utf8')).toBe(before)
+    })
   })
 })

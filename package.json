@@ -15,8 +15,8 @@
     }
   },
   "bin": {
-    "qorsproxy": "src/main/js/cli.js",
-    "qors": "src/main/js/cli.js"
+    "qors": "src/main/js/cli.js",
+    "qorsproxy": "src/main/js/cli.js"
   },
   "scripts": {
     "start:pm2": "pm2 start npm --name qorsproxy -- start",
