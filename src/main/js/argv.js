@@ -5,7 +5,7 @@ const short = new Set(Object.keys(alias))
 const string = ['config', 'host', 'port', 'watch']
 const unsafe = new Set(['__proto__', 'constructor', 'prototype'])
 
-const camelCase = (key) => key.replace(/-+([^-])/g, (_, c) => c.toUpperCase())
+const camelCase = (key) => key.split('-').filter(Boolean).map((part, i) => i ? part[0].toUpperCase() + part.slice(1) : part).join('')
 
 /**
  * Parses CLI args the way the former meow setup did: long names only, camelCased keys,

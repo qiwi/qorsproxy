@@ -52,7 +52,7 @@ describe('config', () => {
       fs.unwatchFile(file)
     })
 
-    it.skip('UPDATE', async () => {
+    it('UPDATE', async () => {
       const file = temporaryFile()
       fs.writeFileSync(file, JSON.stringify({}))
 
@@ -66,7 +66,7 @@ describe('config', () => {
 
       expect(await updated).toMatchObject({ c: 'c' })
       fs.unwatchFile(file)
-    }, 1000)
+    }, 5000) // fs.watchFile polls every `watch` seconds
 
     it('ERROR (read)', async () => {
       const file = temporaryFile()
