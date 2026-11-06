@@ -1,12 +1,14 @@
-## Qorsproxy
+## qorsproxy
 ~~Cors~~ http(s) proxy for ~~dev~~ any purposes  
 
-[![CI](https://github.com/qiwi/qorsproxy/workflows/CI/badge.svg)](https://github.com/qiwi/qorsproxy/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/50acfd98bab6f903d950/maintainability)](https://codeclimate.com/github/qiwi/qorsproxy/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/50acfd98bab6f903d950/test_coverage)](https://codeclimate.com/github/qiwi/qorsproxy/test_coverage)
-[![npm (tag)](https://img.shields.io/npm/v/qorsproxy/latest.svg)](https://www.npmjs.com/package/qorsproxy)
+[![CI](https://github.com/qiwi/qorsproxy/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/qiwi/qorsproxy/actions/workflows/ci.yaml)
+[![Maintainability](https://qlty.sh/gh/qiwi/projects/qorsproxy/maintainability.svg)](https://qlty.sh/gh/qiwi/projects/qorsproxy)
+[![Code Coverage](https://qlty.sh/gh/qiwi/projects/qorsproxy/coverage.svg)](https://qlty.sh/gh/qiwi/projects/qorsproxy)
+[![npm](https://img.shields.io/npm/v/qorsproxy.svg)](https://www.npmjs.com/package/qorsproxy)
 
 ## Install
+Requires Node.js >= 16.
+
 ```bash
 # npm
 npm i qorsproxy --save-dev
@@ -23,7 +25,7 @@ npx qorsproxy [options]
 ```bash
 qorsproxy -p 8080 -c /Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
 ```
-or any other way:
+or via runners:
 ```bash
 npm start -- --config=path
 pm2 start npm --name qorsproxy -- start -- --port=8080 --config=/Users/a.golub/repo/qorsproxy/config/qorsproxy.dev.qiwi.tools.json
@@ -92,6 +94,9 @@ Qorsproxy applies [the first matched](./src/main/js/servlet/corsproxy/rules.js#L
       "to": [
         "example.com"
       ],
+      "paths": [
+        "/"
+      ],
       "mutations": [
         {
           "direction": "to",
@@ -119,7 +124,7 @@ Qorsproxy applies [the first matched](./src/main/js/servlet/corsproxy/rules.js#L
   }
 }
 ```
-Or as array:
+array syntax is suitable too:
 ```json
 {
   "rules": [
@@ -150,12 +155,13 @@ Or as array:
 ```
 
 #### `server`
-Everything is simple here: `host` and `port`.
 ```json
 {
   "server": {
     "host": "127.0.0.1",
-    "port": 8080
+    "port": 8080,
+    "cert": "/path/to/cert.pem", // Defaults to ./ssl/cert.pem
+    "key": "/path/to/key.pem"    // and ./ssl/key.pem
   }
 }
 ```
