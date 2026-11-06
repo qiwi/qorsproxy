@@ -36,7 +36,7 @@ describe('config', () => {
       })
 
       it('getAll returns entire data', () => {
-        expect(Object.keys(config.getAll()).sort()).toEqual(['crumbs', 'log', 'rules', 'server'])
+        expect(Object.keys(config.getAll()).toSorted()).toEqual(['crumbs', 'log', 'rules', 'server'])
       })
     })
   })

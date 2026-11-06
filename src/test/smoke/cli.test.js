@@ -34,7 +34,9 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 // Array bodies are written chunk by chunk, so node:http switches to chunked transfer encoding
 const request = (url, { method = 'GET', headers = {}, body } = {}) => new Promise((resolve, reject) => {
   const client = url.startsWith('https:') ? https : http
-  const req = client.request(url, { method, headers, rejectUnauthorized: false }, async (res) => {
+  // Trust the bundled self-signed cert (CN=localhost) rather than skip the validation
+  const tlsOptions = client === https ? { ca: tls.cert, servername: 'localhost' } : {}
+  const req = client.request(url, { method, headers, ...tlsOptions }, async (res) => {
     const chunks = []
     for await (const chunk of res) chunks.push(chunk)
     resolve({ status: res.statusCode, headers: res.headers, body: Buffer.concat(chunks).toString() })
@@ -84,16 +86,18 @@ describe('cli', () => {
       ''
     ].join('\n'))
 
-    // Upstreams use a self-signed cert
-    proxy = spawn(process.execPath, [cli, '--config', config], { env: { ...process.env, NODE_TLS_REJECT_UNAUTHORIZED: '0' } })
+    // The https upstream uses the same self-signed cert
+    proxy = spawn(process.execPath, [cli, '--config', config], { env: { ...process.env, NODE_EXTRA_CA_CERTS: path.join(root, 'ssl/cert.pem') } })
     proxy.stderr.on('data', chunk => { stderr += chunk })
 
-    for (let i = 0; ; i++) {
+    const ready = async (attempt = 0) => {
       assert.equal(proxy.exitCode, null, `CLI exited: ${stderr}`)
-      if (await request(`http://127.0.0.1:${port}/health`).then(({ status }) => status === 200, () => false)) break
-      assert.ok(i < 100, `CLI is not ready: ${stderr}`)
+      if (await request(`http://127.0.0.1:${port}/health`).then(({ status }) => status === 200, () => false)) return
+      assert.ok(attempt < 100, `CLI is not ready: ${stderr}`)
       await sleep(100)
+      return ready(attempt + 1)
     }
+    await ready()
   })
 
   after(async () => {
