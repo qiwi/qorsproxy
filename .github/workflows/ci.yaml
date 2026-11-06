@@ -34,6 +34,15 @@ jobs:
       - name: Test
         run: yarn test
 
+      - name: Upload coverage to Qlty
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: qltysh/qlty-action/coverage@ebcd284bf32e36a030afe15f1e136c7be08b9506 # v2.5.0
+        env:
+          QLTY_TOKEN: ${{ secrets.QLTY_TOKEN }}
+        with:
+          token: ${{ env.QLTY_TOKEN }}
+          files: coverage/lcov.info
+
   # Legacy consumers run on Node.js 16: install the package the way they do
   # (npm, fresh resolution, no lockfile) and smoke-test that build.
   legacy:
@@ -71,18 +80,8 @@ jobs:
     needs: [test, legacy]
     runs-on: ubuntu-latest
     permissions:
-      contents: write # push the release commit, tag and gh-pages; create the GitHub release
-      packages: write # publish to GitHub Packages
+      contents: write # push docs to gh-pages
       id-token: write # npm OIDC trusted publishing & provenance
-    # Common secrets/inputs reused across release steps. Job-scoped so they
-    # don't leak into earlier steps (checkout/setup-node/install) and are
-    # referenced via $VAR in shells, not via ${{ secrets.X }}.
-    env:
-      GIT_AUTHOR_NAME: ${{ secrets.GIT_AUTHOR_NAME }}
-      GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL }}
-      GIT_COMMITTER_NAME: ${{ secrets.GIT_COMMITTER_NAME }}
-      GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
-      REPO: ${{ github.repository }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -102,16 +101,22 @@ jobs:
       - name: Build docs
         run: yarn build
 
+      # Commit, tag, GitHub release and GitHub Packages publish go on behalf of the org bot
       - name: Release npm package
         env:
-          GH_USER: x-access-token
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_COMMITTER_NAME: ${{ vars.GIT_COMMITTER_NAME }}
+          GIT_COMMITTER_EMAIL: ${{ vars.GIT_COMMITTER_EMAIL }}
+          GH_USER: ${{ vars.GH_USER }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_OIDC: true
           NPM_PROVENANCE: true
         run: npx zx-semrel
 
       - name: Push docs to gh-pages
         env:
+          GIT_COMMITTER_NAME: ${{ vars.GIT_COMMITTER_NAME }}
+          GIT_COMMITTER_EMAIL: ${{ vars.GIT_COMMITTER_EMAIL }}
           GH_PAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
         run: |
           npx ggcp 'docs>**/*' "https://x-access-token:$GH_PAGES_TOKEN@github.com/$REPO.git/gh-pages" --message='docs: update gh-pages'

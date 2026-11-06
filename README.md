@@ -2,7 +2,9 @@
 ~~Cors~~ http(s) proxy for ~~dev~~ any purposes  
 
 [![CI](https://github.com/qiwi/qorsproxy/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/qiwi/qorsproxy/actions/workflows/ci.yaml)
-[![npm (tag)](https://img.shields.io/npm/v/qorsproxy/latest.svg)](https://www.npmjs.com/package/qorsproxy)
+[![Maintainability](https://qlty.sh/gh/qiwi/projects/qorsproxy/maintainability.svg)](https://qlty.sh/gh/qiwi/projects/qorsproxy)
+[![Code Coverage](https://qlty.sh/gh/qiwi/projects/qorsproxy/coverage.svg)](https://qlty.sh/gh/qiwi/projects/qorsproxy)
+[![npm](https://img.shields.io/npm/v/qorsproxy.svg)](https://www.npmjs.com/package/qorsproxy)
 
 ## Install
 Requires Node.js >= 16.
