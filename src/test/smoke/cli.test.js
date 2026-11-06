@@ -14,7 +14,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..')
 const pkgDir = process.env.QORSPROXY_PKG || root
 const pkg = JSON.parse(fs.readFileSync(path.join(pkgDir, 'package.json'), 'utf8'))
-const cli = path.join(pkgDir, pkg.bin)
+const cli = path.join(pkgDir, pkg.bin.qorsproxy)
 const api = pathToFileURL(path.join(pkgDir, pkg.exports['.'].import)).href
 const tls = {
   cert: fs.readFileSync(path.join(root, 'ssl/cert.pem')),

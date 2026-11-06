@@ -14,7 +14,9 @@
       "import": "./src/main/js/index.js"
     }
   },
-  "bin": "src/main/js/cli.js",
+  "bin": {
+    "qorsproxy": "src/main/js/cli.js"
+  },
   "scripts": {
     "start:pm2": "pm2 start npm --name qorsproxy -- start",
     "start": "node src/main/js/cli.js",
