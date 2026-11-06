@@ -1,3 +1,11 @@
+## [4.2.0](https://github.com/qiwi/qorsproxy/compare/v4.1.3...v4.2.0) (2026-11-06)
+
+### Features
+* feat: add bin alias `qors` ([f70da4b](https://github.com/qiwi/qorsproxy/commit/f70da4be25d99914cb57641fa4cc24abdf957be9))
+
+### Fixes & improvements
+* perf: tech release ([4dda009](https://github.com/qiwi/qorsproxy/commit/4dda0094a7d538117cf2bbf11050f28be35b553b))
+
 ## [4.1.3](https://github.com/qiwi/qorsproxy/compare/v4.1.2...v4.1.3) (2026-11-06)
 
 ### Fixes & improvements
