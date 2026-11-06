@@ -1,3 +1,8 @@
+## [4.1.3](https://github.com/qiwi/qorsproxy/compare/v4.1.2...v4.1.3) (2026-11-06)
+
+### Fixes & improvements
+* fix(deps): replace undici transport, patch vulnerable deps, keep node 16 compat ([cec9b4f](https://github.com/qiwi/qorsproxy/commit/cec9b4f21699fbfa4f13ce08df047d46c7d954d3))
+
 ## [4.1.2](https://github.com/qiwi/qorsproxy/compare/v4.1.1...v4.1.2) (2025-04-01)
 
 ### Fixes & improvements
