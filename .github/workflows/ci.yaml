@@ -110,7 +110,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_OIDC: true
           NPM_PROVENANCE: true
-        run: npx zx-semrel@^1
+        run: npx --ignore-scripts zx-semrel@^1
 
       - name: Push docs to gh-pages
         env:
@@ -119,4 +119,4 @@ jobs:
           GH_PAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
-          npx ggcp@^1 'docs>**/*' "https://x-access-token:$GH_PAGES_TOKEN@github.com/$REPO.git/gh-pages" --message='docs: update gh-pages'
+          npx --ignore-scripts ggcp@^1 'docs>**/*' "https://x-access-token:$GH_PAGES_TOKEN@github.com/$REPO.git/gh-pages" --message='docs: update gh-pages'

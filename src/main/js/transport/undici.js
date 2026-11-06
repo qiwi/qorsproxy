@@ -39,7 +39,8 @@ export const request = (url, { method = 'GET', headers, body, headersTimeout = 3
   // Unsupported protocols fall through to `http.request()`, which throws ERR_INVALID_PROTOCOL
   const [client, agent] = clients[new URL(url).protocol] ?? [http]
   const onHeadersTimeout = () => req.destroy(error('Headers Timeout Error', 'UND_ERR_HEADERS_TIMEOUT'))
-  const req = client.request(url, { method, headers, agent }, (res) => {
+  // Requesting a client-defined destination is the proxy's job: the gatekeeper middleware restricts it by the config rules
+  const req = client.request(url, { method, headers, agent }, (res) => { // NOSONAR
     req.off('timeout', onHeadersTimeout)
     req.setTimeout(bodyTimeout, () => res.destroy(error('Body Timeout Error', 'UND_ERR_BODY_TIMEOUT')))
     resolve({ statusCode: res.statusCode, headers: parseHeaders(res.rawHeaders), body: res })
