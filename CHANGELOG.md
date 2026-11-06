@@ -1,3 +1,8 @@
+## [4.2.1](https://github.com/qiwi/qorsproxy/compare/v4.2.0...v4.2.1) (2026-11-06)
+
+### Fixes & improvements
+* fix: match rule `paths` against the request pathname ([8e96340](https://github.com/qiwi/qorsproxy/commit/8e9634002d43c1efb4b31b486beeb8082f7abe57))
+
 ## [4.2.0](https://github.com/qiwi/qorsproxy/compare/v4.1.3...v4.2.0) (2026-11-06)
 
 ### Features
