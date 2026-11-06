@@ -80,7 +80,8 @@ jobs:
     needs: [test, legacy]
     runs-on: ubuntu-latest
     permissions:
-      contents: write # push docs to gh-pages
+      contents: write # push the release commit, tag and gh-pages; create the GitHub release
+      packages: write # publish to GitHub Packages
       id-token: write # npm OIDC trusted publishing & provenance
     steps:
       - name: Checkout
@@ -101,13 +102,13 @@ jobs:
       - name: Build docs
         run: yarn build
 
-      # Commit, tag, GitHub release and GitHub Packages publish go on behalf of the org bot
+      # Pushes and publishes with the job's GITHUB_TOKEN, commits are signed off by the org bot identity
       - name: Release npm package
         env:
           GIT_COMMITTER_NAME: ${{ vars.GIT_COMMITTER_NAME }}
           GIT_COMMITTER_EMAIL: ${{ vars.GIT_COMMITTER_EMAIL }}
-          GH_USER: ${{ vars.GH_USER }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_USER: x-access-token
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_OIDC: true
           NPM_PROVENANCE: true
         run: npx --ignore-scripts zx-semrel@^1
