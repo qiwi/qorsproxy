@@ -12,7 +12,7 @@ describe('corsproxy.middleware.logger', () => {
     expect(getLogLevelByStatus(INTERNAL_SERVER_ERROR)).toBe(ERROR)
   })
 
-  describe('', () => {
+  describe('logs', () => {
     beforeAll(() => {
       vi.spyOn(log, INFO)
       vi.spyOn(log, WARN)

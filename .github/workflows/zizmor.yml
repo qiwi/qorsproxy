@@ -31,4 +31,4 @@ jobs:
           enable-cache: false
 
       - name: Run zizmor
-        run: uvx zizmor@1.30.1 .github/workflows -v -p --min-severity=medium
+        run: uvx --no-build zizmor@1.30.1 .github/workflows -v -p --min-severity=medium

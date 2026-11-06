@@ -8,7 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const stub = path.resolve(__dirname, './stub.json')
 
 describe('corsproxy.middleware.memo', () => {
-  describe('', () => {
+  describe('with a stub file', () => {
     beforeAll(() => {
       fs.writeFileSync(stub, JSON.stringify({}), 'utf8')
     })

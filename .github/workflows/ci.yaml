@@ -29,7 +29,7 @@ jobs:
           package-manager-cache: false
 
       - name: Install deps
-        run: yarn install --immutable
+        run: yarn install --immutable --mode=skip-build
 
       - name: Test
         run: yarn test
@@ -96,7 +96,7 @@ jobs:
           package-manager-cache: false
 
       - name: Install deps
-        run: yarn install --immutable
+        run: yarn install --immutable --mode=skip-build
 
       - name: Build docs
         run: yarn build
@@ -110,7 +110,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_OIDC: true
           NPM_PROVENANCE: true
-        run: npx zx-semrel
+        run: npx zx-semrel@^1
 
       - name: Push docs to gh-pages
         env:
@@ -119,4 +119,4 @@ jobs:
           GH_PAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
-          npx ggcp 'docs>**/*' "https://x-access-token:$GH_PAGES_TOKEN@github.com/$REPO.git/gh-pages" --message='docs: update gh-pages'
+          npx ggcp@^1 'docs>**/*' "https://x-access-token:$GH_PAGES_TOKEN@github.com/$REPO.git/gh-pages" --message='docs: update gh-pages'
