@@ -2,8 +2,8 @@ import { applyServerMixin } from '../../../main/js/container/server.js'
 
 describe('applyServerMixin', () => {
   it('returns class with promisified close and listen', async () => {
-    const listen = sinon.stub().callsFake((_host, _port, cb) => cb())
-    const close = sinon.stub().callsFake((cb) => cb())
+    const listen = vi.fn((_host, _port, cb) => cb())
+    const close = vi.fn((cb) => cb())
     class TestClass {}
     TestClass.prototype.listen = listen
     TestClass.prototype.close = close
@@ -13,10 +13,10 @@ describe('applyServerMixin', () => {
     const closeResult = newClassInstance.close()
     const listenResult = newClassInstance.listen()
 
-    expect(closeResult).to.be.instanceOf(Promise)
-    expect(listenResult).to.be.instanceOf(Promise)
+    expect(closeResult).toBeInstanceOf(Promise)
+    expect(listenResult).toBeInstanceOf(Promise)
     await Promise.all([closeResult, listenResult])
-    expect(listen).to.have.been.called()
-    expect(close).to.have.been.called()
+    expect(listen).toHaveBeenCalled()
+    expect(close).toHaveBeenCalled()
   })
 })

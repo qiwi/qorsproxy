@@ -1,86 +1,52 @@
-import reqresnext from 'reqresnext'
+import { reqresnext } from '../../../reqresnext.js'
 import pipe from '../../../../../main/js/servlet/corsproxy/middlewares/pipe.js'
 import { transport } from '../../../../../main/js/transport/index.js'
 import { ECONNREFUSED } from '../../../../../main/js/servlet/common/error.js'
 import { GET } from '../../../../../main/js/servlet/common/method.js'
 import { OK, REMOTE_IS_DOWN, REMOTE_UNKNOWN } from '../../../../../main/js/servlet/common/status.js'
 
-const sandbox = sinon.createSandbox()
-
 describe('corsproxy.middleware.pipe', () => {
   const method = GET
   const statusCode = OK
   const headers = { foo: 'bar' }
   const body = Buffer.from('Baz')
+  const finished = (res) => new Promise(resolve => res.on('finish', resolve))
 
   afterEach(() => {
-    sandbox.restore()
+    vi.restoreAllMocks()
   })
 
-  it('transmits request to target dst', (done) => {
-    const { req, res, next } = reqresnext.default(
-      // req
-      {
-        method,
-        url: 'https://example.com'
-      },
-      // res
-      null,
-      // next
-      () => {
-        expect(res.piped.statusCode).to.equal(statusCode)
-        expect(res.piped.headers).to.equal(headers)
-        expect(res.piped.body.toString()).to.equal(body.toString())
-        done()
-      }
-    )
+  it('transmits request to target dst', async () => {
+    const { req, res } = reqresnext({ method, url: 'https://example.com' })
+    vi.spyOn(transport, 'request').mockResolvedValue({ statusCode, body: [body], headers })
 
-    sandbox.stub(transport, 'request')
-      .callsFake((url, opts) => ({
-        then (cb) { cb({ statusCode, body: [body], headers }); return this },
-        catch () { return this }
-      }))
+    await new Promise(resolve => pipe(req, res, resolve))
 
-    pipe(req, res, next)
+    expect(res.piped.statusCode).toBe(statusCode)
+    expect(res.piped.headers).toBe(headers)
+    expect(res.piped.body.toString()).toBe(body.toString())
   })
 
-  it('handles ECONNREFUSED error', (done) => {
-    const { req, res, next } = reqresnext.default({
-      method,
-      url: 'https://example.com'
-    })
-
-    sandbox.stub(transport, 'request')
-      .callsFake((url, opts) => ({
-        then () { return this },
-        catch (cb) {
-          cb({ code: ECONNREFUSED }) // eslint-disable-line
-          expect(res.statusCode).to.equal(REMOTE_IS_DOWN)
-          done()
-          return this
-        }
-      }))
+  it('handles ECONNREFUSED error', async () => {
+    const { req, res, next } = reqresnext({ method, url: 'https://example.com' })
+    vi.spyOn(transport, 'request').mockRejectedValue({ code: ECONNREFUSED })
 
     pipe(req, res, next)
+    await finished(res)
+
+    expect(res.statusCode).toBe(REMOTE_IS_DOWN)
   })
 
-  it('handles unexpected error', (done) => {
-    const { req, res, next } = reqresnext.default({
-      method,
-      url: 'https://example.com'
-    })
-
-    sandbox.stub(transport, 'request')
-      .callsFake((url, opts) => ({
-        then () { return this },
-        catch (cb) {
-          cb({ code: 'unknown' }) // eslint-disable-line
-          expect(res.statusCode).to.equal(REMOTE_UNKNOWN)
-          done()
-          return this
-        }
-      }))
+  it('handles unexpected error', async () => {
+    const { req, res, next } = reqresnext({ method, url: 'https://example.com' })
+    const error = { code: 'unknown' }
+    vi.spyOn(transport, 'request').mockRejectedValue(error)
+    vi.spyOn(console, 'error').mockImplementation(() => {})
 
     pipe(req, res, next)
+    await finished(res)
+
+    expect(res.statusCode).toBe(REMOTE_UNKNOWN)
+    expect(console.error).toHaveBeenCalledWith(error)
   })
 })

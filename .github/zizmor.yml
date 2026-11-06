@@ -1,0 +1,19 @@
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        # First-party actions — tags are acceptable.
+        actions/*: ref-pin
+        github/*: ref-pin
+        # Anything else must be pinned to a commit SHA.
+        '*': hash-pin
+
+  # Temporary
+  secrets-outside-env:
+    ignore:
+      - ci.yaml
+
+  # The legacy job installs the packed tarball outside a lockfile on purpose: that's how consumers get it
+  adhoc-packages:
+    ignore:
+      - ci.yaml

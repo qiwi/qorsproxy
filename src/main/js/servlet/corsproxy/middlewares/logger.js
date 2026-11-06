@@ -47,9 +47,9 @@ export default (req, res, next) => {
     const contentLength = (sent ? Buffer.from('' + sent[0]) : Buffer.concat(chunks)).length
 
     sent = null
-    chunks.lenght = 0
+    chunks.length = 0
 
-    log[level](`RES ${res.id} < status=${status} method=${req.method} duration=${log.constructor.now() - start}ms headers=${JSON.stringify(res.header()._headers)} bufferLength=${contentLength}`)
+    log[level](`RES ${res.id} < status=${status} method=${req.method} duration=${log.constructor.now() - start}ms headers=${JSON.stringify(res.getHeaders())} bufferLength=${contentLength}`)
   })
 
   next()

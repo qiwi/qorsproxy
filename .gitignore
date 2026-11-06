@@ -26,11 +26,6 @@ coverage.*
 # CI/CD
 artifact.tar
 
-# Codeclimate
-codeclimate.*
-cc-reporter
-cc-reporter.*
-
 # Bundles
 bundle/
 build/
@@ -50,14 +45,12 @@ node_modules
 jspm_packages
 bower_components
 
-#IDE
+# IDE
 .idea
 .idea/
 
-# Yarn Integrity file
-.yarn-integrity
-
 .npm
+.npmrc
 .eslintcache
 .node_repl_history
 .env
@@ -74,85 +67,8 @@ buildcache
 .rts2_cache_es/
 .rts2_cache_umd/
 
-# Creds
-!ssl/*.pem
-*.asc
-*.key
-*.pem
-*.cert
-
-# Temp
-temp
-
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage
-flow-coverage
-lib-cov
-coverage
-.nyc_output
-*.lcov
-
-# Bundles
-bundle/
-build/
-dist/
-target/
-typings/
-flow-typed/
-
-# Provenance
-buildstamp.json
-
-# Docs
-docs
-doc
-
-# Deps
-node_modules
-jspm_packages
-bower_components
-
-#IDE
-.idea
-.idea/
-
-# Yarn Integrity file
+# Yarn
 .yarn-integrity
-
-.npm
-.eslintcache
-.node_repl_history
-.env
-
-# Typescript
-*.tsbuildinfo
-.tsbuildinfo
-buildcache
-.buildcache
-
-# Microbundle cache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
-
-# yarn
 .yarn/*
 !.yarn/cache
 !.yarn/patches
@@ -161,17 +77,12 @@ buildcache
 !.yarn/sdks
 !.yarn/versions
 
-.npmrc
-
-# Coverage
-cc-reporter
-cc-reporter.*
-codeclimate.*
-coverage.*
-
 # Creds
 *.asc
 *.key
 *.pem
 *.cert
+!ssl/*.pem
 
+# Temp
+temp

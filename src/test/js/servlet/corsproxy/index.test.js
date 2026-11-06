@@ -1,4 +1,4 @@
-import reqresnext from 'reqresnext'
+import { reqresnext } from '../../reqresnext.js'
 import Corsproxy from '../../../../main/js/servlet/corsproxy/index.js'
 import Rules from '../../../../main/js/servlet/corsproxy/rules.js'
 import Stats from '../../../../main/js/servlet/corsproxy/stats.js'
@@ -10,31 +10,31 @@ describe('corsproxy', () => {
   const rules = {}
 
   it('constructor returns proper instance', () => {
-    expect(proxy.handler).not.to.be.undefined()
-    expect(proxy.online).to.be.false()
-    expect(proxy.rules).to.be.an.instanceof(Rules)
-    expect(proxy.stats).to.be.an.instanceof(Stats)
+    expect(proxy.handler).toBeDefined()
+    expect(proxy.online).toBe(false)
+    expect(proxy.rules).toBeInstanceOf(Rules)
+    expect(proxy.stats).toBeInstanceOf(Stats)
   })
 
   describe('proto', () => {
     it('configure updates instance state', () => {
       proxy.configure({ host, port, rules })
 
-      expect(proxy.host).to.equal(host)
-      expect(proxy.port).to.equal(port)
+      expect(proxy.host).toBe(host)
+      expect(proxy.port).toBe(port)
     })
 
     it('health returns UP', () => {
-      expect(proxy.health()).to.deep.equal({ status: 'UP', critical: true })
+      expect(proxy.health()).toEqual({ status: 'UP', critical: true })
     })
 
     it('metrics returns stats report', () => {
-      expect(proxy.metrics()).to.include(new Stats().report())
+      expect(proxy.metrics()).toMatchObject(new Stats().report())
     })
 
     it('contextify sets req/res context', () => {
       const origin = 'http://localhost:3000'
-      const { req, res, next } = reqresnext.default({
+      const { req, res, next } = reqresnext({
         url: '/https://example.com',
         headers: {
           origin
@@ -43,9 +43,9 @@ describe('corsproxy', () => {
 
       proxy.contextify(req, res, next)
 
-      expect(req.id).not.to.be.undefined()
-      expect(req.id).to.equal(res.id)
-      expect(req).to.containSubset({
+      expect(req.id).toBeDefined()
+      expect(req.id).toBe(res.id)
+      expect(req).toMatchObject({
         proxy: {
           from: 'localhost',
           to: 'example.com',

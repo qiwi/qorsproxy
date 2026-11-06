@@ -1,12 +1,10 @@
-import reqresnext from 'reqresnext'
+import { reqresnext } from '../../../reqresnext.js'
 
 import { transport } from '../../../../../main/js/transport/index.js'
 import customAuthorization from '../../../../../main/js/servlet/corsproxy/middlewares/customAuthorization.js'
 
-const sandbox = sinon.createSandbox()
-
 describe('corsproxy.middleware.customAuthorization', () => {
-  afterEach(() => sandbox.restore())
+  afterEach(() => vi.restoreAllMocks())
 
   const statusCode = 200
   const authBody = Buffer.from('{"key1":{"key2":"SuchSecretMuchSecurity"}}')
@@ -27,26 +25,15 @@ describe('corsproxy.middleware.customAuthorization', () => {
   }
   const targetUrl = '/https://target'
 
-  it('adds Authorization to headers ', (done) => {
-    sandbox.stub(transport, 'request')
-      .callsFake((url, opts) => ({
-        then (cb) {
-          expect(url).to.equal(rule.customAuthorization.authorizationUrl)
-          cb({ statusCode, body: [authBody], headers })
-          return this
-        },
-        catch () { return this }
-      }))
+  it('adds Authorization to headers ', async () => {
+    vi.spyOn(transport, 'request').mockResolvedValue({ statusCode, body: [authBody], headers })
 
-    const { req, res, next } = reqresnext.default(
-      { proxy, url: targetUrl, headers },
-      {},
-      () => {
-        expect(req.url).to.equal(targetUrl)
-        expect(req.headers.Authorization).to.equal('SuchSecretMuchSecurity')
-        done()
-      }
-    )
-    customAuthorization(req, res, next)
+    const { req, res } = reqresnext({ proxy, url: targetUrl, headers }, {})
+    const err = await new Promise(resolve => customAuthorization(req, res, resolve))
+
+    expect(err).toBeUndefined()
+    expect(transport.request).toHaveBeenCalledWith(rule.customAuthorization.authorizationUrl, expect.anything())
+    expect(req.url).toBe(targetUrl)
+    expect(req.headers.Authorization).toBe('SuchSecretMuchSecurity')
   })
 })

@@ -1,12 +1,12 @@
 ## qorsproxy
 ~~Cors~~ http(s) proxy for ~~dev~~ any purposes  
 
-[![CI](https://github.com/qiwi/qorsproxy/workflows/CI/badge.svg)](https://github.com/qiwi/qorsproxy/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/50acfd98bab6f903d950/maintainability)](https://codeclimate.com/github/qiwi/qorsproxy/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/50acfd98bab6f903d950/test_coverage)](https://codeclimate.com/github/qiwi/qorsproxy/test_coverage)
+[![CI](https://github.com/qiwi/qorsproxy/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/qiwi/qorsproxy/actions/workflows/ci.yaml)
 [![npm (tag)](https://img.shields.io/npm/v/qorsproxy/latest.svg)](https://www.npmjs.com/package/qorsproxy)
 
 ## Install
+Requires Node.js >= 16.
+
 ```bash
 # npm
 npm i qorsproxy --save-dev
